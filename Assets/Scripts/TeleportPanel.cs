@@ -9,7 +9,7 @@ public class TeleportPanel : MonoBehaviour
     public Vector3 targetPos_mainHall;
     public Vector3 targetPos_myRoom;
     public Vector3 targetPos_community;
-    public Button btn1, btn2, btn3;
+    public Button btn1, btn2, btn3, btn_close;
 
     // Start is called before the first frame update
     private void Start()
@@ -17,6 +17,7 @@ public class TeleportPanel : MonoBehaviour
         btn1.onClick.AddListener(Onclicked_mainHall);       //mainHall buton
         btn2.onClick.AddListener(Onclicked_myroom);         //MyRoom button
         btn3.onClick.AddListener(Onclicked_Community);      //communityRoom button
+        btn_close.onClick.AddListener(Onclicked_close);
         teleportPanel.SetActive(false);         //시작할 때 창 감추기
     }
 
@@ -58,5 +59,9 @@ public class TeleportPanel : MonoBehaviour
             player.SetMove(targetPos_community);
             teleportPanel.SetActive(false);
         }
+    }
+    public void Onclicked_close()
+    {
+        teleportPanel.SetActive(false);
     }
 }
