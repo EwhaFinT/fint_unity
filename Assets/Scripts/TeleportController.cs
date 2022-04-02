@@ -16,7 +16,7 @@ public class TeleportController : MonoBehaviour
     {
         Debug.Log("on enter");
 
-        var panel = GameObject.Find("Canvas_Teleport").GetComponent<TeleportPanel>();
+        var panel = GameObject.Find("Canvas_Teleport(Clone)").GetComponent<TeleportPanel>();
         var player = other.gameObject.GetComponent<PlayerController>();
 
         if (player != null)

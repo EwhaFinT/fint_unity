@@ -26,7 +26,7 @@ public class ArtPanel : MonoBehaviour
     {
         Debug.Log("show art panel");
         artPanel.SetActive(true);
-        var auctionPanel = GameObject.Find("Canvas_Auction").GetComponent<AuctionPanel>();
+        var auctionPanel = GameObject.Find("Canvas_Auction(Clone)").GetComponent<AuctionPanel>();
         auctionPanel.panelClose();
     }
     public void Onclicked_close()
@@ -37,7 +37,7 @@ public class ArtPanel : MonoBehaviour
     public void Onclicked_auction()
     {
         artPanel.SetActive(false);
-        var auctionPanel = GameObject.Find("Canvas_Auction").GetComponent<AuctionPanel>();
+        var auctionPanel = GameObject.Find("Canvas_Auction(Clone)").GetComponent<AuctionPanel>();
         auctionPanel.panelStart();
     }
 }
