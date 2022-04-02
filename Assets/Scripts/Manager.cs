@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class Manager : Singleton<Manager>
 {
-    [Header("Rooms")]
     public GameObject playerPrefab;
+    [Header("Rooms")]
     public GameObject gallaryPrefab;
     public GameObject communityPrefab;
     public GameObject myroomPrefab;
     [Header("UI Panels")]
-    public GameObject popupBoard;
-    public GameObject popupVote;
+    public GameObject UI;
     private PlayerController player;
     public GameObject TeleportPanel, Canvas_Art, Canvas_Auction;
     // Start is called before the first frame update
