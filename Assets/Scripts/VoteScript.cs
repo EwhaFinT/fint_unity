@@ -12,7 +12,6 @@ public class VoteScript : MonoBehaviour
     {
         vote.SetActive(false);
         exit.onClick.AddListener(onClicked_exit);
-
     }
 
     // Update is called once per frame
