@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Manager : MonoBehaviour
+public class Manager : Singleton<Manager>
 {
     public GameObject playerPrefab;
+    [Header("Rooms")]
     public GameObject gallaryPrefab;
     public GameObject communityPrefab;
     public GameObject myroomPrefab;
+    [Header("UI Panels")]
+    public GameObject UI;
     private PlayerController player;
     public GameObject TeleportPanel, Canvas_Art, Canvas_Auction;
     // Start is called before the first frame update
