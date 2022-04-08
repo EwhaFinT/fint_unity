@@ -18,6 +18,8 @@ public class UIManager : MonoBehaviour
     public GameObject popupWarn;
     public GameObject popupFindId;
     public GameObject popupFindPw;
+    public GameObject VoteCanvas;
+    public GameObject PostCanvas;
 
 
     #region Singleton
