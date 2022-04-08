@@ -14,7 +14,7 @@ public class BoardScript : MonoBehaviour
     {
         board.SetActive(false);
         voteBtn.onClick.AddListener(onClicked_vote);
-        exit.onClick.AddListener(onClicked_exit);
+        ExitBtn.onClick.AddListener(onClicked_exit);
 
     }
 
