@@ -20,7 +20,7 @@ public class ArtClick : MonoBehaviour
         if (Input.GetMouseButtonDown(0))  //0이면 좌클릭, 1이면 우클릭, 2이면 중앙을 클릭
         {
             target = GetClickedObject();
-            var artPanel = GameObject.Find("Canvas_Art(Clone)").GetComponent<ArtPanel>();
+            var artPanel = UIManager.Instance.popupArtInfo.GetComponent<ArtPanel>();
             if (target.Equals(art))
             {
                 artPanel.panelStart();

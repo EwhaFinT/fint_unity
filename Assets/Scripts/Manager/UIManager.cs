@@ -10,17 +10,29 @@ public class UIManager : MonoBehaviour
     public Button voteButton;
     public Button loginButton;
     public Button boardButton;
-    [Header("Popups")]
+    public Button artInfoButton;
+
+    [Header("Popups - MainHall")]
+    public GameObject popupAuction;
+    public GameObject popupArtInfo;
+
+    [Header("Popups - Community")]
     public GameObject popupBoard;
     public GameObject popupVote;
+    public GameObject VoteCanvas;
+    public GameObject PostCanvas;
+    
+    [Header("Popups - etc")]
     public GameObject popupLogin;
     public GameObject popupSignup;
     public GameObject popupWarn;
     public GameObject popupFindId;
     public GameObject popupFindPw;
-    public GameObject VoteCanvas;
-    public GameObject PostCanvas;
+    public GameObject popupTeleport;
 
+    [Header("Popups - MyRoom")]
+    //inventory
+    //artUpload
 
     #region Singleton
     public static UIManager Instance;
@@ -39,6 +51,7 @@ public class UIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        artInfoButton.onClick.AddListener(OnArtInfo);
         voteButton.onClick.AddListener(OnVote);
         loginButton.onClick.AddListener(OnLogin);
         boardButton.onClick.AddListener(OnBoard);
@@ -113,6 +126,19 @@ public class UIManager : MonoBehaviour
     {
         TMP_Text message = popupWarn.transform.GetChild(0).GetChild(0).GetComponent<TMP_Text>();
         message.text = msg;
+    }
+
+    public void OnArtInfo()
+    {
+        popupArtInfo.SetActive(!popupArtInfo.activeSelf);
+    }
+    public void OnAuciton()
+    {
+        popupAuction.SetActive(!popupAuction.activeSelf);
+    }
+    public void OnTeleport()
+    {
+        popupTeleport.SetActive(!popupTeleport.activeSelf);
     }
 
     // Update is called once per frame
