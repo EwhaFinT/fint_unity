@@ -9,7 +9,7 @@ public class UIManager : MonoBehaviour
     [Header("Buttons")]
     public Button voteButton;
     public Button loginButton;
-
+    public Button boardButton;
     [Header("Popups")]
     public GameObject popupBoard;
     public GameObject popupVote;
@@ -39,6 +39,7 @@ public class UIManager : MonoBehaviour
     {
         voteButton.onClick.AddListener(OnVote);
         loginButton.onClick.AddListener(OnLogin);
+        boardButton.onClick.AddListener(OnBoard);
         popupWarn.transform.GetChild(0).GetComponent<Button>().onClick.AddListener(OffWarn);
     }
 
@@ -92,6 +93,10 @@ public class UIManager : MonoBehaviour
     {
         popupVote.SetActive(!popupVote.activeSelf);
     }
+    void OnBoard()
+    {
+        popupBoard.SetActive(!popupBoard.activeSelf);
+    }
 
     public void PopupWarn(bool active, string msg)
     {
@@ -102,7 +107,7 @@ public class UIManager : MonoBehaviour
         popupWarn.SetActive(active);
 
     }
-    void MakePopupWarn(string msg)  // °æ°íÃ¢ ¸¸µé±â
+    void MakePopupWarn(string msg)  // ï¿½ï¿½ï¿½Ã¢ ï¿½ï¿½ï¿½ï¿½ï¿½
     {
         TMP_Text message = popupWarn.transform.GetChild(0).GetChild(0).GetComponent<TMP_Text>();
         message.text = msg;

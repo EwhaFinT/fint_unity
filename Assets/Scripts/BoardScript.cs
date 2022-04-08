@@ -7,14 +7,14 @@ public class BoardScript : MonoBehaviour
 {   
     public GameObject board;
     public Button voteBtn;
-    public Button ExitBtn;
+    public Button BoardExitBtn;
 
     // Start is called before the first frame update
     void Start()
     {
         board.SetActive(false);
         voteBtn.onClick.AddListener(onClicked_vote);
-        exit.onClick.AddListener(onClicked_exit);
+        BoardExitBtn.onClick.AddListener(onClicked_exit);
 
     }
 
@@ -29,9 +29,15 @@ public class BoardScript : MonoBehaviour
     }
     void onClicked_vote()
     {
-        board.SetActive(false);
-        var vote = GameObject.Find("VoteCanvas").GetComponent<VoteScript>();
-        vote.show();
+        // board.SetActive(false);
+        // var vote = GameObject.Find("VoteCanvas").GetComponent<VoteScript>();
+        // vote.show();
+        if(GameObject.Find("VoteCanvas")){
+            Debug.Log("find vote canvas");
+        }
+        else{
+            Debug.Log("can't find vote canvas");
+        }
     }
     void onClicked_exit()
     {
