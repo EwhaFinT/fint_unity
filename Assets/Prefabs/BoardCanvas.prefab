@@ -1752,7 +1752,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
+  m_IgnoreReversedGraphics: 0
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
@@ -1771,6 +1771,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   board: {fileID: 8069347008142872222}
   voteBtn: {fileID: 8069347007319074843}
+  BoardExitBtn: {fileID: 9089613827211373589}
 --- !u!1 &8069347008346119449
 GameObject:
   m_ObjectHideFlags: 0
