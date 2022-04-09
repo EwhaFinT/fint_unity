@@ -14,7 +14,7 @@ public class AuctionPanel : MonoBehaviour
         btn_join.onClick.AddListener(Onclicked_Join);
         btn_new.onClick.AddListener(Onclicked_New);
         btn_close.onClick.AddListener(panelClose);
-        auctionPanel.SetActive(false);
+//        auctionPanel.SetActive(false);
     }
 
     // Update is called once per frame
