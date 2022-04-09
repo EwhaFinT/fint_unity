@@ -6,6 +6,7 @@ using TMPro;
 
 public class LoginController : MonoBehaviour
 {
+    public GameObject login;
     public TMP_InputField identity;
     public TMP_InputField password;
     public Button loginBtn;
@@ -32,11 +33,13 @@ public class LoginController : MonoBehaviour
         bool isValid = IsValidUser();
         if(!isValid)
         {
-            UIManager.Instance.PopupWarn(true, "아이디 또는 비밀번호가 일치하지 않습니다.");
+            var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
+            popupWarn.MakePopupWarn("아이디 또는 비밀번호가\n일치하지 않습니다.");
 
         } else
         {
-            UIManager.Instance.PopupWarn(false, "");
+            var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
+            popupWarn.OffWarn();
             // ==== userId 저장 후 메인 페이지로 랜더링 ====
         }
     }
@@ -44,25 +47,27 @@ public class LoginController : MonoBehaviour
     void SignupBtnClick()
     {
         OffLogin();
-        UIManager.Instance.OnSignup();
+        var signup = UIManager.Instance.popupSignup.GetComponent<SignupController>();
+        signup.show();
     }
 
     void FindIdBtnClick()
     {
         OffLogin();
-        UIManager.Instance.OnFindId();
+        var findid = UIManager.Instance.popupFindId.GetComponent<FindIdController>();
+        findid.show();
     }
 
     void FindPwBtnClick()
     {
         OffLogin();
-        UIManager.Instance.OnFindPw();
+        var findPw = UIManager.Instance.popupFindPw.GetComponent<FindPwController>();
+        findPw.show();
     }
 
     void OffLogin()
     {
-        UIManager.Instance.OffLogin();
-        UIManager.Instance.OffWarn();
+        login.SetActive(false);
     }
 
     bool IsValidUser()

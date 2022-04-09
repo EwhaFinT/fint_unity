@@ -6,6 +6,7 @@ using TMPro;
 
 public class FindPwController : MonoBehaviour
 {
+    public GameObject findPw;
     public TMP_InputField identity;
     public TMP_InputField email;
     public Button findPwBtn;
@@ -26,6 +27,11 @@ public class FindPwController : MonoBehaviour
         
     }
 
+    public void show()
+    {
+        findPw.SetActive(true);
+    }
+
     void FindPwBtnClick()
     {
         FindPwRequest request = new FindPwRequest
@@ -40,13 +46,15 @@ public class FindPwController : MonoBehaviour
     void FindIdBtnClick()
     {
         OffFindPw();
-        UIManager.Instance.OnFindId();
+        var findid = UIManager.Instance.popupFindId.GetComponent<FindIdController>();
+        findid.show();
     }
 
     void OffFindPw()
     {
-        UIManager.Instance.OffFindPw();
-        UIManager.Instance.OffWarn();
+        findPw.SetActive(false);
+        var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
+        popupWarn.OffWarn();
     }
 }
 

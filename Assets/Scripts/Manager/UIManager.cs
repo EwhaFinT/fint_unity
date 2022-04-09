@@ -54,54 +54,12 @@ public class UIManager : MonoBehaviour
         voteButton.onClick.AddListener(OnVote);
         loginButton.onClick.AddListener(OnLogin);
         boardButton.onClick.AddListener(OnBoard);
-        popupWarn.transform.GetChild(0).GetComponent<Button>().onClick.AddListener(OffWarn);
     }
 
     public void OnLogin()
     {
         popupLogin.SetActive(!popupLogin.activeSelf);
     }
-
-    public void OnSignup()
-    {
-        popupSignup.SetActive(true);
-    }
-
-    public void OnFindId()
-    {
-        popupFindId.SetActive(true);
-    }
-
-    public void OnFindPw()
-    {
-        popupFindPw.SetActive(true);
-    }
-
-    public void OffLogin()
-    {
-        popupLogin.SetActive(false);
-    }
-
-    public void OffSignup()
-    {
-        popupSignup.SetActive(false);
-    }
-
-    public void OffFindId()
-    {
-        popupFindId.SetActive(false);
-    }
-
-    public void OffFindPw()
-    {
-        popupFindPw.SetActive(false);
-    }
-
-    public void OffWarn()
-    {
-        popupWarn.SetActive(false);
-    }
-
 
     void OnVote()
     {
@@ -111,21 +69,6 @@ public class UIManager : MonoBehaviour
     {
         Debug.Log("OnBoard");
         popupBoard.SetActive(!popupBoard.activeSelf);
-    }
-
-    public void PopupWarn(bool active, string msg)
-    {
-        if (active)
-        {
-            MakePopupWarn(msg);
-        }
-        popupWarn.SetActive(active);
-
-    }
-    void MakePopupWarn(string msg)  // ���â �����
-    {
-        TMP_Text message = popupWarn.transform.GetChild(0).GetChild(0).GetComponent<TMP_Text>();
-        message.text = msg;
     }
 
     public void OnArtInfo()

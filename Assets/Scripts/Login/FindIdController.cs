@@ -6,6 +6,7 @@ using TMPro;
 
 public class FindIdController : MonoBehaviour
 {
+    public GameObject findId;
     public TMP_InputField userName;
     public TMP_InputField phone;
     public Button findIdBtn;
@@ -26,6 +27,11 @@ public class FindIdController : MonoBehaviour
         
     }
 
+    public void show()
+    {
+        findId.SetActive(true);
+    }
+
     void FindIdBtnClick()
     {
         FindIdRequest request = new FindIdRequest
@@ -40,12 +46,14 @@ public class FindIdController : MonoBehaviour
     void FindPwBtnClick()
     {
         OffFindId();
-        UIManager.Instance.OnFindPw();
+        var findPw = UIManager.Instance.popupFindPw.GetComponent<FindPwController>();
+        findPw.show();
     }
     void OffFindId()
     {
-        UIManager.Instance.OffFindId();
-        UIManager.Instance.OffWarn();
+        findId.SetActive(false);
+        var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
+        popupWarn.OffWarn();
     }
 }
 
