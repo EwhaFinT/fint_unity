@@ -13,7 +13,7 @@ public class BoardScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        board.SetActive(false);
+        // board.SetActive(false);
         voteBtn.onClick.AddListener(onClicked_vote);
         BoardExitBtn.onClick.AddListener(onClicked_exit);
         WriteBtn.onClick.AddListener(onClicked_write);

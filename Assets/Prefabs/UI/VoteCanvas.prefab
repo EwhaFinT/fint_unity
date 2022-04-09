@@ -1149,6 +1149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vote: {fileID: 3042078343844931751}
+  board: {fileID: 0}
   exit: {fileID: 443927383275738612}
 --- !u!1 &3042078343878800070
 GameObject:

@@ -1573,11 +1573,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3042078343844931749, guid: 9a6da0f1c1a9342119dd2c23ab2249c3, type: 3}
       propertyPath: m_ReferenceResolution.x
-      value: 1366
+      value: 1920
       objectReference: {fileID: 0}
     - target: {fileID: 3042078343844931749, guid: 9a6da0f1c1a9342119dd2c23ab2249c3, type: 3}
       propertyPath: m_ReferenceResolution.y
-      value: 768
+      value: 1080
       objectReference: {fileID: 0}
     - target: {fileID: 3042078343844931751, guid: 9a6da0f1c1a9342119dd2c23ab2249c3, type: 3}
       propertyPath: m_Name
@@ -3174,6 +3174,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 950902492}
     m_Modifications:
+    - target: {fileID: 3207799350542621016, guid: a68ae2487d47ffe48baca31efe0793e9, type: 3}
+      propertyPath: m_RenderMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3207799350542621019, guid: a68ae2487d47ffe48baca31efe0793e9, type: 3}
       propertyPath: m_Pivot.x
       value: 0

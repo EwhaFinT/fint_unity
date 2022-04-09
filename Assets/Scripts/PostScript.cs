@@ -11,7 +11,7 @@ public class PostScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        post.SetActive(false);
+        // post.SetActive(false);
         exit.onClick.AddListener(onClicked_exit);
     }
 
