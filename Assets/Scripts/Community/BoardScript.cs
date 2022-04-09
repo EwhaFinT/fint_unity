@@ -9,6 +9,7 @@ public class BoardScript : MonoBehaviour
     public Button voteBtn;
     public Button BoardExitBtn;
     public Button WriteBtn;
+    public Button ProposalBtn;
 
     // Start is called before the first frame update
     void Start()
@@ -17,6 +18,7 @@ public class BoardScript : MonoBehaviour
         voteBtn.onClick.AddListener(onClicked_vote);
         BoardExitBtn.onClick.AddListener(onClicked_exit);
         WriteBtn.onClick.AddListener(onClicked_write);
+        ProposalBtn.onClick.AddListener(onClicked_proposal);
 
     }
 
@@ -54,5 +56,13 @@ public class BoardScript : MonoBehaviour
         // post.show();
         var postPanel = UIManager.Instance.popupPost.GetComponent<PostScript>();
         postPanel.show();
+    }
+    void onClicked_proposal()
+    {
+        board.SetActive(false);
+        // var post = GameObject.Find("PostCanvas").GetComponent<PostScript>();
+        // post.show();
+        var proposalPanel = UIManager.Instance.popUpProposal.GetComponent<ProposalScript>();
+        proposalPanel.show();
     }
 }

@@ -10,7 +10,6 @@ public class ProposalScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        proposal.SetActive(false);
         exit.onClick.AddListener(onClicked_exit);
     }
 
