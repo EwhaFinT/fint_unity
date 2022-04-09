@@ -7,6 +7,7 @@ using System.Text.RegularExpressions;
 
 public class SignupController : MonoBehaviour
 {
+    public GameObject signup;
     public TMP_InputField identity;
     public TMP_InputField password;
     public TMP_InputField passwordConfirm;
@@ -31,6 +32,11 @@ public class SignupController : MonoBehaviour
         
     }
 
+    public void show()
+    {
+        signup.SetActive(true);
+    }
+
     void CheckDupIdClick()
     {
         // ==== ¾ÆÀÌµğ Áßº¹ °Ë»ç =====
@@ -52,6 +58,7 @@ public class SignupController : MonoBehaviour
             Debug.Log("id: " + request.identity);
             // ==== ¹é¿£µå¿Í Åë½Å ====
             // ==== ex. È¸¿ø°¡ÀÔ ¿Ï·á½Ã ·Î±×ÀÎ ÆäÀÌÁö·Î ·£´õ¸µ ====
+            UIManager.Instance.OnLogin();
         }
     }
 
@@ -70,12 +77,14 @@ public class SignupController : MonoBehaviour
     {
         if (identity.text == null)
         {
-            UIManager.Instance.PopupWarn(true, "¾ÆÀÌµğ¸¦ ÀÔ·ÂÇÏ¼¼¿ä.");
+            var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
+            popupWarn.MakePopupWarn("¾ÆÀÌµğ¸¦ ÀÔ·ÂÇÏ¼¼¿ä.");
             return false;
         }
         if(isDupId)
         {
-            UIManager.Instance.PopupWarn(true, "¾ÆÀÌµğ Áßº¹ È®ÀÎÀ» ÁøÇàÇØÁÖ¼¼¿ä.");
+            var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
+            popupWarn.MakePopupWarn("¾ÆÀÌµğ Áßº¹ È®ÀÎÀ»\nÁøÇàÇØÁÖ¼¼¿ä.");
             return false;
         }
         return true;
@@ -86,14 +95,16 @@ public class SignupController : MonoBehaviour
         string val = password.text;
         if (val == null)
         {
-            UIManager.Instance.PopupWarn(true, "ºñ¹Ğ¹øÈ£¸¦ ÀÔ·ÂÇÏ¼¼¿ä.");
+            var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
+            popupWarn.MakePopupWarn("ºñ¹Ğ¹øÈ£¸¦ ÀÔ·ÂÇÏ¼¼¿ä.");
             return false;
         }
         Regex eng = new Regex(@"[a-zA-Z]");
         Regex num = new Regex(@"[0-9]");
         if (val.Length < 8 || !eng.IsMatch(val) || !num.IsMatch(val))
         {
-            UIManager.Instance.PopupWarn(true, "¿µ¹®, ¼ıÀÚ¸¦ ÇÏ³ª ÀÌ»ó Æ÷ÇÔÇÑ\n8ÀÚ¸® ºñ¹Ğ¹øÈ£¸¦ ÀÔ·ÂÇÏ¼¼¿ä.");
+            var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
+            popupWarn.MakePopupWarn("¿µ¹®, ¼ıÀÚ¸¦ ÇÏ³ª ÀÌ»ó Æ÷ÇÔÇÑ\n8ÀÚ¸® ºñ¹Ğ¹øÈ£¸¦ ÀÔ·ÂÇÏ¼¼¿ä.");
             return false;
         }
         return true;
@@ -103,7 +114,8 @@ public class SignupController : MonoBehaviour
     {
         if (password.text != passwordConfirm.text)
         {
-            UIManager.Instance.PopupWarn(true, "ºñ¹Ğ¹øÈ£°¡ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.");
+            var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
+            popupWarn.MakePopupWarn("ºñ¹Ğ¹øÈ£°¡ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.");
             return false;
         }
         return true;
@@ -114,13 +126,15 @@ public class SignupController : MonoBehaviour
         string val = userName.text;
         if (val == null)
         {
-            UIManager.Instance.PopupWarn(true, "ÀÌ¸§À» ÀÔ·ÂÇÏ¼¼¿ä.");
+            var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
+            popupWarn.MakePopupWarn("ÀÌ¸§À» ÀÔ·ÂÇÏ¼¼¿ä.");
             return false;
         }
         Regex kor = new Regex(@"^[°¡-ÆR]+$");
         if (val.Length < 2 || val.Length > 5 || !kor.IsMatch(val))
         {
-            UIManager.Instance.PopupWarn(true, "2±ÛÀÚ ÀÌ»ó 5±ÛÀÚ ÀÌÇÏ\nÇÑ±Û¸¸ ÀÔ·Â °¡´ÉÇÕ´Ï´Ù.");
+            var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
+            popupWarn.MakePopupWarn("2±ÛÀÚ ÀÌ»ó 5±ÛÀÚ ÀÌÇÏ\nÇÑ±Û¸¸ ÀÔ·Â °¡´ÉÇÕ´Ï´Ù.");
             return false;
         }
         return true;
@@ -130,7 +144,8 @@ public class SignupController : MonoBehaviour
     {
         if (phone.text == null)
         {
-            UIManager.Instance.PopupWarn(true, "ÀüÈ­¹øÈ£¸¦ ÀÔ·ÂÇÏ¼¼¿ä.");
+            var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
+            popupWarn.MakePopupWarn("ÀüÈ­¹øÈ£¸¦ ÀÔ·ÂÇÏ¼¼¿ä.");
             return false;
         }
         return true;
@@ -139,7 +154,8 @@ public class SignupController : MonoBehaviour
     {
         if (email.text == null)
         {
-            UIManager.Instance.PopupWarn(true, "ÀÌ¸ŞÀÏÀ» ÀÔ·ÂÇÏ¼¼¿ä.");
+            var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
+            popupWarn.MakePopupWarn("ÀÌ¸ŞÀÏÀ» ÀÔ·ÂÇÏ¼¼¿ä.");
             return false;
         }
         return true;
@@ -147,8 +163,9 @@ public class SignupController : MonoBehaviour
 
     void OffSignup()
     {
-        UIManager.Instance.OffSignup();
-        UIManager.Instance.OffWarn();
+        signup.SetActive(false);
+        var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
+        popupWarn.OffWarn();
     }
 }
 
