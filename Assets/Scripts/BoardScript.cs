@@ -50,7 +50,9 @@ public class BoardScript : MonoBehaviour
     void onClicked_write()
     {
         board.SetActive(false);
-        var post = GameObject.Find("PostCanvas").GetComponent<PostScript>();
-        post.show();
+        // var post = GameObject.Find("PostCanvas").GetComponent<PostScript>();
+        // post.show();
+        var postPanel = UIManager.Instance.popupPost.GetComponent<PostScript>();
+        postPanel.show();
     }
 }
