@@ -374,7 +374,7 @@ GameObject:
   - component: {fileID: 6009848755415501698}
   - component: {fileID: 2892634708563155211}
   m_Layer: 5
-  m_Name: RegisterForm
+  m_Name: PopupRegister
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

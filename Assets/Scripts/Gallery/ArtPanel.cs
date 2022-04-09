@@ -9,7 +9,7 @@ public class ArtPanel : MonoBehaviour
     public GameObject artPanel;
     public RawImage thisImg;
     public GameObject target;
-    public GameObject frame_center, frame_left, frame_right;
+    private GameObject frame_center, frame_left, frame_right;
 
     // Start is called before the first frame update
     void Start()

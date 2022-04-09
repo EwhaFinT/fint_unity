@@ -26,7 +26,6 @@ public class AuctionPanel : MonoBehaviour
     {
         Debug.Log("show auction panel");
         auctionPanel.SetActive(true);
-        Debug.Log("gg");
         canvasJoin.SetActive(false);
         canvasNew.SetActive(false);
 
