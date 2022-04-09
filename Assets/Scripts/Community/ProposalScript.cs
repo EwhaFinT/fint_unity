@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class VoteScript : MonoBehaviour
-{   
-    public GameObject vote;
+public class ProposalScript : MonoBehaviour
+{
+    public GameObject proposal;
     public Button exit;
+    // Start is called before the first frame update
     void Start()
     {
-        vote.SetActive(false);
+        proposal.SetActive(false);
         exit.onClick.AddListener(onClicked_exit);
     }
 
@@ -20,10 +21,10 @@ public class VoteScript : MonoBehaviour
     }
     public void show()
     {
-        vote.SetActive(true);
+        proposal.SetActive(true);
     }
     void onClicked_exit()
     {
-        vote.SetActive(false);
+        proposal.SetActive(false);
     }
 }

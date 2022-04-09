@@ -19,8 +19,7 @@ public class UIManager : MonoBehaviour
     [Header("Popups - Community")]
     public GameObject popupBoard;
     public GameObject popupVote;
-    public GameObject VoteCanvas;
-    public GameObject PostCanvas;
+    public GameObject popupPost;
     
     [Header("Popups - etc")]
     public GameObject popupLogin;
@@ -110,6 +109,7 @@ public class UIManager : MonoBehaviour
     }
     void OnBoard()
     {
+        Debug.Log("OnBoard");
         popupBoard.SetActive(!popupBoard.activeSelf);
     }
 

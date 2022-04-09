@@ -16,7 +16,7 @@ public class ArtPanel : MonoBehaviour
     {
         btn_close.onClick.AddListener(Onclicked_close);
         btn_auction.onClick.AddListener(Onclicked_auction);
-        artPanel.SetActive(false);
+//        artPanel.SetActive(false);
         
     }
 
@@ -31,6 +31,7 @@ public class ArtPanel : MonoBehaviour
         Debug.Log("show art panel");
         artPanel.SetActive(true);
  //        var auctionPanel = GameObject.Find("Canvas_Auction").GetComponent<AuctionPanel>();
+        
         var auctionPanel = UIManager.Instance.popupAuction.GetComponent<AuctionPanel>();
         auctionPanel.panelClose();
         Img();
