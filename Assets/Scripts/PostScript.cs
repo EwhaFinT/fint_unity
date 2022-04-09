@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class PostScript : MonoBehaviour
 {   
     public GameObject post;
+    public GameObject board;
     public Button exit;
     // Start is called before the first frame update
     void Start()
@@ -26,5 +27,6 @@ public class PostScript : MonoBehaviour
     void onClicked_exit()
     {
         post.SetActive(false);
+        board.SetActive(true);
     }
 }

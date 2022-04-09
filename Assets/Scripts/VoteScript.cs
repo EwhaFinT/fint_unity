@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class VoteScript : MonoBehaviour
 {   
     public GameObject vote;
+    public GameObject board;
     public Button exit;
     void Start()
     {
@@ -25,5 +26,6 @@ public class VoteScript : MonoBehaviour
     void onClicked_exit()
     {
         vote.SetActive(false);
+        board.SetActive(true);
     }
 }

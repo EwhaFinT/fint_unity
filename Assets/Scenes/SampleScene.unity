@@ -1186,8 +1186,7 @@ MonoBehaviour:
   popupArtInfo: {fileID: 2073830672}
   popupBoard: {fileID: 1671891384}
   popupVote: {fileID: 699901103}
-  VoteCanvas: {fileID: 699901103}
-  PostCanvas: {fileID: 1570626763}
+  popupPost: {fileID: 1570626763}
   popupLogin: {fileID: 1653610444}
   popupSignup: {fileID: 1963089171}
   popupWarn: {fileID: 1142924793}
@@ -1480,6 +1479,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 950902492}
     m_Modifications:
+    - target: {fileID: 3042078343844931744, guid: 9a6da0f1c1a9342119dd2c23ab2249c3, type: 3}
+      propertyPath: board
+      value: 
+      objectReference: {fileID: 1671891384}
     - target: {fileID: 3042078343844931746, guid: 9a6da0f1c1a9342119dd2c23ab2249c3, type: 3}
       propertyPath: m_Camera
       value: 
@@ -2935,6 +2938,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3673052733019704853, guid: 61f9102ddd44c43cca69c6846d7fed21, type: 3}
+      propertyPath: board
+      value: 
+      objectReference: {fileID: 1671891384}
     - target: {fileID: 5656653206254608495, guid: 61f9102ddd44c43cca69c6846d7fed21, type: 3}
       propertyPath: m_Name
       value: PostCanvas
