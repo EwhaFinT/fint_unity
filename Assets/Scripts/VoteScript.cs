@@ -10,7 +10,7 @@ public class VoteScript : MonoBehaviour
     public Button exit;
     void Start()
     {
-        vote.SetActive(false);
+        // vote.SetActive(false);
         exit.onClick.AddListener(onClicked_exit);
     }
 
