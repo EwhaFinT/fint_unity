@@ -3,15 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PostScript : MonoBehaviour
-{   
-    public GameObject post;
-    public GameObject board;
+public class ProposalScript : MonoBehaviour
+{
+    public GameObject proposal;
     public Button exit;
     // Start is called before the first frame update
     void Start()
     {
-        post.SetActive(false);
+        proposal.SetActive(false);
         exit.onClick.AddListener(onClicked_exit);
     }
 
@@ -22,11 +21,10 @@ public class PostScript : MonoBehaviour
     }
     public void show()
     {
-        post.SetActive(true);
+        proposal.SetActive(true);
     }
     void onClicked_exit()
     {
-        post.SetActive(false);
-        board.SetActive(true);
+        proposal.SetActive(false);
     }
 }

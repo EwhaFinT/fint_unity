@@ -32,8 +32,10 @@ public class BoardScript : MonoBehaviour
     void onClicked_vote()
     {
         board.SetActive(false);
-        var vote = GameObject.Find("VoteCanvas").GetComponent<VoteScript>();
-        vote.show();
+        // var vote = GameObject.Find("VoteCanvas").GetComponent<VoteScript>();
+        // vote.show();
+        var votePanel = UIManager.Instance.popupVote.GetComponent<VoteScript>();
+        votePanel.show();
         // if(GameObject.Find("VoteCanvas")){
         //     Debug.Log("find vote canvas");
         // }
@@ -48,7 +50,9 @@ public class BoardScript : MonoBehaviour
     void onClicked_write()
     {
         board.SetActive(false);
-        var post = GameObject.Find("PostCanvas").GetComponent<PostScript>();
-        post.show();
+        // var post = GameObject.Find("PostCanvas").GetComponent<PostScript>();
+        // post.show();
+        var postPanel = UIManager.Instance.popupPost.GetComponent<PostScript>();
+        postPanel.show();
     }
 }
