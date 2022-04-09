@@ -29,6 +29,7 @@ public class ArtChange : MonoBehaviour
 
     public void MaterialChange()
     {
+        var childrenlist = GetComponentsInChildren<ArtClick>();
         Material[] mt_center = FrameCenter.GetComponent<Renderer>().materials;
         Material[] mt_left = FrameLeft.GetComponent<Renderer>().materials;
         Material[] mt_right = FrameRight.GetComponent<Renderer>().materials;

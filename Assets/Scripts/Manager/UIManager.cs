@@ -109,6 +109,7 @@ public class UIManager : MonoBehaviour
     }
     void OnBoard()
     {
+        Debug.Log("OnBoard");
         popupBoard.SetActive(!popupBoard.activeSelf);
     }
 
