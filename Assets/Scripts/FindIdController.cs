@@ -10,16 +10,14 @@ public class FindIdController : MonoBehaviour
     public TMP_InputField phone;
     public Button findIdBtn;
     public Button findPwBtn;
-    public Button loginBtn;
-    public Button signupBtn;
+    public Button exitBtn;
 
     // Start is called before the first frame update
     void Start()
     {
         findIdBtn.onClick.AddListener(FindIdBtnClick);
         findPwBtn.onClick.AddListener(FindPwBtnClick);
-        loginBtn.onClick.AddListener(LoginBtnClick);
-        signupBtn.onClick.AddListener(SignupBtnClick);
+        exitBtn.onClick.AddListener(OffFindId);
     }
 
     // Update is called once per frame
@@ -44,19 +42,6 @@ public class FindIdController : MonoBehaviour
         OffFindId();
         UIManager.Instance.OnFindPw();
     }
-
-    void LoginBtnClick()
-    {
-        OffFindId();
-        UIManager.Instance.OnLogin();
-    }
-
-    void SignupBtnClick()
-    {
-        OffFindId();
-        UIManager.Instance.OnSignup();
-    }
-
     void OffFindId()
     {
         UIManager.Instance.OffFindId();

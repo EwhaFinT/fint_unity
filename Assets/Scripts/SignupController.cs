@@ -15,6 +15,7 @@ public class SignupController : MonoBehaviour
     public TMP_InputField email;
     public Button checkDupIdBtn;
     public Button signupBtn;
+    public Button exitBtn;
 
     bool isDupId = true;
 
@@ -22,6 +23,7 @@ public class SignupController : MonoBehaviour
     {
         checkDupIdBtn.onClick.AddListener(CheckDupIdClick);
         signupBtn.onClick.AddListener(SignupBtnClick);
+        exitBtn.onClick.AddListener(OffSignup);
     }
 
     void Update()
@@ -141,6 +143,12 @@ public class SignupController : MonoBehaviour
             return false;
         }
         return true;
+    }
+
+    void OffSignup()
+    {
+        UIManager.Instance.OffSignup();
+        UIManager.Instance.OffWarn();
     }
 }
 

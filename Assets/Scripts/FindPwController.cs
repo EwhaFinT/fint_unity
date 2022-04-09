@@ -10,16 +10,14 @@ public class FindPwController : MonoBehaviour
     public TMP_InputField email;
     public Button findPwBtn;
     public Button findIdBtn;
-    public Button loginBtn;
-    public Button signupBtn;
+    public Button exitBtn;
 
     // Start is called before the first frame update
     void Start()
     {
         findIdBtn.onClick.AddListener(FindIdBtnClick);
         findPwBtn.onClick.AddListener(FindPwBtnClick);
-        loginBtn.onClick.AddListener(LoginBtnClick);
-        signupBtn.onClick.AddListener(SignupBtnClick);
+        exitBtn.onClick.AddListener(OffFindPw);
     }
 
     // Update is called once per frame
@@ -43,18 +41,6 @@ public class FindPwController : MonoBehaviour
     {
         OffFindPw();
         UIManager.Instance.OnFindId();
-    }
-
-    void LoginBtnClick()
-    {
-        OffFindPw();
-        UIManager.Instance.OnLogin();
-    }
-    
-    void SignupBtnClick()
-    {
-        OffFindPw();
-        UIManager.Instance.OnSignup();
     }
 
     void OffFindPw()
