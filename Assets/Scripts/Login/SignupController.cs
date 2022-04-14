@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 using TMPro;
 using System.Text.RegularExpressions;
 
@@ -18,7 +19,7 @@ public class SignupController : MonoBehaviour
     public Button signupBtn;
     public Button exitBtn;
 
-    bool isDupId = true;
+    bool dupCheck = false;
 
     void Start()
     {
@@ -39,26 +40,14 @@ public class SignupController : MonoBehaviour
 
     void CheckDupIdClick()
     {
-        // ==== 아이디 중복 검사 =====
-        isDupId = false;
+        StartCoroutine(IdCheck());
     }
 
     void SignupBtnClick()
     {
         if(CheckValidation())
         {
-            SignupRequest request = new SignupRequest
-            {
-                identity = identity.text,
-                password = password.text,
-                name = userName.text,
-                phone = phone.text,
-                email = email.text
-            };
-            Debug.Log("id: " + request.identity);
-            // ==== 백엔드와 통신 ====
-            // ==== ex. 회원가입 완료시 로그인 페이지로 랜더링 ====
-            UIManager.Instance.OnLogin();
+            StartCoroutine(Signup());
         }
     }
 
@@ -75,13 +64,13 @@ public class SignupController : MonoBehaviour
 
     bool CheckId()
     {
-        if (identity.text == null)
+        if (identity.text.Length < 1)
         {
             var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
             popupWarn.MakePopupWarn("아이디를 입력하세요.");
             return false;
         }
-        if(isDupId)
+        if(!dupCheck)
         {
             var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
             popupWarn.MakePopupWarn("아이디 중복 확인을\n진행해주세요.");
@@ -93,7 +82,7 @@ public class SignupController : MonoBehaviour
     bool CheckPassword()
     {
         string val = password.text;
-        if (val == null)
+        if (val.Length < 1)
         {
             var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
             popupWarn.MakePopupWarn("비밀번호를 입력하세요.");
@@ -124,7 +113,7 @@ public class SignupController : MonoBehaviour
     bool CheckName()
     {
         string val = userName.text;
-        if (val == null)
+        if (val.Length < 1)
         {
             var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
             popupWarn.MakePopupWarn("이름을 입력하세요.");
@@ -142,20 +131,36 @@ public class SignupController : MonoBehaviour
 
     bool CheckPhone()
     {
-        if (phone.text == null)
+        string val = phone.text;
+        if (val.Length < 1)
         {
             var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
             popupWarn.MakePopupWarn("전화번호를 입력하세요.");
+            return false;
+        }
+        Regex num = new Regex(@"^01[016789][^0][0-9]{2,3}[0-9]{3,4}$");
+        if(!num.IsMatch(val))
+        {
+            var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
+            popupWarn.MakePopupWarn("올바르지 않은\n전화번호 입니다.");
             return false;
         }
         return true;
     }
     bool CheckEmail()
     {
-        if (email.text == null)
+        string val = email.text;
+        if (val.Length < 1)
         {
             var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
             popupWarn.MakePopupWarn("이메일을 입력하세요.");
+            return false;
+        }
+        Regex mail = new Regex(@"[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}");
+        if(!mail.IsMatch(val))
+        {
+            var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
+            popupWarn.MakePopupWarn("올바르지 않은\n이메일 주소 입니다..");
             return false;
         }
         return true;
@@ -163,10 +168,77 @@ public class SignupController : MonoBehaviour
 
     void OffSignup()
     {
-        signup.SetActive(false);
         var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
         popupWarn.OffWarn();
+        signup.SetActive(false);
     }
+
+    IEnumerator IdCheck() // 아이디 중복 검사 요청
+    {
+        string url = "http://localhost:8080/v1/check-id?identity=" + identity.text;
+
+        UnityWebRequest www = UnityWebRequest.Get(url);
+        yield return www.SendWebRequest();
+
+        // string -> json
+        string jsonString = www.downloadHandler.text;
+        var response = JsonUtility.FromJson<IdCheckResponse>(jsonString);
+
+        if (response.idCheckSuccess == 0)    // 아이디 중복
+        {
+            var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
+            popupWarn.MakePopupWarn("중복된 아이디가 존재합니다.");
+        }
+        else                                // 사용할 수 있는 아이디
+        {
+            var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
+            popupWarn.MakePopupWarn("사용 가능한 아이디입니다.");
+            dupCheck = true;
+        }
+    }
+
+    IEnumerator Signup() // 아이디 중복 검사 요청
+    {
+        string url = "http://localhost:8080/v1/signup";
+
+        SignupRequest signupRequest = new SignupRequest
+        {
+            identity = identity.text,
+            password = password.text,
+            name = userName.text,
+            phone = phone.text,
+            email = email.text
+        }; 
+        string jsonBody = JsonUtility.ToJson(signupRequest);
+
+        UnityWebRequest www = UnityWebRequest.Post(url, jsonBody);
+        byte[] jsonToSend = new System.Text.UTF8Encoding().GetBytes(jsonBody);
+        www.uploadHandler = new UploadHandlerRaw(jsonToSend);
+        www.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
+        www.SetRequestHeader("Content-Type", "application/json");
+        yield return www.SendWebRequest();
+
+        // string -> json
+        string jsonString = www.downloadHandler.text;
+        var response = JsonUtility.FromJson<SignupResponse>(jsonString);
+
+        if (response.signupSuccess == 0)    // 회원가입 실패
+        {
+            var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
+            popupWarn.MakePopupWarn("중복된 아이디가 존재합니다.");
+            dupCheck = false;
+        }
+        else                                // 회원가입 성공
+        {
+            OffSignup();
+            UIManager.Instance.OnLogin();
+        }
+    }
+}
+
+class IdCheckResponse
+{
+    public int idCheckSuccess;
 }
 
 class SignupRequest
@@ -176,4 +248,9 @@ class SignupRequest
     public string name;
     public string phone;
     public string email;
+}
+
+class SignupResponse
+{
+    public int signupSuccess;
 }
