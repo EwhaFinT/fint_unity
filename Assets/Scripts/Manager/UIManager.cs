@@ -62,20 +62,9 @@ public class UIManager : MonoBehaviour
         inventoryButton.onClick.AddListener(OnInventory);
         registerButton.onClick.AddListener(OnRegister);
         teleportButton.onClick.AddListener(OnTeleport);
-        showMyRoomButton();
 
     }
 
-    public void showMyRoomButton()
-    {
-        GameObject player = GameObject.Find("Player");
-        Vector3 pos = player.gameObject.transform.position;
-        if (pos.y > 25)
-        {
-            Debug.Log(pos.y);
-            myroomPanel.SetActive(!popupRegister.activeSelf);
-        }
-    }
 
     public void OnInventory()
     {
