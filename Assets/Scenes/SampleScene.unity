@@ -3269,6 +3269,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BoardWriteBtn
       objectReference: {fileID: 0}
+    - target: {fileID: 8069347008537638270, guid: f04666759b9324f2ca78a1ff1fc535f4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f04666759b9324f2ca78a1ff1fc535f4, type: 3}
 --- !u!1 &1531551243 stripped
