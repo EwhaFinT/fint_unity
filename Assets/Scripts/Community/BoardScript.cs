@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using WebSocketSharp;
 
 public class BoardScript : MonoBehaviour
 {   
@@ -10,6 +11,9 @@ public class BoardScript : MonoBehaviour
     public Button BoardExitBtn;
     public Button WriteBtn;
     public Button ProposalBtn;
+
+    private WebSocket webSocket;
+
 
     // Start is called before the first frame update
     void Start()
@@ -20,6 +24,15 @@ public class BoardScript : MonoBehaviour
         WriteBtn.onClick.AddListener(onClicked_write);
         ProposalBtn.onClick.AddListener(onClicked_proposal);
 
+        //webSocket = new WebSocket("ws://fintribe.herokuapp.com/v1/article?articleId=6231f66a15ffd20d91c1b10e");
+        //webSocket.Connect();
+
+        //webSocket.OnMessage += (sender, e) =>
+        //{
+        //    // TODO; 연결 끊겼을 때 재접속 코드
+        //    Debug.Log($"{((WebSocket)sender).Url}에서 데이터: {e.Data}가 옴.");
+        //    string positionJson = JsonUtility.ToJson(e.Data);
+        //};
     }
 
     // Update is called once per frame
