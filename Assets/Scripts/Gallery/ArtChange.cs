@@ -8,9 +8,7 @@ using System;
 
 public class ArtChange : MonoBehaviour
 {
-    public string[] artURL = new string[]{ "https://i.ibb.co/hyX44r9/flower.jpg", 
-        "https://i.ibb.co/hyX44r9/flower.jpg", 
-        "https://i.ibb.co/hyX44r9/flower.jpg" };
+    public string[] artURL;
     public GameObject[] frame;
     //public GameObject FrameCenter;
     //public GameObject FrameLeft;
@@ -23,7 +21,7 @@ public class ArtChange : MonoBehaviour
     public Texture art3;
     // Start is called before the first frame update
     void Start()
-    {
+    { 
         frame = GameObject.FindGameObjectsWithTag("GalleryFrame");      //gallery내 frame의 배열
         //artURL[0] = "https://i.ibb.co/hyX44r9/flower.jpg";
         //artURL[1] = "https://i.ibb.co/TPxs5Wn/6d3feda469a1.jpg";
@@ -32,8 +30,7 @@ public class ArtChange : MonoBehaviour
         //    artURL[i] = //서버에서 받아오기
         for (int i=0; i<frame.Length; i++)
         {
-            Debug.Log(artURL[0]);
-            StartCoroutine(DownloadImage(frame[i], artURL[i]));
+            StartCoroutine(DownloadImage(frame[i], "https://i.ibb.co/hyX44r9/flower.jpg"));
         }
  //       MaterialChange();
         //StartCoroutine(ImageUpload());
