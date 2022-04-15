@@ -973,6 +973,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   proposal: {fileID: 524980169}
+  board: {fileID: 1671891384}
   exit: {fileID: 524980168}
 --- !u!1 &689839857
 GameObject:
