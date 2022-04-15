@@ -11,6 +11,7 @@ public class UIManager : MonoBehaviour
     public Button loginButton;
     public Button boardButton;
     public Button artInfoButton;
+    public Button teleportButton;
     public Button inventoryButton;
     public Button registerButton;
 
@@ -33,6 +34,7 @@ public class UIManager : MonoBehaviour
     public GameObject popupTeleport;
 
     [Header("Popups - MyRoom")]
+    public GameObject myroomPanel;
     public GameObject popupInventory;
     public GameObject popupRegister;
 
@@ -59,7 +61,20 @@ public class UIManager : MonoBehaviour
         boardButton.onClick.AddListener(OnBoard);
         inventoryButton.onClick.AddListener(OnInventory);
         registerButton.onClick.AddListener(OnRegister);
+        teleportButton.onClick.AddListener(OnTeleport);
+        showMyRoomButton();
 
+    }
+
+    public void showMyRoomButton()
+    {
+        GameObject player = GameObject.Find("Player");
+        Vector3 pos = player.gameObject.transform.position;
+        if (pos.y > 25)
+        {
+            Debug.Log(pos.y);
+            myroomPanel.SetActive(!popupRegister.activeSelf);
+        }
     }
 
     public void OnInventory()
@@ -94,11 +109,11 @@ public class UIManager : MonoBehaviour
     {
         popupAuction.SetActive(!popupAuction.activeSelf);
     }
+
     public void OnTeleport()
     {
-        popupTeleport.SetActive(!popupTeleport.activeSelf);
+        popupTeleport.SetActive(!popupAuction.activeSelf);
     }
-
     // Update is called once per frame
     void Update()
     {

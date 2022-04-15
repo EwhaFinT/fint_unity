@@ -68,6 +68,7 @@ public class PlayerController : MonoBehaviour
         Debug.Log("setmove : " + pos);
         movement3D.SetPosition(pos);
     }
+
 }
 // 1. Player에 Movement3D 추가 & Camera Transform으로 Main Camera 설정
 // 2. Player에 PlayerController 추가 & Camera Controller로 Main Camera 설정

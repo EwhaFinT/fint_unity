@@ -6,8 +6,10 @@ using UnityEngine.UI;
 
 public class InventoryScript : MonoBehaviour
 {
+    public GameObject inventoryCanvas;
     public Slot[] slots;
     public Transform slotHolder;
+    public Button btn_close;
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +23,7 @@ public class InventoryScript : MonoBehaviour
         {
             StartCoroutine(DownloadImage(slots[i], "https://i.ibb.co/hyX44r9/flower.jpg"));
         }
+        btn_close.onClick.AddListener(Onclicked_close);
 
     }
     IEnumerator DownloadImage(Slot slot, string MediaUrl)          //서버에서 그림 받아와서 art에 넣기
@@ -62,6 +65,10 @@ public class InventoryScript : MonoBehaviour
                 slots[i].GetComponent<Button>().interactable = false;
             }
         }
+    }
+    public void Onclicked_close()
+    {
+        inventoryCanvas.SetActive(false);
     }
 
 }

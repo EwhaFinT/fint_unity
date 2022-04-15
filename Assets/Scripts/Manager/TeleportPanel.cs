@@ -18,7 +18,6 @@ public class TeleportPanel : MonoBehaviour
         btn2.onClick.AddListener(Onclicked_myroom);         //MyRoom button
         btn3.onClick.AddListener(Onclicked_Community);      //communityRoom button
         btn_close.onClick.AddListener(Onclicked_close);
-        teleportPanel.SetActive(false);         //시작할 때 창 감추기
     }
 
     public void panelStart()
@@ -36,6 +35,8 @@ public class TeleportPanel : MonoBehaviour
         {
             player.SetMove(targetPos_mainHall);
             teleportPanel.SetActive(false);
+            var myroomPanel = UIManager.Instance.myroomPanel;
+            myroomPanel.SetActive(false);
         }
     }
 
@@ -47,6 +48,8 @@ public class TeleportPanel : MonoBehaviour
         {
             player.SetMove(targetPos_myRoom);
             teleportPanel.SetActive(false);
+            var myroomPanel = UIManager.Instance.myroomPanel;
+            myroomPanel.SetActive(true);
         }
     }
 
@@ -58,6 +61,8 @@ public class TeleportPanel : MonoBehaviour
         {
             player.SetMove(targetPos_community);
             teleportPanel.SetActive(false);
+            var myroomPanel = UIManager.Instance.myroomPanel;
+            myroomPanel.SetActive(false);
         }
     }
     public void Onclicked_close()
