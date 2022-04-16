@@ -75,3 +75,8 @@ crashlytics-build.properties
 #NuGet
 packages
 !packages/repositories.config
+Assets/NuGet.config
+Assets/NuGet.config.meta
+Assets/Packages.meta
+Assets/packages.config
+Assets/packages.config.meta
