@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 using TMPro;
 
 public class FindPwController : MonoBehaviour
@@ -34,13 +35,7 @@ public class FindPwController : MonoBehaviour
 
     void FindPwBtnClick()
     {
-        FindPwRequest request = new FindPwRequest
-        {
-            identity = identity.text,
-            email = email.text
-        };
-        Debug.Log("id: " + request.identity);
-        // ==== 백엔드와 통신 필요 ====
+        StartCoroutine(FindPw());
     }
 
     void FindIdBtnClick()
@@ -52,14 +47,36 @@ public class FindPwController : MonoBehaviour
 
     void OffFindPw()
     {
-        findPw.SetActive(false);
         var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
         popupWarn.OffWarn();
+        findPw.SetActive(false);
+    }
+
+    IEnumerator FindPw()
+    {
+        string url = "http://localhost:8080/v1/find-pw?identity=" + identity.text + "&email=" + email.text;
+
+        UnityWebRequest www = UnityWebRequest.Get(url);
+        yield return www.SendWebRequest();
+
+        // string -> json
+        string jsonString = www.downloadHandler.text;
+        var response = JsonUtility.FromJson<FindPwResponse>(jsonString);
+
+        if (!response.emailSuccess)    // 비밀번호 찾기 실패
+        {
+            var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
+            popupWarn.MakePopupWarn("해당 정보와 일치하는\n사용자가 없습니다.");
+        }
+        else
+        {
+            var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
+            popupWarn.MakePopupWarn("해당 이메일 주소로\n임시 비밀번호를 전송했습니다.");
+        }
     }
 }
 
-class FindPwRequest
+class FindPwResponse
 {
-    public string identity;
-    public string email;
+    public bool emailSuccess;
 }

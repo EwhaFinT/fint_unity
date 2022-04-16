@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 using TMPro;
 
 public class FindIdController : MonoBehaviour
@@ -34,13 +35,7 @@ public class FindIdController : MonoBehaviour
 
     void FindIdBtnClick()
     {
-        FindIdRequest request = new FindIdRequest
-        {
-            userName = userName.text,
-            phone = phone.text
-        };
-        Debug.Log("name: " + request.userName);
-        // ==== 백엔드와 통신 필요 ====
+        StartCoroutine(FindId());
     }
 
     void FindPwBtnClick()
@@ -55,10 +50,32 @@ public class FindIdController : MonoBehaviour
         var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
         popupWarn.OffWarn();
     }
+
+    IEnumerator FindId()
+    {
+        string url = "http://localhost:8080/v1/find-id?name=" + userName.text + "&phone=" + phone.text;
+
+        UnityWebRequest www = UnityWebRequest.Get(url);
+        yield return www.SendWebRequest();
+
+        // string -> json
+        string jsonString = www.downloadHandler.text;
+        var response = JsonUtility.FromJson<FindIdResponse>(jsonString);
+
+        if (response.identity == null)    // 아이디 찾기 실패
+        {
+            var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
+            popupWarn.MakePopupWarn("해당 정보를 가진\n사용자가 존재하지 않습니다.");
+        }
+        else
+        {
+            var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
+            popupWarn.MakePopupWarn(userName.text + "님의 아이디는\n" + response.identity + " 입니다.");
+        }
+    }
 }
 
-class FindIdRequest
+class FindIdResponse
 {
-    public string userName;
-    public string phone;
+    public string identity;
 }

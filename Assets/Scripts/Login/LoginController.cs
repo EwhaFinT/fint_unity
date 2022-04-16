@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 using TMPro;
+//using MongoDB.Bson;
 
 public class LoginController : MonoBehaviour
 {
@@ -13,7 +15,6 @@ public class LoginController : MonoBehaviour
     public Button signupBtn;
     public Button findIdBtn;
     public Button findPwBtn;
-
 
     void Start()
     {
@@ -28,24 +29,15 @@ public class LoginController : MonoBehaviour
 
     }
 
+
     void LoginBtnClick()
     {
-        bool isValid = IsValidUser();
-        if(!isValid)
-        {
-            var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
-            popupWarn.MakePopupWarn("아이디 또는 비밀번호가\n일치하지 않습니다.");
-
-        } else
-        {
-            var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
-            popupWarn.OffWarn();
-            // ==== userId 저장 후 메인 페이지로 랜더링 ====
-        }
+        StartCoroutine(Login());
     }
 
     void SignupBtnClick()
     {
+        OffWarn();
         OffLogin();
         var signup = UIManager.Instance.popupSignup.GetComponent<SignupController>();
         signup.show();
@@ -53,6 +45,7 @@ public class LoginController : MonoBehaviour
 
     void FindIdBtnClick()
     {
+        OffWarn();
         OffLogin();
         var findid = UIManager.Instance.popupFindId.GetComponent<FindIdController>();
         findid.show();
@@ -60,6 +53,7 @@ public class LoginController : MonoBehaviour
 
     void FindPwBtnClick()
     {
+        OffWarn();
         OffLogin();
         var findPw = UIManager.Instance.popupFindPw.GetComponent<FindPwController>();
         findPw.show();
@@ -70,20 +64,43 @@ public class LoginController : MonoBehaviour
         login.SetActive(false);
     }
 
-    bool IsValidUser()
+    void OffWarn()
     {
-        LoginRequest request = new LoginRequest
+        var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
+        popupWarn.OffWarn();
+    }
+
+    IEnumerator Login() // 로그인 요청
+    {
+        string url = "http://localhost:8080/v1/login?identity=" + identity.text + "&password=" + password.text;
+
+        UnityWebRequest www = UnityWebRequest.Get(url);
+        yield return www.SendWebRequest();
+
+        // string -> json
+        string jsonString = www.downloadHandler.text;
+        var response = JsonUtility.FromJson<LoginResponse>(jsonString);
+        var userIdString = response.userId.ToString();
+        Debug.Log(jsonString);
+        Debug.Log(userIdString);
+
+        if (response.userId == null)    // 로그인 실패
         {
-            identity = identity.text,
-            password = password.text
-        };
-        Debug.Log("id: " + request.identity);
-        // ==== 백엔드와 통신해서 로그인 성공 여부 받아오기 ====
-        return false;
+            var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
+            popupWarn.MakePopupWarn(response.message);
+        }
+        else
+        {
+            var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
+            popupWarn.OffWarn();
+            // TODO : userId 저장 후 메인 페이지로 랜더링
+        }
     }
 }
 
-class LoginRequest {
-    public string identity;
-    public string password;
+class LoginResponse
+{
+    //public ObjectId userId;
+    public Object userId;
+    public string message;
 }
