@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.4465782, g: 0.49641252, b: 0.5748167, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4264,6 +4264,18 @@ PrefabInstance:
       propertyPath: m_RenderMode
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2351991734779022157, guid: 9585e45648d19764d9d6a2287f783421, type: 3}
+      propertyPath: m_MatchWidthOrHeight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2351991734779022157, guid: 9585e45648d19764d9d6a2287f783421, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 1920
+      objectReference: {fileID: 0}
+    - target: {fileID: 2351991734779022157, guid: 9585e45648d19764d9d6a2287f783421, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 1080
+      objectReference: {fileID: 0}
     - target: {fileID: 2351991734779022159, guid: 9585e45648d19764d9d6a2287f783421, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -5176,6 +5188,22 @@ PrefabInstance:
     - target: {fileID: 6740477088160120090, guid: 8f7f12150940d91419515356ad1fd85c, type: 3}
       propertyPath: m_RenderMode
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6740477088160120091, guid: 8f7f12150940d91419515356ad1fd85c, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6740477088160120091, guid: 8f7f12150940d91419515356ad1fd85c, type: 3}
+      propertyPath: m_MatchWidthOrHeight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6740477088160120091, guid: 8f7f12150940d91419515356ad1fd85c, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 1920
+      objectReference: {fileID: 0}
+    - target: {fileID: 6740477088160120091, guid: 8f7f12150940d91419515356ad1fd85c, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 1080
       objectReference: {fileID: 0}
     - target: {fileID: 6740477088160120093, guid: 8f7f12150940d91419515356ad1fd85c, type: 3}
       propertyPath: m_Name
