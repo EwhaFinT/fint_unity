@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
     {
         //Turn();
         //LookUp();
-        var uiCanvas = UIManager.Instance.popupArtInfo;
+        GameObject[] uiCanvas = { UIManager.Instance.popupArtInfo,  };
 
         if (!UIManager.Instance.popupArtInfo.activeSelf)
         {
