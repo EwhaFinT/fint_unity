@@ -3954,6 +3954,17 @@ RectTransform:
   m_AnchoredPosition: {x: 4.833191, y: -26.552307}
   m_SizeDelta: {x: 41.529, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2016392483 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1362579509245250298, guid: e5745a83b193a6048b793e0753c001cf, type: 3}
+  m_PrefabInstance: {fileID: 8278581098152365156}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &2037716668 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8623556978672568308, guid: e5745a83b193a6048b793e0753c001cf, type: 3}
@@ -4478,6 +4489,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 950902492}
     m_Modifications:
+    - target: {fileID: 154211881451516390, guid: e5745a83b193a6048b793e0753c001cf, type: 3}
+      propertyPath: img
+      value: 
+      objectReference: {fileID: 2016392483}
     - target: {fileID: 689617452518681105, guid: e5745a83b193a6048b793e0753c001cf, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
