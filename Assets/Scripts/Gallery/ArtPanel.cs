@@ -9,7 +9,7 @@ public class ArtPanel : MonoBehaviour
     public GameObject artPanel;
     public RawImage thisImg;
     public GameObject target;
-    public GameObject frame_center, frame_left, frame_right;
+    private GameObject frame_center, frame_left, frame_right;
 
     // Start is called before the first frame update
     void Start()
@@ -51,28 +51,22 @@ public class ArtPanel : MonoBehaviour
 
     void Img()
     {
-
+        GameObject[] frame;
+        frame = GameObject.FindGameObjectsWithTag("GalleryFrame");      //gallery내 frame의 배열
         var x = thisImg.GetComponent<RawImage>();
-        var artManager = Manager.Instance.gallaryPrefab.GetComponent<ArtChange>();
-        frame_center = GameObject.Find("Frame_Center");
-        frame_left = GameObject.Find("Frame_Left");
-        frame_right = GameObject.Find("Frame_Right");
-
         // 왼쪽 마우스 버튼을 클릭했을때
         if (Input.GetMouseButtonDown(0))  //0이면 좌클릭, 1이면 우클릭, 2이면 중앙을 클릭
         {
+            
             target = GetClickedObject();
-            if (target.Equals(frame_center))
+            for(int i=0; i<frame.Length; i++)
             {
-                x.texture = artManager.art1;
-            }
-            else if (target.Equals(frame_left))
-            {
-                x.texture = artManager.art2;
-            }
-            else if (target.Equals(frame_right))
-            {
-                x.texture = artManager.art3;
+                if (target.Equals(frame[i]))
+                {
+                    Material[] mt = frame[i].GetComponent<Renderer>().materials;
+                    x.texture = mt[1].GetTexture("_MainTex");
+                }
+                    
             }
 
         }

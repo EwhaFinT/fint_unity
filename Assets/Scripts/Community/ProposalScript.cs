@@ -6,7 +6,9 @@ using UnityEngine.UI;
 public class ProposalScript : MonoBehaviour
 {
     public GameObject proposal;
+    public GameObject board;
     public Button exit;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,5 +27,6 @@ public class ProposalScript : MonoBehaviour
     void onClicked_exit()
     {
         proposal.SetActive(false);
+        board.SetActive(true);
     }
 }
