@@ -24,6 +24,13 @@ public class PlayerController : MonoBehaviour
     {
         Turn();
         LookUp();
+        //var uiCanvas = UIManager.Instance.popupArtInfo;
+        
+        //if (!uiCanvas.activeSelf)
+        //{
+        //    Turn();
+        //    LookUp();
+        //}
     }
 
     private void Turn()
