@@ -7,7 +7,7 @@ public class CameraController : MonoBehaviour
     private Transform target;       // 카메라가 추적하는 대상
     
     [SerializeField]
-    private float xMoveSpeed; // 카메라의 y축 회전 속도
+    private float xMoveSpeed = 500; // 카메라의 y축 회전 속도 500
     [SerializeField]
     private float yMoveSpeed = 250; // 카메라의 x축 회전 속도
     private float yMinLimit = 5;    // 카메라 x축 회전 제한 최소 값

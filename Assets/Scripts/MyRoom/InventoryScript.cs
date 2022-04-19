@@ -66,14 +66,6 @@ public class InventoryScript : MonoBehaviour
         }
     }
 
-    //public void OnClick_Slot()
-    //{
-    //    frame = GameObject.FindGameObjectsWithTag("MyRoomFrame");      //myroom 내 frame의 배열
-    //    art = slot.transform.GetChild(0).GetComponent<RawImage>().texture;
-    //    frame[0].SetActive(true);
-    //    Material[] mt = frame[0].GetComponent<Renderer>().materials;
-    //    mt[1].SetTexture("_MainTex", art);
-    //}
     public void Onclicked_close()
     {
         inventoryCanvas.SetActive(false);

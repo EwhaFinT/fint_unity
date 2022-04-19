@@ -14,11 +14,6 @@ public class ArtChange : MonoBehaviour
     //public GameObject FrameLeft;
     //public GameObject FrameRight;
     //public Material[] mts;
-
-    [Header("Art Img")]
-    public Texture art1;
-    public Texture art2;
-    public Texture art3;
     // Start is called before the first frame update
     void Start()
     { 

@@ -7,10 +7,8 @@ public class ArtClick : MonoBehaviour
 {
 
     public GameObject art, target;
-
     void Start()
     {
-        
     }
 
     void Update()
@@ -24,10 +22,11 @@ public class ArtClick : MonoBehaviour
             if (target.Equals(art))
             {
                 artPanel.panelStart();
+                artPanel.changeImg(gameObject);
             }
 
         }
-        
+
     }
 
     private GameObject GetClickedObject()
