@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -12,21 +13,48 @@ public class PlayerController : MonoBehaviour
 
     public Camera mainCamera;
     private float m_HorizontalAngle, m_VerticalAngle;
+    public GameObject ui;
+    GameObject[] popupCanvas;
 
+    public void Start()
+    {
+        popupCanvas = new GameObject[ui.transform.childCount];
+        for (int i = 3; i < popupCanvas.Length; i++)
+        {
+            popupCanvas[i] = ui.transform.GetChild(i).gameObject;
+        }
+    }
     public void Awake()
     {
         movement3D = gameObject.GetComponent<Movement3D>();
     }
 
-    
-
     void FixedUpdate()
     {
         //Turn();
         //LookUp();
-        GameObject[] uiCanvas = { UIManager.Instance.popupArtInfo,  };
+        //        GameObject[] uiCanvas = {UIManager.Instance.popupArtInfo, UIManager.Instance.popupLogin};
+        //       if (!UIManager.Instance.popupArtInfo.activeSelf);
 
-        if (!UIManager.Instance.popupArtInfo.activeSelf)
+        //Debug.Log(ui.transform.childCount);
+        //Debug.Log(ui.transform.GetChild(0));
+        //Debug.Log(ui.transform.GetChild(1));
+
+        //transform[] allchildren = ui.getcomponentsinchildren<transform>(true);
+        //transform[] list = { };
+
+        //GameObject[] a = transform.GetComponentsInChildren;
+        //GameObject.FindGameObjectWithTag("")(true);
+        //Turn();
+        //LookUp();
+        bool notActiving = true;
+
+        for(int i=3; i< popupCanvas.Length; i++)
+        {
+            if (popupCanvas[i].activeSelf == true)
+                notActiving = false;
+        }
+        if (notActiving)
         {
             Turn();
             LookUp();

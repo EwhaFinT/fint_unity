@@ -40,20 +40,12 @@ public class InventoryScript : MonoBehaviour
             Debug.Log(request.error);
         else
         {
-            //액자 안 texture을 받아온 이미지로 변경
+            //인벤토리 슬롯을 해당 이미지로 변경
             slot.transform.GetChild(0).GetComponent<RawImage>().texture = ((DownloadHandlerTexture)request.downloadHandler).texture;
+            Debug.Log("change inventory slot");
         }
     }
     public int slotCnt;    // 슬롯 개수 (= 내 인벤토리 속 작품 개수)
-    //public int SlotCnt
-    //{
-    //    get => slotCnt;
-    //    set
-    //    {
-    //        slotCnt = value;
-    //        onSlotCountChange.Invoke(slotCnt);
-    //    }
-    //}
 
     private void SlotChange(int val)    // 슬롯 활성화 & 비활성화
     {
