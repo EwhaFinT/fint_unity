@@ -34,7 +34,6 @@ public class ArtPanel : MonoBehaviour
         
         var auctionPanel = UIManager.Instance.popupAuction.GetComponent<AuctionPanel>();
         auctionPanel.panelClose();
-        Img();
 
     }
     public void Onclicked_close()
@@ -49,29 +48,36 @@ public class ArtPanel : MonoBehaviour
         auctionPanel.panelStart();
     }
 
-    void Img()
+    public void changeImg(GameObject frame)
     {
-        GameObject[] frame;
-        frame = GameObject.FindGameObjectsWithTag("GalleryFrame");      //gallery내 frame의 배열
         var x = thisImg.GetComponent<RawImage>();
-        // 왼쪽 마우스 버튼을 클릭했을때
-        if (Input.GetMouseButtonDown(0))  //0이면 좌클릭, 1이면 우클릭, 2이면 중앙을 클릭
-        {
-            
-            target = GetClickedObject();
-            for(int i=0; i<frame.Length; i++)
-            {
-                if (target.Equals(frame[i]))
-                {
-                    Material[] mt = frame[i].GetComponent<Renderer>().materials;
-                    x.texture = mt[1].GetTexture("_MainTex");
-                }
-                    
-            }
-
-        }
-        
+        Material[] mt = frame.GetComponent<Renderer>().materials;
+        x.texture = mt[1].GetTexture("_MainTex");
     }
+
+    //void Img()
+    //{
+    //    GameObject[] frame;
+    //    frame = GameObject.FindGameObjectsWithTag("GalleryFrame");      //gallery내 frame의 배열
+    //    var x = thisImg.GetComponent<RawImage>();
+    //    // 왼쪽 마우스 버튼을 클릭했을때
+    //    if (Input.GetMouseButtonDown(0))  //0이면 좌클릭, 1이면 우클릭, 2이면 중앙을 클릭
+    //    {
+            
+    //        target = GetClickedObject();
+    //        for(int i=0; i<frame.Length; i++)
+    //        {
+    //            if (target.Equals(frame[i]))
+    //            {
+    //                Material[] mt = frame[i].GetComponent<Renderer>().materials;
+    //                x.texture = mt[1].GetTexture("_MainTex");
+    //            }
+                    
+    //        }
+
+    //    }
+        
+    //}
 
     private GameObject GetClickedObject()
     {

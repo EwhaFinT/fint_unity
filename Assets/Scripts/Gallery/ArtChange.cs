@@ -14,11 +14,6 @@ public class ArtChange : MonoBehaviour
     //public GameObject FrameLeft;
     //public GameObject FrameRight;
     //public Material[] mts;
-
-    [Header("Art Img")]
-    public Texture art1;
-    public Texture art2;
-    public Texture art3;
     // Start is called before the first frame update
     void Start()
     { 
@@ -27,14 +22,13 @@ public class ArtChange : MonoBehaviour
         //artURL[1] = "https://i.ibb.co/TPxs5Wn/6d3feda469a1.jpg";
         //artURL[2] = "https://i.ibb.co/0BJKwM1/flower2.jpg";
         //for (int i = 0; i < frame.Length; i++)
-        //    artURL[i] = //서버에서 받아오기
+        //    artURL[i] = //서버에서 받아오기 (배열로 줌)
         for (int i=0; i<frame.Length; i++)
         {
             StartCoroutine(DownloadImage(frame[i], "https://i.ibb.co/hyX44r9/flower.jpg"));
         }
  //       MaterialChange();
         //StartCoroutine(ImageUpload());
-        
 
     }
 

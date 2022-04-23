@@ -28,6 +28,7 @@ public class UIManager : MonoBehaviour
     [Header("Popups - etc")]
     public GameObject popupLogin;
     public GameObject popupSignup;
+
     public GameObject popupWarn;
     public GameObject popupFindId;
     public GameObject popupFindPw;
@@ -88,6 +89,7 @@ public class UIManager : MonoBehaviour
     {
         Debug.Log("OnBoard");
         popupBoard.SetActive(!popupBoard.activeSelf);
+
     }
 
     public void OnArtInfo()
