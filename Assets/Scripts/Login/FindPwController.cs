@@ -54,7 +54,7 @@ public class FindPwController : MonoBehaviour
 
     IEnumerator FindPw()
     {
-        string url = "http://localhost:8080/v1/find-pw?identity=" + identity.text + "&email=" + email.text;
+        string url = "https://fintribe.herokuapp.com/v1/find-pw?identity=" + identity.text + "&email=" + email.text;
 
         UnityWebRequest www = UnityWebRequest.Get(url);
         yield return www.SendWebRequest();

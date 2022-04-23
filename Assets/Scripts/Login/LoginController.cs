@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
 using TMPro;
-//using MongoDB.Bson;
+using MongoDB.Bson;
 
 public class LoginController : MonoBehaviour
 {
@@ -72,7 +72,7 @@ public class LoginController : MonoBehaviour
 
     IEnumerator Login() // 로그인 요청
     {
-        string url = "http://localhost:8080/v1/login?identity=" + identity.text + "&password=" + password.text;
+        string url = "https://fintribe.herokuapp.com/v1/login?identity=" + identity.text + "&password=" + password.text;
 
         UnityWebRequest www = UnityWebRequest.Get(url);
         yield return www.SendWebRequest();
@@ -81,8 +81,6 @@ public class LoginController : MonoBehaviour
         string jsonString = www.downloadHandler.text;
         var response = JsonUtility.FromJson<LoginResponse>(jsonString);
         var userIdString = response.userId.ToString();
-        Debug.Log(jsonString);
-        Debug.Log(userIdString);
 
         if (response.userId == null)    // 로그인 실패
         {
@@ -93,6 +91,7 @@ public class LoginController : MonoBehaviour
         {
             var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
             popupWarn.OffWarn();
+            OffLogin();
             // TODO : userId 저장 후 메인 페이지로 랜더링
         }
     }
@@ -100,7 +99,6 @@ public class LoginController : MonoBehaviour
 
 class LoginResponse
 {
-    //public ObjectId userId;
-    public Object userId;
+    public ObjectId userId;
     public string message;
 }

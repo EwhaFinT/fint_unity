@@ -199,7 +199,7 @@ public class SignupController : MonoBehaviour
 
     IEnumerator Signup() // 아이디 중복 검사 요청
     {
-        string url = "http://localhost:8080/v1/signup";
+        string url = "https://fintribe.herokuapp.com/v1/signup";
 
         SignupRequest signupRequest = new SignupRequest
         {

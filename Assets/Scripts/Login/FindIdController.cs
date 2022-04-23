@@ -53,7 +53,7 @@ public class FindIdController : MonoBehaviour
 
     IEnumerator FindId()
     {
-        string url = "http://localhost:8080/v1/find-id?name=" + userName.text + "&phone=" + phone.text;
+        string url = "https://fintribe.herokuapp.com/v1/find-id?name=" + userName.text + "&phone=" + phone.text;
 
         UnityWebRequest www = UnityWebRequest.Get(url);
         yield return www.SendWebRequest();
