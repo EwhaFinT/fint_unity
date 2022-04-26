@@ -833,10 +833,7 @@ MonoBehaviour:
   btn_auction: {fileID: 1162793893565987409}
   artPanel: {fileID: 2964171000551093244}
   thisImg: {fileID: 6388362279318483016}
-  target: {fileID: 0}
-  frame_center: {fileID: 0}
-  frame_left: {fileID: 0}
-  frame_right: {fileID: 0}
+  artInfo: {fileID: 196024837060819203}
 --- !u!1 &2964171000551093244
 GameObject:
   m_ObjectHideFlags: 0

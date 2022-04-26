@@ -19,10 +19,11 @@ public class ArtClick : MonoBehaviour
         {
             target = GetClickedObject();
             var artPanel = UIManager.Instance.popupArtInfo.GetComponent<ArtPanel>();
-            if (target == art)
+            if (art.Equals(target))
             {
                 artPanel.panelStart();
                 artPanel.changeImg(gameObject);
+                artPanel.changeArtInfo();
             }
 
         }
