@@ -883,6 +883,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Table_Round
       objectReference: {fileID: 0}
+    - target: {fileID: 164701495213216492, guid: 5b9e62274f926da4196f17bcfa38dc24, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3874360796470083572, guid: 5b9e62274f926da4196f17bcfa38dc24, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -1062,6 +1066,10 @@ PrefabInstance:
     - target: {fileID: 6997241797089348803, guid: b3fc9c14bb077af458391fc520a0ebeb, type: 3}
       propertyPath: m_Name
       value: Vase_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 6997241797089348803, guid: b3fc9c14bb077af458391fc520a0ebeb, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b3fc9c14bb077af458391fc520a0ebeb, type: 3}

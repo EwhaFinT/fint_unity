@@ -1191,7 +1191,7 @@ MonoBehaviour:
   teleportButton: {fileID: 1029039790}
   inventoryButton: {fileID: 1142302757}
   registerButton: {fileID: 1953546852}
-  popupAuction: {fileID: 0}
+  popupAuction: {fileID: 1583496253}
   popupArtInfo: {fileID: 955490001}
   popupBoard: {fileID: 1671891384}
   popupVote: {fileID: 699901103}
@@ -3485,6 +3485,11 @@ GameObject:
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6578843954281693662, guid: 61f9102ddd44c43cca69c6846d7fed21, type: 3}
   m_PrefabInstance: {fileID: 1570626762}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1583496253 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7385779569602819284, guid: b6558a5dc8d90d049932d672fe4b2c6c, type: 3}
+  m_PrefabInstance: {fileID: 708514698}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1634595184
 GameObject:
