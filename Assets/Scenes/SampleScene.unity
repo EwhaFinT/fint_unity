@@ -2166,8 +2166,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0.6571468, z: 0}
+  m_LocalScale: {x: 1, y: 0.7204766, z: 1}
   m_Children: []
   m_Father: {fileID: 1516708248}
   m_RootOrder: 0
@@ -2823,6 +2823,10 @@ PrefabInstance:
       propertyPath: teleportPanel
       value: 
       objectReference: {fileID: 1531551243}
+    - target: {fileID: 2560137380183847572, guid: 2af9b72f56e84e14f9951d195d8e9c3a, type: 3}
+      propertyPath: targetPos_community.y
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 5228964253105597048, guid: 2af9b72f56e84e14f9951d195d8e9c3a, type: 3}
       propertyPath: m_Name
       value: Canvas_Teleport
@@ -3791,12 +3795,16 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6261470874564650358, guid: c832eb2e81f9f1d4695bc2a885fc40e0, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.3879701
+      objectReference: {fileID: 0}
+    - target: {fileID: 6261470874564650358, guid: c832eb2e81f9f1d4695bc2a885fc40e0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6261470874564650358, guid: c832eb2e81f9f1d4695bc2a885fc40e0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.1
+      value: 1.4879
       objectReference: {fileID: 0}
     - target: {fileID: 6261470874564650358, guid: c832eb2e81f9f1d4695bc2a885fc40e0, type: 3}
       propertyPath: m_LocalPosition.z

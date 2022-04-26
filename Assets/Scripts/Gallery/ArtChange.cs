@@ -2,30 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using System.IO;
 using UnityEngine.Networking;
-using System;
 
 public class ArtChange : MonoBehaviour
 {
     public string[] artURL;
     public GameObject[] frame;
-    //public GameObject FrameCenter;
-    //public GameObject FrameLeft;
-    //public GameObject FrameRight;
-    //public Material[] mts;
     // Start is called before the first frame update
     void Start()
     { 
         frame = GameObject.FindGameObjectsWithTag("GalleryFrame");      //gallery내 frame의 배열
-        //artURL[0] = "https://i.ibb.co/hyX44r9/flower.jpg";
-        //artURL[1] = "https://i.ibb.co/TPxs5Wn/6d3feda469a1.jpg";
-        //artURL[2] = "https://i.ibb.co/0BJKwM1/flower2.jpg";
-        //for (int i = 0; i < frame.Length; i++)
-        //    artURL[i] = //서버에서 받아오기 (배열로 줌)
-        for (int i=0; i<frame.Length; i++)
+        string[] art = {"https://i.ibb.co/hyX44r9/flower.jpg", "https://i.ibb.co/Wtm6xfZ/cute-cat.jpg", "https://i.ibb.co/BL1VJQw/image.jpg",
+            "https://i.ibb.co/7JQ4FM7/red-flower.jpg", "https://i.ibb.co/6wz86xj/purple-flower.jpg", "https://i.ibb.co/jTJzz8G/green-flower.jpg"};
+              //    artURL[i] = //서버에서 받아오기 (배열로 줌)
+            for (int i=0; i<frame.Length; i++)
         {
-            StartCoroutine(DownloadImage(frame[i], "https://i.ibb.co/hyX44r9/flower.jpg"));
+            StartCoroutine(DownloadImage(frame[i], art[i]));
+//            StartCoroutine(DownloadImage(frame[i], "https://i.ibb.co/hyX44r9/flower.jpg"));
         }
  //       MaterialChange();
         //StartCoroutine(ImageUpload());
