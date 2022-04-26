@@ -69,17 +69,22 @@ public class BoardScript : MonoBehaviour
 
     IEnumerator LoadArticle()
     {
-        ObjectId articleId = new ObjectId("6231f66a15ffd20d91c1b10e");
-        string url = "https://fintribe.herokuapp.com/v1/article?articleId=" + articleId;
+        //string url = "https://fintribe.herokuapp.com/v1";
+        //MongoClient cli = new MongoClient(url);
+        //IMongoDatabase db = cli.GetServer().GetDatabase("myFirstDatabase");
 
+        ObjectId id = new ObjectId("6231f66a15ffd20d91c1b10e");
+
+        string url = "http://localhost:8080/v1/article?articleId=" + id;
         UnityWebRequest www = UnityWebRequest.Get(url);
         yield return www.SendWebRequest();
 
         string jsonString = www.downloadHandler.text;
         var response = JsonUtility.FromJson<LoadBoardResponse>(jsonString);
 
-        
-        Debug.Log("Article" + response.Article + "|| comment" + response.comment);
+
+        Debug.Log(response);
+        //Debug.Log("Article" + response.Article + "|| comment" + response.comment);
     }
 }
 
