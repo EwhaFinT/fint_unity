@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using WebSocketSharp;
+using UnityEngine.Networking;
+using MongoDB.Bson;
 using TMPro;
 
 public class BoardScript : MonoBehaviour
@@ -13,9 +14,6 @@ public class BoardScript : MonoBehaviour
     public Button WriteBtn;
     public Button ProposalBtn;
 
-    private WebSocket webSocket;
-
-
     // Start is called before the first frame update
     void Start()
     {
@@ -24,26 +22,20 @@ public class BoardScript : MonoBehaviour
         BoardExitBtn.onClick.AddListener(onClicked_exit);
         WriteBtn.onClick.AddListener(onClicked_write);
         ProposalBtn.onClick.AddListener(onClicked_proposal);
+        StartCoroutine(LoadArticle());
 
-        
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (webSocket == null)
-        {
-            return;
-        }
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            webSocket.Send("Hello");
-        }
+    
     }
 
     public void show()
     {
         board.SetActive(true);
+
     }
 
     void onClicked_vote()
@@ -74,4 +66,30 @@ public class BoardScript : MonoBehaviour
         var proposalPanel = UIManager.Instance.popUpProposal.GetComponent<ProposalScript>();
         proposalPanel.show();
     }
+
+    IEnumerator LoadArticle()
+    {
+        //string url = "https://fintribe.herokuapp.com/v1";
+        //MongoClient cli = new MongoClient(url);
+        //IMongoDatabase db = cli.GetServer().GetDatabase("myFirstDatabase");
+
+        ObjectId id = new ObjectId("6231f66a15ffd20d91c1b10e");
+
+        string url = "https://fintribe.herokuapp.com/v1/article?articleId=" + id;
+        UnityWebRequest www = UnityWebRequest.Get(url);
+        yield return www.SendWebRequest();
+
+        string jsonString = www.downloadHandler.text;
+        var response = JsonUtility.FromJson<LoadBoardResponse>(jsonString);
+
+
+        Debug.Log(response);
+        //Debug.Log("Article" + response.Article + "|| comment" + response.comment);
+    }
+}
+
+class LoadBoardResponse
+{
+    public string Article;
+    public string comment;
 }

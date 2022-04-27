@@ -5,24 +5,40 @@ using UnityEngine.UI;
 
 public class ArtClick : MonoBehaviour
 {
-
+    GameObject[] popupCanvas;
+    public GameObject ui;
     public GameObject art, target;
     void Start()
     {
+        ui = GameObject.Find("UI");
+        popupCanvas = new GameObject[ui.transform.childCount];
+        for (int i = 3; i < popupCanvas.Length; i++)
+        {
+            popupCanvas[i] = ui.transform.GetChild(i).gameObject;
+        }
     }
 
     void Update()
     {
-
+        bool notActiving = true;
         // 왼쪽 마우스 버튼을 클릭했을때
         if (Input.GetMouseButtonDown(0))  //0이면 좌클릭, 1이면 우클릭, 2이면 중앙을 클릭
         {
-            target = GetClickedObject();
-            var artPanel = UIManager.Instance.popupArtInfo.GetComponent<ArtPanel>();
-            if (target.Equals(art))
+            for (int i = 3; i < popupCanvas.Length; i++)
             {
-                artPanel.panelStart();
-                artPanel.changeImg(gameObject);
+                if (popupCanvas[i].activeSelf == true)
+                    notActiving = false;
+            }
+            if (notActiving)
+            {
+                target = GetClickedObject();
+                var artPanel = UIManager.Instance.popupArtInfo.GetComponent<ArtPanel>();
+                if (art.Equals(target))
+                {
+                    artPanel.panelStart();
+                    artPanel.changeImg(gameObject);
+                    artPanel.changeArtInfo();
+                }
             }
 
         }

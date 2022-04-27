@@ -9,8 +9,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private KeyCode jumpKeyCode = KeyCode.Space;
 
-    public float sensitivity = 5;
-
+    public float sensitivity = 3;
+    public float yMin, yMax;
     public Camera mainCamera;
     private float m_HorizontalAngle, m_VerticalAngle;
     public GameObject ui;
@@ -76,10 +76,10 @@ public class PlayerController : MonoBehaviour
     {
         float rotateVertical = Input.GetAxis("Mouse Y");
         var turnCam = -rotateVertical * sensitivity;
-        m_VerticalAngle = Mathf.Clamp(turnCam + m_VerticalAngle, -89.0f, 89.0f);
+        m_VerticalAngle = Mathf.Clamp(turnCam + m_VerticalAngle, -30.0f, 30.0f);
         Vector3 currentAngles = mainCamera.transform.localEulerAngles;
         currentAngles.x = m_VerticalAngle;
-        mainCamera.transform.localEulerAngles = currentAngles;
+        mainCamera.transform.localEulerAngles = currentAngles; 
     }
 
     // 상하좌우 이동 및 점프
