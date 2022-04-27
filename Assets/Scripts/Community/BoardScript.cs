@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
@@ -13,10 +14,12 @@ public class BoardScript : MonoBehaviour
     public Button BoardExitBtn;
     public Button WriteBtn;
     public Button ProposalBtn;
+    public TextMeshPro ArticleTitle;
 
     // Start is called before the first frame update
     void Start()
     {
+
         // board.SetActive(false);
         voteBtn.onClick.AddListener(onClicked_vote);
         BoardExitBtn.onClick.AddListener(onClicked_exit);
@@ -69,10 +72,7 @@ public class BoardScript : MonoBehaviour
 
     IEnumerator LoadArticle()
     {
-        //string url = "https://fintribe.herokuapp.com/v1";
-        //MongoClient cli = new MongoClient(url);
-        //IMongoDatabase db = cli.GetServer().GetDatabase("myFirstDatabase");
-
+        //ArticleTitle = GetComponent<TextMeshPro>();
         ObjectId id = new ObjectId("6231f66a15ffd20d91c1b10e");
 
         string url = "https://fintribe.herokuapp.com/v1/article?articleId=" + id;
@@ -82,14 +82,56 @@ public class BoardScript : MonoBehaviour
         string jsonString = www.downloadHandler.text;
         var response = JsonUtility.FromJson<LoadBoardResponse>(jsonString);
 
-
-        Debug.Log(response);
-        //Debug.Log("Article" + response.Article + "|| comment" + response.comment);
+        //ArticleTitle.text = response.article.title;
+      
     }
 }
 
+class Article
+{
+    public ObjectId articleId;
+    public ObjectId communityId;
+    public ObjectId userId;
+    public string identity;
+    public string title;
+    public string content;
+    public DateTime createdAt;
+    public DateTime updatedAt;
+    public bool isDeleted;
+}
+
+class Comment
+{
+    public int commentId;
+    public ObjectId articleId;
+    public string content;
+    public ObjectId userId;
+    public string identity;
+    public DateTime createdAt;
+    public DateTime updatedAt;
+    public bool isDeleted;
+}
+
+class ReComment
+{
+    public int reCommentId;
+    public int tagCommentId;
+    public ObjectId articleId;
+    public string content;
+    public ObjectId userId;
+    public string identity;
+    public DateTime createdAt;
+    public DateTime updatedAt;
+    public ObjectId tagUser;
+    public string tagUserIdentity;
+    public bool isDeleted;
+}
+
+
 class LoadBoardResponse
 {
-    public string Article;
-    public string comment;
+    public Article article;
+    public string articleId;
+    public List<Comment> comments;
+    public List<ReComment> reComments;
 }
