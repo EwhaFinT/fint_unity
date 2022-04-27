@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
 using TMPro;
-using MongoDB.Bson;
 
 public class LoginController : MonoBehaviour
 {
@@ -80,9 +79,8 @@ public class LoginController : MonoBehaviour
         // string -> json
         string jsonString = www.downloadHandler.text;
         var response = JsonUtility.FromJson<LoginResponse>(jsonString);
-        var userIdString = response.userId.ToString();
-
-        if (response.userId == null)    // 로그인 실패
+        
+        if (response.userId == "")    // 로그인 실패
         {
             var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
             popupWarn.MakePopupWarn(response.message);
@@ -99,6 +97,6 @@ public class LoginController : MonoBehaviour
 
 class LoginResponse
 {
-    public ObjectId userId;
+    public string userId;
     public string message;
 }
