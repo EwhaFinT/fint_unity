@@ -11,27 +11,29 @@ public class BoardImgScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // MakeBoard();
     }
 
     // Update is called once per frame
     void Update()
     {
+        MakeBoard();
     }
 
-    // private void MakeBoard() {
-    //     var board = GetComponent<BoardScript>();
-        
-    //     // 왼쪽 마우스 버튼을 클릭했을때
-    //     if (Input.GetMouseButtonDown(0))  //0이면 좌클릭, 1이면 우클릭, 2이면 중앙을 클릭
-    //     {
-    //         target = GetClickedObject();
-    //         if (target.Equals(boardImg))
-    //         {
-    //             board.show();
-    //         }
-    //     }
-    // }
+    private void MakeBoard()
+    {
+        var boardPanel = UIManager.Instance.popupBoard.GetComponent<BoardScript>();
+
+
+        // 왼쪽 마우스 버튼을 클릭했을때
+        if (Input.GetMouseButtonDown(0))  //0이면 좌클릭, 1이면 우클릭, 2이면 중앙을 클릭
+        {
+            target = GetClickedObject();
+            if (boardImg.Equals(target))
+            {
+                boardPanel.show();
+            }
+        }
+    }
 
     private GameObject GetClickedObject()
     {

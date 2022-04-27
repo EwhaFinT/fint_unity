@@ -75,7 +75,7 @@ public class BoardScript : MonoBehaviour
 
         ObjectId id = new ObjectId("6231f66a15ffd20d91c1b10e");
 
-        string url = "http://localhost:8080/v1/article?articleId=" + id;
+        string url = "https://fintribe.herokuapp.com/v1/article?articleId=" + id;
         UnityWebRequest www = UnityWebRequest.Get(url);
         yield return www.SendWebRequest();
 
