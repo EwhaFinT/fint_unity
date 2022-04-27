@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
 public class ArtPanel : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class ArtPanel : MonoBehaviour
     public GameObject artPanel;
     public RawImage thisImg;
     public Text artInfo;
+    public string artId;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -16,7 +19,6 @@ public class ArtPanel : MonoBehaviour
         btn_close.onClick.AddListener(Onclicked_close);
         btn_auction.onClick.AddListener(Onclicked_auction);
 //        artPanel.SetActive(false);
-        
     }
 
     // Update is called once per frame
@@ -54,64 +56,45 @@ public class ArtPanel : MonoBehaviour
         x.texture = mt[1].GetTexture("_MainTex");
     }
 
-    public void changeArtInfo()
+    public void getFrame(GameObject frame)
     {
-        artInfo.text = 
-            "작품명 : " + "귀여운 고양이\n" +
-            "작가 : " + "321codus\n" +
-            "작품 소개 : " + "귀여운 고양이가 세상을 구합니다. 세상에서 제일 예쁜 길고양이 한입에 쏙....\n" +
-            "　　　　＿\n" +
-            "　 　 ／　／\n" +
-            "　　 | 　 |\n" +
-            "　　 | 　 |\n" +
-            "　　 | 　 \\\n" +
-            "　　∧ 　 \\\n" +
-            "　 /　 ＼　?　　　 　 _\n" +
-            "　 |　（·） Y￣￣￣￣￣_ ノ\n" +
-            "　 |　　　　　￣￣￣|￣\n" +
-            "　 》　　　　　　　 }\n" +
-            "　/　　　　　　　　/\n" +
-            " /";
+        ArtChange artChange = ArtChange.Instance.GetComponent<ArtChange>();
+        artId = artChange.dic[frame];
+        StartCoroutine(LoadArtInfo());
     }
 
+    IEnumerator LoadArtInfo()     // 서버에서 작품 정보 받아오기
+    {
+        string url = "http://localhost:8080/v1/art-info?artId=" + artId;
+        //string url = "https://fintribe.herokuapp.com/v1/art-info?artId=" + artId;
 
+        UnityWebRequest www = UnityWebRequest.Get(url);
+        yield return www.SendWebRequest();
+
+        string jsonString = www.downloadHandler.text;
+        var response = JsonUtility.FromJson<ArtInfoResponse>(jsonString);
+
+        changeArtInfo(response);
+    }
+
+    void changeArtInfo(ArtInfoResponse response)
+    {
+        artInfo.text =
+            "작품명 : " + response.artName + "\n" +
+            "작가 : " + response.painter + "\n" +
+            "작품 소개 : " + response.detail + "\n";
+    }
 }
 
-//void Img()
-//{
-//    GameObject[] frame;
-//    frame = GameObject.FindGameObjectsWithTag("GalleryFrame");      //gallery내 frame의 배열
-//    var x = thisImg.GetComponent<RawImage>();
-//    // 왼쪽 마우스 버튼을 클릭했을때
-//    if (Input.GetMouseButtonDown(0))  //0이면 좌클릭, 1이면 우클릭, 2이면 중앙을 클릭
-//    {
-
-//        target = GetClickedObject();
-//        for (int i = 0; i < frame.Length; i++)
-//        {
-//            if (target.Equals(frame[i]))
-//            {
-//                Material[] mt = frame[i].GetComponent<Renderer>().materials;
-//                x.texture = mt[1].GetTexture("_MainTex");
-//            }
-
-//        }
-
-//    }
-
-//}
-
-//private GameObject GetClickedObject()
-//{
-//    RaycastHit hit;
-//    GameObject target = null;
-//    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); //마우스 포인트 근처 좌표를 만든다. 
-
-//    if (true == (Physics.Raycast(ray.origin, ray.direction * 10, out hit)))   //마우스 근처에 오브젝트가 있는지 확인
-//    {
-//        //있으면 오브젝트를 저장한다.
-//        target = hit.collider.gameObject;
-
-//    }
-//    return target;
-//}
+class ArtInfoResponse {
+    public string artId;
+    public string painter; // 작가
+    public string artName; // 작품명
+    public string detail;
+    public double price; // 경매가
+    public string nftAdd;
+    public string paint; // 이미지 url 주소
+    public bool sold;
+    public List<string> userId;
+    public List<double> ratio; // 공동 투자자별 지분
+}

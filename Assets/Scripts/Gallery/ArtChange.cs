@@ -6,31 +6,60 @@ using UnityEngine.Networking;
 
 public class ArtChange : MonoBehaviour
 {
-    public string[] artURL;
     public GameObject[] frame;
+
+    public Dictionary<GameObject, string> dic;
+
     // Start is called before the first frame update
     void Start()
     { 
         frame = GameObject.FindGameObjectsWithTag("GalleryFrame");      //gallery내 frame의 배열
-        string[] art = {"https://i.ibb.co/hyX44r9/flower.jpg", "https://i.ibb.co/Wtm6xfZ/cute-cat.jpg", "https://i.ibb.co/BL1VJQw/image.jpg",
-            "https://i.ibb.co/7JQ4FM7/red-flower.jpg", "https://i.ibb.co/6wz86xj/purple-flower.jpg", "https://i.ibb.co/jTJzz8G/green-flower.jpg"};
-              //    artURL[i] = //서버에서 받아오기 (배열로 줌)
-            for (int i=0; i<frame.Length; i++)
-        {
-            StartCoroutine(DownloadImage(frame[i], art[i]));
-//            StartCoroutine(DownloadImage(frame[i], "https://i.ibb.co/hyX44r9/flower.jpg"));
-        }
- //       MaterialChange();
-        //StartCoroutine(ImageUpload());
-
+        dic = new Dictionary<GameObject, string>();
+        StartCoroutine(LoadImage());
     }
+
+    #region Singleton
+    public static ArtChange Instance;
+
+    private void Awake()
+    {
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+    }
+    #endregion
 
     // Update is called once per frame
     void Update()
     {
         
     }
-    IEnumerator DownloadImage(GameObject Frame, string MediaUrl)          //서버에서 그림 받아와서 art에 넣기
+    IEnumerator LoadImage()     // 서버에서 작품 리스트 받아오기
+    {
+        string url = "http://localhost:8080/v1/artlist";
+        //string url = "https://fintribe.herokuapp.com/v1/artlist"; // TODO : 나중에 로컬 대신 배포용 해주세요
+
+        UnityWebRequest www = UnityWebRequest.Get(url);
+        yield return www.SendWebRequest();
+
+        string jsonString = www.downloadHandler.text;
+        var response = JsonUtility.FromJson<ArtlistResponse>(jsonString);
+
+        List<string> artId = response.artId;
+        List<string> artUrl = response.paint;
+
+        for (int i = 0; i < 3; i++)
+        {
+            StartCoroutine(DownloadImage(frame[i], artUrl[i]));
+            dic.Add(frame[i], artId[i]);
+        }
+
+    }
+
+    IEnumerator DownloadImage(GameObject tmp, string MediaUrl)          // 서버에서 그림 받아와서 art에 넣기
     {
         UnityWebRequest request = UnityWebRequestTexture.GetTexture(MediaUrl);
         yield return request.SendWebRequest();
@@ -40,9 +69,8 @@ public class ArtChange : MonoBehaviour
         {
             //액자 안 texture을 받아온 이미지로 변경
             Texture artTmp = ((DownloadHandlerTexture)request.downloadHandler).texture;
-            Material[] mt = Frame.GetComponent<Renderer>().materials;
+            Material[] mt = tmp.GetComponent<Renderer>().materials;
             mt[1].SetTexture("_MainTex", artTmp);
-            
         }
     }
     //IEnumerator ImageUpload()
@@ -73,4 +101,8 @@ public class ArtChange : MonoBehaviour
     //    mt_right[1].SetTexture("_MainTex", art3);    
     //}
 
+}
+class ArtlistResponse {
+    public List<string> artId;
+    public List<string> paint;
 }
