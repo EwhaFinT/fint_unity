@@ -6,32 +6,60 @@ using UnityEngine.Networking;
 
 public class ArtChange : MonoBehaviour
 {
-    public string[] artURL;
     public GameObject[] frame;
+
+    public Dictionary<GameObject, string> dic;
+
     // Start is called before the first frame update
     void Start()
     { 
-        frame = GameObject.FindGameObjectsWithTag("GalleryFrame");      //gallery³» frameÀÇ ¹è¿­
-        string[] art = {"https://i.ibb.co/hyX44r9/flower.jpg", "https://i.ibb.co/Wtm6xfZ/cute-cat.jpg", "https://i.ibb.co/BL1VJQw/image.jpg",
-            "https://i.ibb.co/7JQ4FM7/red-flower.jpg", "https://i.ibb.co/6wz86xj/purple-flower.jpg", "https://i.ibb.co/jTJzz8G/green-flower.jpg"};
-              //    artURL[i] = //¼­¹ö¿¡¼­ ¹Þ¾Æ¿À±â (¹è¿­·Î ÁÜ)
-
-            for (int i=0; i<frame.Length; i++)
-        {
-            StartCoroutine(DownloadImage(frame[i], art[i]));
-//            StartCoroutine(DownloadImage(frame[i], "https://i.ibb.co/hyX44r9/flower.jpg"));
-        }
- //       MaterialChange();
-        //StartCoroutine(ImageUpload());
-
+        frame = GameObject.FindGameObjectsWithTag("GalleryFrame");      //galleryï¿½ï¿½ frameï¿½ï¿½ ï¿½è¿­
+        dic = new Dictionary<GameObject, string>();
+        StartCoroutine(LoadImage());
     }
+
+    #region Singleton
+    public static ArtChange Instance;
+
+    private void Awake()
+    {
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+    }
+    #endregion
 
     // Update is called once per frame
     void Update()
     {
         
     }
-    IEnumerator DownloadImage(GameObject Frame, string MediaUrl)          //¼­¹ö¿¡¼­ ±×¸² ¹Þ¾Æ¿Í¼­ art¿¡ ³Ö±â
+    IEnumerator LoadImage()     // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Þ¾Æ¿ï¿½ï¿½ï¿½
+    {
+        string url = "http://localhost:8080/v1/artlist";
+        //string url = "https://fintribe.herokuapp.com/v1/artlist"; // TODO : ï¿½ï¿½ï¿½ß¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½
+
+        UnityWebRequest www = UnityWebRequest.Get(url);
+        yield return www.SendWebRequest();
+
+        string jsonString = www.downloadHandler.text;
+        var response = JsonUtility.FromJson<ArtlistResponse>(jsonString);
+
+        List<string> artId = response.artId;
+        List<string> artUrl = response.paint;
+
+        for (int i = 0; i < 3; i++)
+        {
+            StartCoroutine(DownloadImage(frame[i], artUrl[i]));
+            dic.Add(frame[i], artId[i]);
+        }
+
+    }
+
+    IEnumerator DownloadImage(GameObject tmp, string MediaUrl)          // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×¸ï¿½ ï¿½Þ¾Æ¿Í¼ï¿½ artï¿½ï¿½ ï¿½Ö±ï¿½
     {
         UnityWebRequest request = UnityWebRequestTexture.GetTexture(MediaUrl);
         yield return request.SendWebRequest();
@@ -39,20 +67,19 @@ public class ArtChange : MonoBehaviour
             Debug.Log(request.error);
         else
         {
-            //¾×ÀÚ ¾È textureÀ» ¹Þ¾Æ¿Â ÀÌ¹ÌÁö·Î º¯°æ
+            //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ textureï¿½ï¿½ ï¿½Þ¾Æ¿ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             Texture artTmp = ((DownloadHandlerTexture)request.downloadHandler).texture;
-            Material[] mt = Frame.GetComponent<Renderer>().materials;
+            Material[] mt = tmp.GetComponent<Renderer>().materials;
             mt[1].SetTexture("_MainTex", artTmp);
-            
         }
     }
     //IEnumerator ImageUpload()
     //{
-    //    // ÀÌ¹ÌÁö base64stringÀ¸·Î º¯È¯
+    //    // ï¿½Ì¹ï¿½ï¿½ï¿½ base64stringï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯
     //    FileInfo file = new FileInfo("{local_image_file_path}");
     //    byte[] byteTexture = File.ReadAllBytes(file.FullName);
 
-    //    // ÀÌ¹ÌÁö ¼­¹ö post ¿äÃ»
+    //    // ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ post ï¿½ï¿½Ã»
     //    string url = "https://api.imgbb.com/1/upload?key={api_key}";
     //    WWWForm form = new WWWForm();
     //    string base64string = Convert.ToBase64String(byteTexture);
@@ -68,10 +95,14 @@ public class ArtChange : MonoBehaviour
         
     //    Material[] mt_left = FrameLeft.GetComponent<Renderer>().materials;
     //    Material[] mt_right = FrameRight.GetComponent<Renderer>().materials;
-    //    //mt[0]Àº ¾×ÀÚÆ², mt[1]Àº ±×¸²
+    //    //mt[0]ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ², mt[1]ï¿½ï¿½ ï¿½×¸ï¿½
         
     //    mt_left[1].SetTexture("_MainTex", art2);
     //    mt_right[1].SetTexture("_MainTex", art3);    
     //}
 
+}
+class ArtlistResponse {
+    public List<string> artId;
+    public List<string> paint;
 }

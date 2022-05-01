@@ -37,7 +37,8 @@ public class ArtClick : MonoBehaviour
                 {
                     artPanel.panelStart();
                     artPanel.changeImg(gameObject);
-                    artPanel.changeArtInfo();
+                    artPanel.getFrame(gameObject);
+                    //artPanel.changeArtInfo();
                 }
             }
 
