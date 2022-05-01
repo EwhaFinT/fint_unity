@@ -15,6 +15,7 @@ public class ArtChange : MonoBehaviour
         string[] art = {"https://i.ibb.co/hyX44r9/flower.jpg", "https://i.ibb.co/Wtm6xfZ/cute-cat.jpg", "https://i.ibb.co/BL1VJQw/image.jpg",
             "https://i.ibb.co/7JQ4FM7/red-flower.jpg", "https://i.ibb.co/6wz86xj/purple-flower.jpg", "https://i.ibb.co/jTJzz8G/green-flower.jpg"};
               //    artURL[i] = //서버에서 받아오기 (배열로 줌)
+
             for (int i=0; i<frame.Length; i++)
         {
             StartCoroutine(DownloadImage(frame[i], art[i]));
