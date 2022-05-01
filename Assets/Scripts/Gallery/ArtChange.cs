@@ -13,7 +13,7 @@ public class ArtChange : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     { 
-        frame = GameObject.FindGameObjectsWithTag("GalleryFrame");      //gallery내 frame의 배열
+        frame = GameObject.FindGameObjectsWithTag("GalleryFrame");      //gallery?? frame?? ????
         dic = new Dictionary<GameObject, string>();
         StartCoroutine(LoadImage());
     }
@@ -37,10 +37,10 @@ public class ArtChange : MonoBehaviour
     {
         
     }
-    IEnumerator LoadImage()     // 서버에서 작품 리스트 받아오기
+    IEnumerator LoadImage()     // ???????? ???? ?????? ????????
     {
-        string url = "http://localhost:8080/v1/artlist";
-        //string url = "https://fintribe.herokuapp.com/v1/artlist"; // TODO : 나중에 로컬 대신 배포용 해주세요
+        //string url = "http://localhost:8080/v1/artlist";
+        string url = "https://fintribe.herokuapp.com/v1/artlist"; // TODO : ?????? ???? ???? ?????? ????????
 
         UnityWebRequest www = UnityWebRequest.Get(url);
         yield return www.SendWebRequest();
@@ -59,7 +59,7 @@ public class ArtChange : MonoBehaviour
 
     }
 
-    IEnumerator DownloadImage(GameObject tmp, string MediaUrl)          // 서버에서 그림 받아와서 art에 넣기
+    IEnumerator DownloadImage(GameObject tmp, string MediaUrl)          // ???????? ???? ???????? art?? ????
     {
         UnityWebRequest request = UnityWebRequestTexture.GetTexture(MediaUrl);
         yield return request.SendWebRequest();
@@ -67,7 +67,7 @@ public class ArtChange : MonoBehaviour
             Debug.Log(request.error);
         else
         {
-            //액자 안 texture을 받아온 이미지로 변경
+            //???? ?? texture?? ?????? ???????? ????
             Texture artTmp = ((DownloadHandlerTexture)request.downloadHandler).texture;
             Material[] mt = tmp.GetComponent<Renderer>().materials;
             mt[1].SetTexture("_MainTex", artTmp);
@@ -75,11 +75,11 @@ public class ArtChange : MonoBehaviour
     }
     //IEnumerator ImageUpload()
     //{
-    //    // 이미지 base64string으로 변환
+    //    // ?????? base64string???? ????
     //    FileInfo file = new FileInfo("{local_image_file_path}");
     //    byte[] byteTexture = File.ReadAllBytes(file.FullName);
 
-    //    // 이미지 서버 post 요청
+    //    // ?????? ???? post ????
     //    string url = "https://api.imgbb.com/1/upload?key={api_key}";
     //    WWWForm form = new WWWForm();
     //    string base64string = Convert.ToBase64String(byteTexture);
@@ -95,7 +95,7 @@ public class ArtChange : MonoBehaviour
         
     //    Material[] mt_left = FrameLeft.GetComponent<Renderer>().materials;
     //    Material[] mt_right = FrameRight.GetComponent<Renderer>().materials;
-    //    //mt[0]은 액자틀, mt[1]은 그림
+    //    //mt[0]?? ??????, mt[1]?? ????
         
     //    mt_left[1].SetTexture("_MainTex", art2);
     //    mt_right[1].SetTexture("_MainTex", art3);    
