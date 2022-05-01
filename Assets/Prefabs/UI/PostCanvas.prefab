@@ -1021,10 +1021,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   post: {fileID: 5656653206254608495}
-  board: {fileID: 0}
   exit: {fileID: 8812120203353097394}
-  title: {fileID: 4879281508003035097}
-  content: {fileID: 5621640871627987350}
+  Title: {fileID: 4879281508003035097}
+  Content: {fileID: 5621640871627987350}
   submit: {fileID: 6068469605127458575}
 --- !u!1 &5872436612488475779
 GameObject:
