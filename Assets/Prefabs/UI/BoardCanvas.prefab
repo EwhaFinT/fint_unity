@@ -3258,6 +3258,8 @@ MonoBehaviour:
   WriteBtn: {fileID: 8069347008410726059}
   ProposalBtn: {fileID: 1696743019837642958}
   ArticleTitle: {fileID: 7537407160068651483}
+  ArticleTimestamp: {fileID: 7189823092975494588}
+  ArticleContent: {fileID: 8589484969736964251}
 --- !u!1 &8069347008346119449
 GameObject:
   m_ObjectHideFlags: 0

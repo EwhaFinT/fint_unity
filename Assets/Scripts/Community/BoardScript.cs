@@ -14,12 +14,19 @@ public class BoardScript : MonoBehaviour
     public Button BoardExitBtn;
     public Button WriteBtn;
     public Button ProposalBtn;
-    public TextMeshPro ArticleTitle;
+
+    [Header("Article")]
+    public TextMeshProUGUI ArticleTitle;
+    public TextMeshProUGUI ArticleTimestamp;
+    public TextMeshProUGUI ArticleContent;
+
+    //[Header("Comment")]
+    //public TextMeshProUGUI 
+
 
     // Start is called before the first frame update
     void Start()
     {
-
         // board.SetActive(false);
         voteBtn.onClick.AddListener(onClicked_vote);
         BoardExitBtn.onClick.AddListener(onClicked_exit);
@@ -76,17 +83,26 @@ public class BoardScript : MonoBehaviour
         ObjectId id = new ObjectId("6231f66a15ffd20d91c1b10e");
 
         string url = "https://fintribe.herokuapp.com/v1/article?articleId=" + id;
+
+        Debug.Log(url);
+
         UnityWebRequest www = UnityWebRequest.Get(url);
         yield return www.SendWebRequest();
 
         string jsonString = www.downloadHandler.text;
         var response = JsonUtility.FromJson<LoadBoardResponse>(jsonString);
 
-        //ArticleTitle.text = response.article.title;
-      
+        Debug.Log("json : " + jsonString);
+
+        Debug.Log("time: " + response.article.createdAt);
+        
+        ArticleTitle.text = response.article.title.ToString();
+        ArticleTimestamp.text = "작성일자| " + response.article.createdAt.ToString("yyyy/MM/dd HH:mm") + "\n" + "작성자| " + response.article.identity.ToString();
+        ArticleContent.text = response.article.content.ToString();
     }
 }
 
+[Serializable]
 class Article
 {
     public ObjectId articleId;
@@ -100,6 +116,7 @@ class Article
     public bool isDeleted;
 }
 
+[Serializable]
 class Comment
 {
     public int commentId;
@@ -112,6 +129,7 @@ class Comment
     public bool isDeleted;
 }
 
+[Serializable]
 class ReComment
 {
     public int reCommentId;
@@ -127,7 +145,7 @@ class ReComment
     public bool isDeleted;
 }
 
-
+[Serializable]
 class LoadBoardResponse
 {
     public Article article;
