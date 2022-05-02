@@ -13,7 +13,6 @@ public class CommunityFrame : MonoBehaviour
         Material[] mt = frame.GetComponent<Renderer>().materials;
         mt[1].SetTexture("_MainTex", art);
         Debug.Log("set frame img");
-
     }
 
     // Update is called once per frame

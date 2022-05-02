@@ -39,8 +39,8 @@ public class ArtChange : MonoBehaviour
     }
     IEnumerator LoadImage()     // �������� ��ǰ ����Ʈ �޾ƿ���
     {
-        string url = "http://localhost:8080/v1/artlist";
-        //string url = "https://fintribe.herokuapp.com/v1/artlist"; // TODO : ���߿� ���� ��� ������ ���ּ���
+        //string url = "http://localhost:8080/v1/artlist";
+        string url = "https://fintribe.herokuapp.com/v1/artlist"; // TODO : ���߿� ���� ��� ������ ���ּ���
 
         UnityWebRequest www = UnityWebRequest.Get(url);
         yield return www.SendWebRequest();

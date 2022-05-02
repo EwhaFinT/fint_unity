@@ -17,6 +17,8 @@ public class UIManager : MonoBehaviour
 
     [Header("Popups - MainHall")]
     public GameObject popupAuction;
+    public GameObject auctionJoin;
+    public GameObject auctionNew;
     public GameObject popupArtInfo;
 
     [Header("Popups - Community")]
