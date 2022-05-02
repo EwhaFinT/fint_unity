@@ -63,7 +63,7 @@ public class ArtPanel : MonoBehaviour
         StartCoroutine(LoadArtInfo());
     }
 
-    IEnumerator LoadArtInfo()     // 서버에서 작품 정보 받아오기
+    IEnumerator LoadArtInfo()     // ???????? ???? ???? ????????
     {
         //string url = "http://localhost:8080/v1/art-info?artId=" + artId;
         string url = "https://fintribe.herokuapp.com/v1/art-info?artId=" + artId;
@@ -80,21 +80,21 @@ public class ArtPanel : MonoBehaviour
     void changeArtInfo(ArtInfoResponse response)
     {
         artInfo.text =
-            "작품명 : " + response.artName + "\n" +
-            "작가 : " + response.painter + "\n" +
-            "작품 소개 : " + response.detail + "\n";
+            "?????? : " + response.artName + "\n" +
+            "???? : " + response.painter + "\n" +
+            "???? ???? : " + response.detail + "\n";
     }
 }
 
 class ArtInfoResponse {
     public string artId;
-    public string painter; // 작가
-    public string artName; // 작품명
+    public string painter; // ????
+    public string artName; // ??????
     public string detail;
-    public double price; // 경매가
+    public double price; // ??????
     public string nftAdd;
-    public string paint; // 이미지 url 주소
+    public string paint; // ?????? url ????
     public bool sold;
     public List<string> userId;
-    public List<double> ratio; // 공동 투자자별 지분
+    public List<double> ratio; // ???? ???????? ????
 }
