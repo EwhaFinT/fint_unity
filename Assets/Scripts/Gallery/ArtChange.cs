@@ -13,7 +13,7 @@ public class ArtChange : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     { 
-        frame = GameObject.FindGameObjectsWithTag("GalleryFrame");      //gallery?? frame?? ????
+        frame = GameObject.FindGameObjectsWithTag("GalleryFrame");      //gallery�� frame�� �迭
         dic = new Dictionary<GameObject, string>();
         StartCoroutine(LoadImage());
     }
@@ -41,6 +41,10 @@ public class ArtChange : MonoBehaviour
     {
         //string url = "http://localhost:8080/v1/artlist";
         string url = "https://fintribe.herokuapp.com/v1/artlist"; // TODO : ?????? ???? ???? ?????? ????????
+    IEnumerator LoadImage()     // �������� ��ǰ ����Ʈ �޾ƿ���
+    {
+        //string url = "http://localhost:8080/v1/artlist";
+        string url = "https://fintribe.herokuapp.com/v1/artlist"; // TODO : ���߿� ���� ��� ������ ���ּ���
 
         UnityWebRequest www = UnityWebRequest.Get(url);
         yield return www.SendWebRequest();
@@ -59,7 +63,7 @@ public class ArtChange : MonoBehaviour
 
     }
 
-    IEnumerator DownloadImage(GameObject tmp, string MediaUrl)          // ???????? ???? ???????? art?? ????
+    IEnumerator DownloadImage(GameObject tmp, string MediaUrl)          // �������� �׸� �޾ƿͼ� art�� �ֱ�
     {
         UnityWebRequest request = UnityWebRequestTexture.GetTexture(MediaUrl);
         yield return request.SendWebRequest();
@@ -67,7 +71,7 @@ public class ArtChange : MonoBehaviour
             Debug.Log(request.error);
         else
         {
-            //???? ?? texture?? ?????? ???????? ????
+            //���� �� texture�� �޾ƿ� �̹����� ����
             Texture artTmp = ((DownloadHandlerTexture)request.downloadHandler).texture;
             Material[] mt = tmp.GetComponent<Renderer>().materials;
             mt[1].SetTexture("_MainTex", artTmp);
@@ -75,11 +79,11 @@ public class ArtChange : MonoBehaviour
     }
     //IEnumerator ImageUpload()
     //{
-    //    // ?????? base64string???? ????
+    //    // �̹��� base64string���� ��ȯ
     //    FileInfo file = new FileInfo("{local_image_file_path}");
     //    byte[] byteTexture = File.ReadAllBytes(file.FullName);
 
-    //    // ?????? ???? post ????
+    //    // �̹��� ���� post ��û
     //    string url = "https://api.imgbb.com/1/upload?key={api_key}";
     //    WWWForm form = new WWWForm();
     //    string base64string = Convert.ToBase64String(byteTexture);
@@ -95,7 +99,7 @@ public class ArtChange : MonoBehaviour
         
     //    Material[] mt_left = FrameLeft.GetComponent<Renderer>().materials;
     //    Material[] mt_right = FrameRight.GetComponent<Renderer>().materials;
-    //    //mt[0]?? ??????, mt[1]?? ????
+    //    //mt[0]�� ����Ʋ, mt[1]�� �׸�
         
     //    mt_left[1].SetTexture("_MainTex", art2);
     //    mt_right[1].SetTexture("_MainTex", art3);    

@@ -8,12 +8,14 @@ public class JoinAuction : MonoBehaviour
 {
 //    public GameObject content;
     public InputField inputShare;
-    public Text sumprice, remain, wallet, pricetopay;
-    int price = 2000;       //합산 금액
+    public Text price, remainRatio, remainPrice, pricetopay;
+
+    string priceId;
+    double auctionPrice, remainderRatio;
+
     // Start is called before the first frame update
     void Start()
     {
-        GetContent();
         inputShare.onValueChanged.AddListener(ChangePriceToPay);
     }
 
@@ -22,10 +24,20 @@ public class JoinAuction : MonoBehaviour
     {
         
     }
+
+    public void PanelStart(string priceId, double auctionPrice, double remainderRatio) 
+    {
+        this.priceId = priceId;
+        this.auctionPrice = auctionPrice;
+        this.remainderRatio = remainderRatio;
+
+        ChangeContent();
+    }
+
     private void ChangePriceToPay(string _data)
     {
         double.TryParse(_data, out double shareprice);
-        double tmp = price * shareprice * 0.01;
+        double tmp = auctionPrice * shareprice * 0.01;
         pricetopay.text = "예상 지불 금액 : " + tmp + " KLAY";
     }
     public void GetHopeShare(Text text)
@@ -33,15 +45,26 @@ public class JoinAuction : MonoBehaviour
         text.text = inputShare.text;
 
     }
-    public void GetContent()
+    public void ChangeContent()
     {
-        
-
-//        Text[] joinInfo = content.GetComponentsInChildren<Text>();
-        sumprice.text = "합산 금액 : " + price;
-        remain.text = "잔여 지분 : " + "45" + " %";
-        wallet.text = "잔여 금액 : " + "67.5" + " KLAY";        //내 지갑에서 가져오기
-        
-
+        price.text = "합산 금액 : " + auctionPrice +" KLAY";
+        remainRatio.text = "잔여 지분 : " + remainderRatio*100 + " %";
+        remainPrice.text = "잔여 금액 : " + auctionPrice*remainderRatio + " KLAY";
     }
+
+    class ParticipateAuctionRequest
+    {
+        public string userId;
+        public string priceId;
+        public double ratio;
+        public List<string> rlp;
+    }
+
+    class ParticipateAuctionResponse
+    {
+        public string priceId;
+    }
+
+    // TO FRONT : 경매 정보 조회할 때 저장하고 있던 priceId 사용합니다
+
 }

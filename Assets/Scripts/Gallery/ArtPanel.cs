@@ -46,7 +46,7 @@ public class ArtPanel : MonoBehaviour
     {
         artPanel.SetActive(false);
         var auctionPanel = UIManager.Instance.popupAuction.GetComponent<AuctionPanel>();
-        auctionPanel.panelStart();
+        auctionPanel.panelStart(artId);
     }
 
     public void changeImg(GameObject frame)
