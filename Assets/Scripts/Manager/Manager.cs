@@ -34,6 +34,4 @@ public class Manager : Singleton<Manager>
     {
         
     }
-
-
 }
