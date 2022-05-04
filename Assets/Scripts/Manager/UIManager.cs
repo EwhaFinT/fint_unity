@@ -26,6 +26,7 @@ public class UIManager : MonoBehaviour
     public GameObject popupVote;
     public GameObject popupPost;
     public GameObject popUpProposal;
+    public GameObject popUpPostAnnouncement;
     
     [Header("Popups - etc")]
     public GameObject popupLogin;
