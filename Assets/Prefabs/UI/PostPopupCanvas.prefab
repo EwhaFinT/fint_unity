@@ -116,6 +116,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PostPopUp: {fileID: 754769748356631322}
   exit: {fileID: 2221676695070681818}
+  message: {fileID: 2467984714304795459}
 --- !u!1 &3468267594072755492
 GameObject:
   m_ObjectHideFlags: 0
@@ -154,7 +155,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -1200, y: -1000}
+  m_SizeDelta: {x: -1200, y: -600}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3914839256298109900
 CanvasRenderer:
@@ -219,7 +220,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3624514453737614638}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -229,7 +230,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -0.000015258789}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2691605345031711892
@@ -463,7 +464,7 @@ GameObject:
   - component: {fileID: 8391722685137910947}
   - component: {fileID: 2467984714304795459}
   m_Layer: 5
-  m_Name: PostAnnouncementMsg
+  m_Name: SuccessMessage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -486,8 +487,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 44}
-  m_SizeDelta: {x: 435.6877, y: 136.403}
+  m_AnchoredPosition: {x: 0, y: 25}
+  m_SizeDelta: {x: 435.6877, y: 204.4931}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8391722685137910947
 CanvasRenderer:
@@ -519,8 +520,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Message
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 6b127e58870254fc18e0aa2a91aaf78a, type: 2}
-  m_sharedMaterial: {fileID: -6046521574304430368, guid: 6b127e58870254fc18e0aa2a91aaf78a, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4bea601c70031964e9903a115b1b4342, type: 2}
+  m_sharedMaterial: {fileID: 4363104862951446302, guid: 4bea601c70031964e9903a115b1b4342, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -580,7 +581,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: 0, w: -0.0040283203}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

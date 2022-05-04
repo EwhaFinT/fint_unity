@@ -33,7 +33,7 @@ public class PostScript : MonoBehaviour
     {
         post.SetActive(true);
     }
-    void onClicked_exit()
+    public void onClicked_exit()
     {
         var boardPanel = UIManager.Instance.popupBoard.GetComponent<BoardScript>();
 
@@ -75,16 +75,18 @@ public class PostScript : MonoBehaviour
         www.SetRequestHeader("Content-Type", "application/json");
         yield return www.SendWebRequest();
 
-        Debug.Log("status: " + www.responseCode);
+        long status = www.responseCode;
+        Debug.Log("status: " + status);
 
-        www.disposeUploadHandlerOnDispose = true;
-        www.disposeDownloadHandlerOnDispose = true;
 
         // string -> json
         string jsonString = www.downloadHandler.text;
         var response = JsonUtility.FromJson<ArticlePostResponse>(jsonString);
+        var PostPopup = UIManager.Instance.popUpPostAnnouncement.GetComponent<PostPopupScript>();
+        PostPopup.MakePopupWarn(status);
 
-        Debug.Log(response.postSuccess);
+        www.disposeUploadHandlerOnDispose = true;
+        www.disposeDownloadHandlerOnDispose = true;
     }
 }
 
