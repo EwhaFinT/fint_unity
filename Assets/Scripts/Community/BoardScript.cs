@@ -20,8 +20,11 @@ public class BoardScript : MonoBehaviour
     public TextMeshProUGUI ArticleTimestamp;
     public TextMeshProUGUI ArticleContent;
 
-    //[Header("Comment")]
-    //public TextMeshProUGUI 
+    [Header("Comment")]
+    public TextMeshProUGUI ReplyID;
+    public TextMeshProUGUI ReplyTimestamp;
+    public TextMeshProUGUI ReplyContent;
+
 
 
     // Start is called before the first frame update
@@ -93,12 +96,15 @@ public class BoardScript : MonoBehaviour
         var response = JsonUtility.FromJson<LoadBoardResponse>(jsonString);
 
         Debug.Log("json : " + jsonString);
+        Debug.Log("time: " + response.article.createdAt.ToString());
 
-        Debug.Log("time: " + response.article.createdAt);
-        
+        //DateTime timeFromJson = JsonUtility.FromJson<JsonDateTime>(response.article.createdAt);
+
         ArticleTitle.text = response.article.title.ToString();
         ArticleTimestamp.text = "작성일자| " + response.article.createdAt.ToString("yyyy/MM/dd HH:mm") + "\n" + "작성자| " + response.article.identity.ToString();
         ArticleContent.text = response.article.content.ToString();
+
+        Debug.Log("comment response: " + response.comments);
     }
 }
 
@@ -152,4 +158,22 @@ class LoadBoardResponse
     public string articleId;
     public List<Comment> comments;
     public List<ReComment> reComments;
+}
+
+[Serializable]
+struct JsonDateTime
+{
+    public long value;
+    public static implicit operator DateTime(JsonDateTime jdt)
+    {
+        Debug.Log("Converted to time");
+        return DateTime.FromFileTimeUtc(jdt.value);
+    }
+    public static implicit operator JsonDateTime(DateTime dt)
+    {
+        Debug.Log("Converted to JDT");
+        JsonDateTime jdt = new JsonDateTime();
+        jdt.value = dt.ToFileTimeUtc();
+        return jdt;
+    }
 }

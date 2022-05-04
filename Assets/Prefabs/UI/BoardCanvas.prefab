@@ -3260,6 +3260,9 @@ MonoBehaviour:
   ArticleTitle: {fileID: 7537407160068651483}
   ArticleTimestamp: {fileID: 7189823092975494588}
   ArticleContent: {fileID: 8589484969736964251}
+  ReplyID: {fileID: 9145624357103517749}
+  ReplyTimestamp: {fileID: 7211874807883125288}
+  ReplyContent: {fileID: 525745402212733341}
 --- !u!1 &8069347008346119449
 GameObject:
   m_ObjectHideFlags: 0
