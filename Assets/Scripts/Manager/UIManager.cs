@@ -15,6 +15,7 @@ public class UIManager : MonoBehaviour
     public Button inventoryButton;
     public Button registerButton;
 
+
     [Header("Popups - MainHall")]
     public GameObject popupAuction;
     public GameObject auctionJoin;
@@ -108,6 +109,29 @@ public class UIManager : MonoBehaviour
     {
         popupTeleport.SetActive(!popupAuction.activeSelf);
     }
+
+    // Community Room PopUps
+    //public void OnBoard()
+    //{
+    //    popupTeleport.SetActive(!popupAuction.activeSelf);
+    //}
+    public void OnPostPop()
+    {
+        popUpPostAnnouncement.SetActive(!popUpPostAnnouncement.activeSelf);
+    }
+    public void OnPost()
+    {
+        popupPost.SetActive(!popupPost.activeSelf);
+    }
+    public void OnProposal()
+    {
+        popUpProposal.SetActive(!popUpProposal.activeSelf);
+    }
+    //public void OnVote()
+    //{
+    //    popupTeleport.SetActive(!popupAuction.activeSelf);
+    //}
+
     // Update is called once per frame
     void Update()
     {
