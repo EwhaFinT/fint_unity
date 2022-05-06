@@ -12,7 +12,7 @@ public class ArtChange : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {
+    { 
         frame = GameObject.FindGameObjectsWithTag("GalleryFrame");      //gallery�� frame�� �迭
         dic = new Dictionary<GameObject, string>();
         StartCoroutine(LoadImage());
@@ -35,9 +35,8 @@ public class ArtChange : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
     }
-
     IEnumerator LoadImage()     // �������� ��ǰ ����Ʈ �޾ƿ���
     {
         //string url = "http://localhost:8080/v1/artlist";
@@ -59,7 +58,6 @@ public class ArtChange : MonoBehaviour
         }
 
     }
-
 
     IEnumerator DownloadImage(GameObject tmp, string MediaUrl)          // �������� �׸� �޾ƿͼ� art�� �ֱ�
     {
@@ -94,20 +92,17 @@ public class ArtChange : MonoBehaviour
     //public void MaterialChange()
     //{
     //    var childrenlist = GetComponentsInChildren<ArtClick>();
-
+        
     //    Material[] mt_left = FrameLeft.GetComponent<Renderer>().materials;
     //    Material[] mt_right = FrameRight.GetComponent<Renderer>().materials;
     //    //mt[0]�� ����Ʋ, mt[1]�� �׸�
-
+        
     //    mt_left[1].SetTexture("_MainTex", art2);
     //    mt_right[1].SetTexture("_MainTex", art3);    
     //}
 
 }
-
-class ArtlistResponse
-{
+class ArtlistResponse {
     public List<string> artId;
     public List<string> paint;
 }
-
