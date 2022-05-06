@@ -15,13 +15,15 @@ public class ProposalScript : MonoBehaviour
     public TMP_InputField Content;
     public Button date;
     public Button submit;
+    public string calender_date;
+    public static ProposalScript instance;
 
     // Start is called before the first frame update
     void Start()
     {
         exit.onClick.AddListener(onClicked_exit);
         submit.onClick.AddListener(onClicked_sumbit);
-
+        date.onClick.AddListener(onClicked_date);
     }
 
     // Update is called once per frame
@@ -43,6 +45,13 @@ public class ProposalScript : MonoBehaviour
     void onClicked_sumbit()
     {
         StartCoroutine(PostVote());
+    }
+    void onClicked_date()
+    {
+        Debug.Log("calendar button clicked");
+        var calenderPanel = UIManager.Instance.popupCalender.GetComponent<CalendarController>();
+        Debug.Log("calendar panel: " + calenderPanel);
+        calenderPanel.ShowCalendar(date);
     }
 
     IEnumerator PostVote()

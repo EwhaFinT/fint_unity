@@ -28,6 +28,7 @@ public class UIManager : MonoBehaviour
     public GameObject popupPost;
     public GameObject popUpProposal;
     public GameObject popUpPostAnnouncement;
+    public GameObject popupCalender;
     
     [Header("Popups - etc")]
     public GameObject popupLogin;
@@ -126,6 +127,10 @@ public class UIManager : MonoBehaviour
     public void OnProposal()
     {
         popUpProposal.SetActive(!popUpProposal.activeSelf);
+    }
+    public void OnCalender()
+    {
+        popupCalender.SetActive(!popupCalender.activeSelf);
     }
     //public void OnVote()
     //{
