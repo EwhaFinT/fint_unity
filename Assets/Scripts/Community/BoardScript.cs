@@ -101,7 +101,8 @@ public class BoardScript : MonoBehaviour
         //DateTime timeFromJson = JsonUtility.FromJson<JsonDateTime>(response.article.createdAt);
 
         ArticleTitle.text = response.article.title.ToString();
-        ArticleTimestamp.text = "작성일자| " + response.article.createdAt.ToString("yyyy/MM/dd HH:mm") + "\n" + "작성자| " + response.article.identity.ToString();
+        ArticleTimestamp.text = "작성일자| " + response.article.createdAt;
+        //ArticleTimestamp.text = "작성일자| " + response.article.createdAt.ToString("yyyy/MM/dd HH:mm") + "\n" + "작성자| " + response.article.identity.ToString();
         ArticleContent.text = response.article.content.ToString();
 
         Debug.Log("comment response: " + response.comments);
@@ -117,8 +118,8 @@ class Article
     public string identity;
     public string title;
     public string content;
-    public DateTime createdAt;
-    public DateTime updatedAt;
+    public string createdAt;
+    public string updatedAt;
     public bool isDeleted;
 }
 
@@ -130,8 +131,8 @@ class Comment
     public string content;
     public ObjectId userId;
     public string identity;
-    public DateTime createdAt;
-    public DateTime updatedAt;
+    public string createdAt;
+    public string updatedAt;
     public bool isDeleted;
 }
 
@@ -160,20 +161,20 @@ class LoadBoardResponse
     public List<ReComment> reComments;
 }
 
-[Serializable]
-struct JsonDateTime
-{
-    public long value;
-    public static implicit operator DateTime(JsonDateTime jdt)
-    {
-        Debug.Log("Converted to time");
-        return DateTime.FromFileTimeUtc(jdt.value);
-    }
-    public static implicit operator JsonDateTime(DateTime dt)
-    {
-        Debug.Log("Converted to JDT");
-        JsonDateTime jdt = new JsonDateTime();
-        jdt.value = dt.ToFileTimeUtc();
-        return jdt;
-    }
-}
+//[Serializable]
+//struct JsonDateTime
+//{
+//    public long value;
+//    public static implicit operator DateTime(JsonDateTime jdt)
+//    {
+//        Debug.Log("Converted to time");
+//        return DateTime.FromFileTimeUtc(jdt.value);
+//    }
+//    public static implicit operator JsonDateTime(DateTime dt)
+//    {
+//        Debug.Log("Converted to JDT");
+//        JsonDateTime jdt = new JsonDateTime();
+//        jdt.value = dt.ToFileTimeUtc();
+//        return jdt;
+//    }
+//}
