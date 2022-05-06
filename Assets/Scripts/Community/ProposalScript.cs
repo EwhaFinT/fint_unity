@@ -66,7 +66,7 @@ public class ProposalScript : MonoBehaviour
 
         string url = "https://fintribe.herokuapp.com/v1/vote-proposal";
 
-        VoteRequest voteRequest = new VoteRequest
+        ProposeRequest proposeRequest = new ProposeRequest
         {
             communityId = CommunityId,
             userId = UserId,
@@ -74,8 +74,8 @@ public class ProposalScript : MonoBehaviour
             resalePrice = double.Parse(Price.text),
             endTime = "2022-06-01T12:00:00"
         };
-        string jsonBody = JsonUtility.ToJson(voteRequest);
-        Debug.Log(voteRequest);
+        string jsonBody = JsonUtility.ToJson(proposeRequest);
+        Debug.Log(proposeRequest);
 
         UnityWebRequest www = UnityWebRequest.Post(url, jsonBody);
 
@@ -92,7 +92,7 @@ public class ProposalScript : MonoBehaviour
 
         // string -> json
         string jsonString = www.downloadHandler.text;
-        var response = JsonUtility.FromJson<VoteResponse>(jsonString);
+        var response = JsonUtility.FromJson<ProposeResponse>(jsonString);
         Debug.Log("vote response: " + response);
 
         www.disposeUploadHandlerOnDispose = true;
@@ -105,7 +105,7 @@ public class ProposalScript : MonoBehaviour
 }
 
 [Serializable]
-class VoteRequest
+class ProposeRequest
 {
     public string communityId;
     public string userId;
@@ -115,7 +115,7 @@ class VoteRequest
 }
 
 [Serializable]
-class VoteResponse
+class ProposeResponse
 {
     public string proposeSuccess;
 }
