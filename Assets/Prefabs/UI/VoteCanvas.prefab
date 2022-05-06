@@ -1089,6 +1089,8 @@ MonoBehaviour:
   content: {fileID: 1521628780225637764}
   YesPercent: {fileID: 1234517667312526899}
   NoPercent: {fileID: 2667273619509904914}
+  YesBtn: {fileID: 3042078342945958571}
+  NoBtn: {fileID: 3042078343922432853}
 --- !u!1 &3042078343878800070
 GameObject:
   m_ObjectHideFlags: 0
