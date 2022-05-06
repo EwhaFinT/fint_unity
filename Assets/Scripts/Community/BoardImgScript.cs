@@ -7,33 +7,62 @@ public class BoardImgScript : MonoBehaviour
 {   
     public GameObject boardImg;
     public GameObject target;
+    GameObject[] popupCanvas;
+    public GameObject ui;
 
     // Start is called before the first frame update
     void Start()
     {
+        ui = GameObject.Find("UI");
+        popupCanvas = new GameObject[ui.transform.childCount];
+        for (int i = 3; i < popupCanvas.Length; i++)
+        {
+            popupCanvas[i] = ui.transform.GetChild(i).gameObject;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        MakeBoard();
-    }
-
-    private void MakeBoard()
-    {
-        var boardPanel = UIManager.Instance.popupBoard.GetComponent<BoardScript>();
-
-
-        // 왼쪽 마우스 버튼을 클릭했을때
-        if (Input.GetMouseButtonDown(0))  //0이면 좌클릭, 1이면 우클릭, 2이면 중앙을 클릭
+        //MakeBoard();
+        bool notActiving = true;
+        // ???? ?????? ?????? ??????????
+        if (Input.GetMouseButtonDown(0))  //0???? ??????, 1???? ??????, 2???? ?????? ????
         {
-            target = GetClickedObject();
-            if (boardImg.Equals(target))
+            for (int i = 3; i < popupCanvas.Length; i++)
             {
-                boardPanel.show();
+                if (popupCanvas[i].activeSelf == true)
+                    notActiving = false;
             }
+            if (notActiving)
+            {
+                target = GetClickedObject();
+                var boardPanel = UIManager.Instance.popupBoard.GetComponent<BoardScript>();
+                if (boardImg.Equals(target))
+                {
+                    boardPanel.show();
+                }
+            }
+
         }
+
     }
+
+    //private void MakeBoard()
+    //{
+    //    var boardPanel = UIManager.Instance.popupBoard.GetComponent<BoardScript>();
+
+
+    //    // 왼쪽 마우스 버튼을 클릭했을때
+    //    if (Input.GetMouseButtonDown(0))  //0이면 좌클릭, 1이면 우클릭, 2이면 중앙을 클릭
+    //    {
+    //        target = GetClickedObject();
+    //        if (boardImg.Equals(target))
+    //        {
+    //            boardPanel.show();
+    //        }
+    //    }
+    //}
 
     private GameObject GetClickedObject()
     {
