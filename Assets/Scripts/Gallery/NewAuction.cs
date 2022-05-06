@@ -34,6 +34,7 @@ public class NewAuction : MonoBehaviour
         auctionPanel.panelStart(_artId);
     }
 
+
     IEnumerator SendNewInfo()
     {
         string url = "https://fintribe.herokuapp.com/v1/price-success";
