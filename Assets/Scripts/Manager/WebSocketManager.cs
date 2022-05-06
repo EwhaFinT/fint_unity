@@ -30,12 +30,10 @@ public class WebSocketManager : MonoBehaviour
             switch (playerData.command)
             {
                 case PositionData.Command.Create:
-                    Debug.Log("Create");
                     _actions.Enqueue(() => CreateRemotePlayer(playerData.userId, playerData.character, playerData.position, playerData.communityId));
                     break;
                 case PositionData.Command.Update:
                     _actions.Enqueue(() => MoveRemotePlayer(playerData.userId, playerData.position, playerData.communityId));
-                    Debug.Log("Updated");
                     break;
                 case PositionData.Command.Delete:
                     DeleteRemotePlayer(playerData.userId);
@@ -94,9 +92,6 @@ public class WebSocketManager : MonoBehaviour
                 remotePlayer.SetActive(true);
             }
         }
-        //community y = 13
-        //myroom y = 26
-
     }
 
     private void MoveRemotePlayer(string userId, Vector3 position, string communityId)
