@@ -8,7 +8,7 @@ using MongoDB.Bson;
 using TMPro;
 
 public class BoardScript : MonoBehaviour
-{   
+{
     public GameObject board;
     public Button voteBtn;
     public Button BoardExitBtn;
@@ -24,7 +24,8 @@ public class BoardScript : MonoBehaviour
     public TextMeshProUGUI ReplyID;
     public TextMeshProUGUI ReplyTimestamp;
     public TextMeshProUGUI ReplyContent;
-
+    public TMP_InputField CommentInput;
+    public Button CommentRegister;
 
 
     // Start is called before the first frame update
@@ -37,12 +38,14 @@ public class BoardScript : MonoBehaviour
         ProposalBtn.onClick.AddListener(onClicked_proposal);
         StartCoroutine(LoadArticle());
 
+        CommentRegister.onClick.AddListener(onClicked_comment);
+
     }
 
     // Update is called once per frame
     void Update()
     {
-    
+
     }
 
     public void show()
@@ -54,7 +57,7 @@ public class BoardScript : MonoBehaviour
     void onClicked_vote()
     {
         board.SetActive(false);
-        
+
         var votePanel = UIManager.Instance.popupVote.GetComponent<VoteScript>();
         votePanel.show();
     }
@@ -67,7 +70,7 @@ public class BoardScript : MonoBehaviour
     void onClicked_write()
     {
         board.SetActive(false);
-        
+
         var postPanel = UIManager.Instance.popupPost.GetComponent<PostScript>();
         postPanel.show();
     }
@@ -75,9 +78,15 @@ public class BoardScript : MonoBehaviour
     void onClicked_proposal()
     {
         board.SetActive(false);
-        
+
         var proposalPanel = UIManager.Instance.popUpProposal.GetComponent<ProposalScript>();
         proposalPanel.show();
+    }
+
+    void onClicked_comment()
+    {
+        StartCoroutine(PostComment());
+        //CommentInput.text = "??? ?????.";
     }
 
     IEnumerator LoadArticle()
@@ -101,14 +110,49 @@ public class BoardScript : MonoBehaviour
         //DateTime timeFromJson = JsonUtility.FromJson<JsonDateTime>(response.article.createdAt);
 
         ArticleTitle.text = response.article.title.ToString();
-        ArticleTimestamp.text = "?ëÏÑ±?ºÏûê| " + response.article.createdAt;
-        //ArticleTimestamp.text = "?ëÏÑ±?ºÏûê| " + response.article.createdAt.ToString("yyyy/MM/dd HH:mm") + "\n" + "?ëÏÑ±?? " + response.article.identity.ToString();
+        ArticleTimestamp.text = "????| " + response.article.createdAt;
+        //ArticleTimestamp.text = "????| " + response.article.createdAt.ToString("yyyy/MM/dd HH:mm") + "\n" + "???| " + response.article.identity.ToString();
         ArticleContent.text = response.article.content.ToString();
 
         Debug.Log("comment response: " + response.comments);
     }
-}
+    IEnumerator PostComment()
+    {
+        string UserId = "6250073f634945502a92cbbe";
+        string ArticleId = "6231d5883dfcf54107e14364";
 
+        string url = "https://fintribe.herokuapp.com/v1/comment";
+
+        CommentRequest commentRequest = new CommentRequest
+        {
+            userId = UserId,
+            articleId = ArticleId,
+            tagUser = null,
+            content = CommentInput.text,
+            tagCommentId = -1
+        };
+        string jsonBody = JsonUtility.ToJson(commentRequest);
+        UnityWebRequest www = UnityWebRequest.Post(url, jsonBody);
+
+        byte[] jsonToSend = new System.Text.UTF8Encoding().GetBytes(jsonBody);
+        www.uploadHandler = new UploadHandlerRaw(jsonToSend);
+        www.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
+
+        www.SetRequestHeader("Content-Type", "application/json");
+        yield return www.SendWebRequest();
+
+        long status = www.responseCode;
+        Debug.Log("status: " + status);
+
+        string jsonString = www.downloadHandler.text;
+        var response = JsonUtility.FromJson<ArticlePostResponse>(jsonString);
+        var PostPopup = UIManager.Instance.popUpPostAnnouncement.GetComponent<PostPopupScript>();
+        PostPopup.MakePopupWarn(status);
+
+        www.disposeUploadHandlerOnDispose = true;
+        www.disposeDownloadHandlerOnDispose = true;
+    }
+}
 [Serializable]
 class Article
 {
@@ -161,20 +205,18 @@ class LoadBoardResponse
     public List<ReComment> reComments;
 }
 
-//[Serializable]
-//struct JsonDateTime
-//{
-//    public long value;
-//    public static implicit operator DateTime(JsonDateTime jdt)
-//    {
-//        Debug.Log("Converted to time");
-//        return DateTime.FromFileTimeUtc(jdt.value);
-//    }
-//    public static implicit operator JsonDateTime(DateTime dt)
-//    {
-//        Debug.Log("Converted to JDT");
-//        JsonDateTime jdt = new JsonDateTime();
-//        jdt.value = dt.ToFileTimeUtc();
-//        return jdt;
-//    }
-//}
+[Serializable]
+class CommentRequest
+{
+    public string userId;
+    public string articleId;
+    public string tagUser;
+    public string content;
+    public int tagCommentId;
+}
+
+[Serializable]
+class CommentResponse
+{
+    public string commentSuccess;
+}

@@ -1001,7 +1001,7 @@ RectTransform:
   m_Children:
   - {fileID: 4711752328789388429}
   m_Father: {fileID: 8069347007208881094}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2268,7 +2268,7 @@ RectTransform:
   m_Children:
   - {fileID: 6568179522617137676}
   m_Father: {fileID: 8069347007208881094}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2603,7 +2603,7 @@ RectTransform:
   m_Children:
   - {fileID: 8069347008485762596}
   m_Father: {fileID: 8069347007208881094}
-  m_RootOrder: 4
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2806,11 +2806,11 @@ RectTransform:
   - {fileID: 8069347008410726060}
   - {fileID: 8069347007319074844}
   - {fileID: 8069347008482706433}
-  - {fileID: 8069347007032478102}
   - {fileID: 8069347007979642867}
   - {fileID: 8069347008111978533}
   - {fileID: 1248697919076320314}
   - {fileID: 3092099962478137168}
+  - {fileID: 8069347007032478102}
   - {fileID: 8548341615506613209}
   m_Father: {fileID: 8069347008142872218}
   m_RootOrder: 0
@@ -3014,7 +3014,7 @@ RectTransform:
   - {fileID: 5243707171366592735}
   - {fileID: 811707011739438425}
   m_Father: {fileID: 8069347007208881094}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3093,7 +3093,7 @@ RectTransform:
   - {fileID: 1960232726601120675}
   - {fileID: 3922522760648994317}
   m_Father: {fileID: 8069347007208881094}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -3263,6 +3263,8 @@ MonoBehaviour:
   ReplyID: {fileID: 9145624357103517749}
   ReplyTimestamp: {fileID: 7211874807883125288}
   ReplyContent: {fileID: 525745402212733341}
+  CommentInput: {fileID: 5596003130486953716}
+  CommentRegister: {fileID: 8069347007032478101}
 --- !u!1 &8069347008346119449
 GameObject:
   m_ObjectHideFlags: 0
