@@ -98,7 +98,8 @@ public class AuctionPanel : MonoBehaviour
 
     public void Onclicked_New()
     {
-        canvasNew.SetActive(true);
+        var newAuctionPanel = UIManager.Instance.auctionNew.GetComponent<NewAuction>();
+        newAuctionPanel.panelStart(artId);
         canvasJoin.SetActive(false);
 
     }

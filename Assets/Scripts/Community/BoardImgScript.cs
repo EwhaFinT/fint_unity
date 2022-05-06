@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class BoardImgScript : MonoBehaviour
-{   
+{
     public GameObject boardImg;
     public GameObject target;
     GameObject[] popupCanvas;
@@ -53,8 +53,8 @@ public class BoardImgScript : MonoBehaviour
     //    var boardPanel = UIManager.Instance.popupBoard.GetComponent<BoardScript>();
 
 
-    //    // ì™¼ìª½ ë§ˆìš°ìŠ¤ ë²„íŠ¼ì„ í´ë¦­í–ˆì„ë•Œ
-    //    if (Input.GetMouseButtonDown(0))  //0ì´ë©´ ì¢Œí´ë¦­, 1ì´ë©´ ìš°í´ë¦­, 2ì´ë©´ ì¤‘ì•™ì„ í´ë¦­
+    //    // ¿ŞÂÊ ¸¶¿ì½º ¹öÆ°À» Å¬¸¯ÇßÀ»¶§
+    //    if (Input.GetMouseButtonDown(0))  //0ÀÌ¸é ÁÂÅ¬¸¯, 1ÀÌ¸é ¿ìÅ¬¸¯, 2ÀÌ¸é Áß¾ÓÀ» Å¬¸¯
     //    {
     //        target = GetClickedObject();
     //        if (boardImg.Equals(target))
@@ -68,11 +68,11 @@ public class BoardImgScript : MonoBehaviour
     {
         RaycastHit hit;
         GameObject target = null;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); //ë§ˆìš°ìŠ¤ í¬ì¸íŠ¸ ê·¼ì²˜ ì¢Œí‘œë¥¼ ë§Œë“ ë‹¤. 
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); //¸¶¿ì½º Æ÷ÀÎÆ® ±ÙÃ³ ÁÂÇ¥¸¦ ¸¸µç´Ù. 
 
-        if (true == (Physics.Raycast(ray.origin, ray.direction * 10, out hit)))   //ë§ˆìš°ìŠ¤ ê·¼ì²˜ì— ì˜¤ë¸Œì íŠ¸ê°€ ìˆëŠ”ì§€ í™•ì¸
+        if (true == (Physics.Raycast(ray.origin, ray.direction * 10, out hit)))   //¸¶¿ì½º ±ÙÃ³¿¡ ¿ÀºêÁ§Æ®°¡ ÀÖ´ÂÁö È®ÀÎ
         {
-            //ìˆìœ¼ë©´ ì˜¤ë¸Œì íŠ¸ë¥¼ ì €ì¥í•œë‹¤.
+            //ÀÖÀ¸¸é ¿ÀºêÁ§Æ®¸¦ ÀúÀåÇÑ´Ù.
             target = hit.collider.gameObject;
 
         }
