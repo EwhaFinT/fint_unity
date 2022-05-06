@@ -101,8 +101,8 @@ public class BoardScript : MonoBehaviour
         //DateTime timeFromJson = JsonUtility.FromJson<JsonDateTime>(response.article.createdAt);
 
         ArticleTitle.text = response.article.title.ToString();
-        ArticleTimestamp.text = "작성일자| " + response.article.createdAt;
-        //ArticleTimestamp.text = "작성일자| " + response.article.createdAt.ToString("yyyy/MM/dd HH:mm") + "\n" + "작성자| " + response.article.identity.ToString();
+        ArticleTimestamp.text = "?�성?�자| " + response.article.createdAt;
+        //ArticleTimestamp.text = "?�성?�자| " + response.article.createdAt.ToString("yyyy/MM/dd HH:mm") + "\n" + "?�성?? " + response.article.identity.ToString();
         ArticleContent.text = response.article.content.ToString();
 
         Debug.Log("comment response: " + response.comments);
