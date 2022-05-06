@@ -28,19 +28,21 @@ public class PostPopupScript : MonoBehaviour
         Debug.Log("status: " + status);
         if(status == 200)
         {
-            message.text = "게시물이 성공적으로\n등록되었습니다.";
+            message.text = "성공적으로 등록되었습니다.";
         }
         else
         {
-            message.text = "게시물 등록에\n실패했습니다.";
+            message.text = "등록에 실패했습니다.";
         }
         PostPopUp.SetActive(true);
     }
     void onClicked_exit()
     {
         var postPanel = UIManager.Instance.popupPost.GetComponent<PostScript>();
+        var proposalPanel = UIManager.Instance.popUpProposal.GetComponent<ProposalScript>();
 
         PostPopUp.SetActive(false);
         postPanel.onClicked_exit();
+        proposalPanel.onClicked_exit();
     }
 }

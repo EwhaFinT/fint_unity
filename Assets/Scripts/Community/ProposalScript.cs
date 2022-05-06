@@ -33,7 +33,7 @@ public class ProposalScript : MonoBehaviour
     {
         proposal.SetActive(true);
     }
-    void onClicked_exit()
+    public void onClicked_exit()
     {
         var boardPanel = UIManager.Instance.popupBoard.GetComponent<BoardScript>();
 
@@ -88,6 +88,10 @@ public class ProposalScript : MonoBehaviour
 
         www.disposeUploadHandlerOnDispose = true;
         www.disposeDownloadHandlerOnDispose = true;
+
+        var PostPopup = UIManager.Instance.popUpPostAnnouncement.GetComponent<PostPopupScript>();
+        PostPopup.MakePopupWarn(status);
+
     }
 }
 
