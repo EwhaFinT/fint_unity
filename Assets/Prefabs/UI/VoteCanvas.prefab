@@ -1083,8 +1083,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vote: {fileID: 3042078343844931751}
-  board: {fileID: 0}
   exit: {fileID: 443927383275738612}
+  proposer: {fileID: 1392163117404020800}
+  price: {fileID: 7573750822358601451}
+  content: {fileID: 1521628780225637764}
+  YesPercent: {fileID: 1234517667312526899}
+  NoPercent: {fileID: 2667273619509904914}
 --- !u!1 &3042078343878800070
 GameObject:
   m_ObjectHideFlags: 0
