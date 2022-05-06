@@ -434,6 +434,7 @@ GameObject:
   - component: {fileID: 3669003277607736293}
   - component: {fileID: 3669003277607736292}
   - component: {fileID: 3669003277607736295}
+  - component: {fileID: 3464084374888720572}
   m_Layer: 5
   m_Name: ProposalCanvas
   m_TagString: Untagged
@@ -523,6 +524,24 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &3464084374888720572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3669003277607736294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ee54c0abc3994b5eb0999b650d60099, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  proposal: {fileID: 3669003277607736294}
+  exit: {fileID: 3669003277656365876}
+  Price: {fileID: 6215619937130105941}
+  Content: {fileID: 3467402420297265090}
+  date: {fileID: 7571690960996596695}
+  submit: {fileID: 2167888118356717344}
 --- !u!1 &3669003277656365878
 GameObject:
   m_ObjectHideFlags: 0
@@ -1275,8 +1294,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4bea601c70031964e9903a115b1b4342, type: 2}
+  m_sharedMaterial: {fileID: 4363104862951446302, guid: 4bea601c70031964e9903a115b1b4342, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1300,15 +1319,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 14
-  m_fontSizeBase: 14
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 2
   m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -1658,8 +1677,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 14
-  m_fontSizeBase: 14
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
