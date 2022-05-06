@@ -253,11 +253,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 720426672113028437, guid: b6558a5dc8d90d049932d672fe4b2c6c, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 481.07788
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 720426672113028437, guid: b6558a5dc8d90d049932d672fe4b2c6c, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 66.50184
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 720426672113028437, guid: b6558a5dc8d90d049932d672fe4b2c6c, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -295,6 +295,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3615356009397200774, guid: b6558a5dc8d90d049932d672fe4b2c6c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5085779545120097050, guid: b6558a5dc8d90d049932d672fe4b2c6c, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -314,6 +318,10 @@ PrefabInstance:
     - target: {fileID: 5253665663515655535, guid: b6558a5dc8d90d049932d672fe4b2c6c, type: 3}
       propertyPath: m_Name
       value: Button
+      objectReference: {fileID: 0}
+    - target: {fileID: 6405813405153043938, guid: b6558a5dc8d90d049932d672fe4b2c6c, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 752.99994
       objectReference: {fileID: 0}
     - target: {fileID: 7385779569602819280, guid: b6558a5dc8d90d049932d672fe4b2c6c, type: 3}
       propertyPath: m_Pivot.x
@@ -900,7 +908,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   proposal: {fileID: 524980169}
-  board: {fileID: 1671891384}
   exit: {fileID: 524980168}
 --- !u!1 &699901103 stripped
 GameObject:
@@ -1262,6 +1269,7 @@ MonoBehaviour:
   popupVote: {fileID: 699901103}
   popupPost: {fileID: 1570626763}
   popUpProposal: {fileID: 524980169}
+  popUpPostAnnouncement: {fileID: 0}
   popupLogin: {fileID: 3207799348889013908}
   popupSignup: {fileID: 1789696556964980692}
   popupWarn: {fileID: 118586554}
@@ -3416,6 +3424,7 @@ MonoBehaviour:
   communityPrefab: {fileID: 6709773672136471324, guid: 27e309a32592aaf40b3de9d02caad38c, type: 3}
   myroomPrefab: {fileID: 526608239132415713, guid: c2102e9438611004d9cf840d3f843462, type: 3}
   UI: {fileID: 0}
+  ID: 
 --- !u!4 &1536482423
 Transform:
   m_ObjectHideFlags: 0

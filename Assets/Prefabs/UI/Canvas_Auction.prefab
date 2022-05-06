@@ -423,7 +423,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 759642518766127256}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.5
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -542,7 +542,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -243.99997, y: 146.94904}
+  m_AnchoredPosition: {x: -243.99997, y: 148.71501}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &4669467413782765449
@@ -1529,6 +1529,7 @@ MonoBehaviour:
   remainRatio: {fileID: 5871341423241391798}
   remainPrice: {fileID: 144805309410711894}
   pricetopay: {fileID: 8545374798224059288}
+  joinAuction: {fileID: 4369784178782368021}
 --- !u!1 &4641145681672518296
 GameObject:
   m_ObjectHideFlags: 0

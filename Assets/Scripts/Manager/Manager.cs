@@ -12,6 +12,7 @@ public class Manager : Singleton<Manager>
     [Header("UI Panels")]
     public GameObject UI;
     private PlayerController player;
+    public string ID;
     //    public GameObject TeleportPanel, Canvas_Art, Canvas_Auction;
     // Start is called before the first frame update
 
@@ -27,9 +28,16 @@ public class Manager : Singleton<Manager>
         var myroom = Instantiate(myroomPrefab);
         community.transform.position = new Vector3(0, 10, 0);
         myroom.transform.position = new Vector3(0, 25, 0);
+        GetUserID();
     }
 
     // Update is called once per frame
+
+    public void GetUserID()
+    {
+        ID = "62689f6564ebad668621db42"; //tmp ID
+    }
+
     void Update()
     {
         

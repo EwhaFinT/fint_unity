@@ -45,14 +45,14 @@ public class AuctionPanel : MonoBehaviour
         ShowAuctionInfo(response);
         AuctionListInit(response);
     }
-
+    
     //show auction info
     void ShowAuctionInfo(PricelistResponse response)
     {
-        price.text = response.price + " KLAY";
+        price.text = response.price.ToString("F2") + " KLAY";
     }
 
-    private void AuctionListInit(PricelistResponse response)
+    void AuctionListInit(PricelistResponse response)
     {
         //content Initialization
         if (content.transform.childCount > 1)
@@ -70,7 +70,7 @@ public class AuctionPanel : MonoBehaviour
             suggest.transform.SetParent(content.transform, false);
 
             var joinBtn = suggest.GetComponent<JoinButton>();
-            joinBtn.GetAuctionInfo(response.pricelist[i].priceId, response.pricelist[i].auctionPrice, response.pricelist[i].remainderRatio);
+            joinBtn.GetAuctionInfo(response.pricelist[i].priceId, response.pricelist[i].auctionPrice, response.pricelist[i].remainderRatio, artId);
         }
     }
 

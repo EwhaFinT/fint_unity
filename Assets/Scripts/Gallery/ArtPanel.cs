@@ -80,9 +80,9 @@ public class ArtPanel : MonoBehaviour
     void changeArtInfo(ArtInfoResponse response)
     {
         artInfo.text =
-            "?????? : " + response.artName + "\n" +
-            "???? : " + response.painter + "\n" +
-            "???? ???? : " + response.detail + "\n";
+            "작품 명 : " + response.artName + "\n" +
+            "작가 : " + response.painter + "\n" +
+            "작품 소개 : " + response.detail + "\n";
     }
 }
 

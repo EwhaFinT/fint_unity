@@ -3,20 +3,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
 public class JoinAuction : MonoBehaviour
 {
 //    public GameObject content;
     public InputField inputShare;
     public Text price, remainRatio, remainPrice, pricetopay;
+    public Button joinAuction;
 
-    string priceId;
-    double auctionPrice, remainderRatio;
+    string _priceId, artId;
+    double auctionPrice, _ratio;
+    double _remainderRatio;
 
     // Start is called before the first frame update
     void Start()
     {
         inputShare.onValueChanged.AddListener(ChangePriceToPay);
+        joinAuction.onClick.AddListener(Onclick_JoinAuction);
     }
 
     // Update is called once per frame
@@ -25,38 +29,81 @@ public class JoinAuction : MonoBehaviour
         
     }
 
-    public void PanelStart(string priceId, double auctionPrice, double remainderRatio) 
+    public void PanelStart(string priceId, double auctionPrice, double remainderRatio, string artId) 
     {
-        this.priceId = priceId;
+        _priceId = priceId;
         this.auctionPrice = auctionPrice;
-        this.remainderRatio = remainderRatio;
+        _remainderRatio = remainderRatio;
+        this.artId = artId;
 
         ChangeContent();
     }
 
+    void Onclick_JoinAuction()
+    {
+        StartCoroutine(SendJoinInfo());
+        //auction panel refresh
+        var auctionPanel = UIManager.Instance.popupAuction.GetComponent<AuctionPanel>();
+        auctionPanel.panelStart(artId);
+    }
+
+    IEnumerator SendJoinInfo()
+    {
+        ParticipateAuctionRequest participateAuctionRequest = new ParticipateAuctionRequest
+        {
+            userId = Manager.Instance.ID,
+            priceId = _priceId,
+            ratio = _ratio/100,
+            rlp = new List<string>()
+        };
+        Debug.Log("userid : "+ participateAuctionRequest.userId);
+        string url = "https://fintribe.herokuapp.com/v1/participate-success";
+        string jsonBody = JsonUtility.ToJson(participateAuctionRequest);
+
+        UnityWebRequest www = UnityWebRequest.Post(url, jsonBody);
+        byte[] jsonToSend = new System.Text.UTF8Encoding().GetBytes(jsonBody);
+        www.uploadHandler = new UploadHandlerRaw(jsonToSend);
+        www.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
+        www.SetRequestHeader("Content-Type", "application/json");
+        yield return www.SendWebRequest();
+
+
+        string jsonString = www.downloadHandler.text;
+        var response = JsonUtility.FromJson<ParticipateAuctionResponse>(jsonString);
+
+        if (response.priceId == "0")
+        {
+            // ê²½ë§¤ ì°¸ì—¬ ì‹¤íŒ¨ : ì”ì—¬ ì§€ë¶„ì„ ì´ˆê³¼í•œ ê²½ìš°
+        }
+        else
+        {
+            // ê²½ë§¤ ì°¸ì—¬ ì„±ê³µ
+        }
+
+        // api í†µì‹  ë¶€ë¶„ ë
+    }
+
+
     private void ChangePriceToPay(string _data)
     {
         double.TryParse(_data, out double shareprice);
+        _ratio = shareprice;
         double tmp = auctionPrice * shareprice * 0.01;
-        pricetopay.text = "¿¹»ó ÁöºÒ ±İ¾× : " + tmp + " KLAY";
+        pricetopay.text = "ì˜ˆìƒ ì§€ë¶ˆ ê¸ˆì•¡ : " + tmp.ToString("F2") + " KLAY";
     }
-    public void GetHopeShare(Text text)
-    {
-        text.text = inputShare.text;
 
-    }
     public void ChangeContent()
     {
-        price.text = "ÇÕ»ê ±İ¾× : " + auctionPrice +" KLAY";
-        remainRatio.text = "ÀÜ¿© ÁöºĞ : " + remainderRatio*100 + " %";
-        remainPrice.text = "ÀÜ¿© ±İ¾× : " + auctionPrice*remainderRatio + " KLAY";
+        price.text = "í•©ì‚° ê¸ˆì•¡ : " + auctionPrice.ToString("F2") +" KLAY";
+        remainRatio.text = "ì”ì—¬ ì§€ë¶„ : " + (_remainderRatio*100).ToString("F2") + " %";
+        remainPrice.text = "ì”ì—¬ ê¸ˆì•¡ : " + (auctionPrice*_remainderRatio).ToString("F2") + " KLAY";
     }
 
     class ParticipateAuctionRequest
     {
         public string userId;
         public string priceId;
-        public double ratio;
+        public double ratio;       //myratio
         public List<string> rlp;
     }
 
@@ -65,6 +112,6 @@ public class JoinAuction : MonoBehaviour
         public string priceId;
     }
 
-    // TO FRONT : °æ¸Å Á¤º¸ Á¶È¸ÇÒ ¶§ ÀúÀåÇÏ°í ÀÖ´ø priceId »ç¿ëÇÕ´Ï´Ù
+    // TO FRONT : ê²½ë§¤ ì •ë³´ ì¡°íšŒí•  ë•Œ ì €ì¥í•˜ê³  ìˆë˜ priceId ì‚¬ìš©í•©ë‹ˆë‹¤
 
 }
