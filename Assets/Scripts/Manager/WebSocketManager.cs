@@ -19,7 +19,8 @@ public class WebSocketManager : MonoBehaviour
 
     public void Start()
     {
-        webSocket = new WebSocket("ws://fintribesocket.herokuapp.com");
+        webSocket = new WebSocket("wss://fintribesocket.herokuapp.com");
+        webSocket.SslConfiguration.EnabledSslProtocols = System.Security.Authentication.SslProtocols.Tls12;
         webSocket.Connect();
         playerData = new PositionData(player.transform.position, playerCharacter, playerId, playerCommunity, PositionData.Command.Create);
         webSocket.Send(JsonUtility.ToJson(playerData));
