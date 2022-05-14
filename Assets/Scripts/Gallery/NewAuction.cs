@@ -37,15 +37,13 @@ public class NewAuction : MonoBehaviour
 
     IEnumerator SendNewInfo()
     {
-        string url = "https://fintribe.herokuapp.com/v1/price-success";
-        // (for 시연 영상 : rlp 빈 리스트)
+        string url = "https://fintribe.herokuapp.com/v1/price";
         NewPriceRequest newPriceRequest = new NewPriceRequest
         {
             userId = Manager.Instance.ID,
             artId = _artId,
             auctionPrice = sumprice,
-            ratio = _ratio/100,
-            rlp = new List<string>()
+            ratio = _ratio/100
         };
 
         string jsonBody = JsonUtility.ToJson(newPriceRequest);
@@ -94,7 +92,6 @@ class NewPriceRequest
     public string artId;
     public double auctionPrice;
     public double ratio;
-    public List<string> rlp;
 }
 
 class NewPriceResponse

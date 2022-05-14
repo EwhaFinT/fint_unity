@@ -66,11 +66,16 @@ public class AuctionPanel : MonoBehaviour
 
         for (int i=0; i<response.pricelist.Count; i++)
         {
-            GameObject suggest = Instantiate(suggestPrefab);
-            suggest.transform.SetParent(content.transform, false);
+            if (response.pricelist[i].auctionPrice == response.price && response.pricelist[i].remainderRatio == 1)      //if response is successful bid, do not instantiate suggest 
+                continue;
+            else
+            {
+                GameObject suggest = Instantiate(suggestPrefab);
+                suggest.transform.SetParent(content.transform, false);
 
-            var joinBtn = suggest.GetComponent<JoinButton>();
-            joinBtn.GetAuctionInfo(response.pricelist[i].priceId, response.pricelist[i].auctionPrice, response.pricelist[i].remainderRatio, artId);
+                var joinBtn = suggest.GetComponent<JoinButton>();
+                joinBtn.GetAuctionInfo(response.pricelist[i].priceId, response.pricelist[i].auctionPrice, response.pricelist[i].remainderRatio, artId);
+            }
         }
     }
 

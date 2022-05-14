@@ -53,11 +53,10 @@ public class JoinAuction : MonoBehaviour
         {
             userId = Manager.Instance.ID,
             priceId = _priceId,
-            ratio = _ratio/100,
-            rlp = new List<string>()
+            ratio = _ratio/100
         };
         Debug.Log("userid : "+ participateAuctionRequest.userId);
-        string url = "https://fintribe.herokuapp.com/v1/participate-success";
+        string url = "https://fintribe.herokuapp.com/v1/participate";
         string jsonBody = JsonUtility.ToJson(participateAuctionRequest);
 
         UnityWebRequest www = UnityWebRequest.Post(url, jsonBody);
@@ -104,7 +103,6 @@ public class JoinAuction : MonoBehaviour
         public string userId;
         public string priceId;
         public double ratio;       //myratio
-        public List<string> rlp;
     }
 
     class ParticipateAuctionResponse

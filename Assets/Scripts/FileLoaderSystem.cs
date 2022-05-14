@@ -13,10 +13,10 @@ public class FileLoaderSystem : MonoBehaviour
         imageLoader = GetComponent<ImageLoader>();
     }
 
-    public void LoadFile(Image imageDrawTexture, FileInfo file)
-    {
-        imageLoader.OnLoad(imageDrawTexture, file);
-    }
+    //public void LoadFile(Image imageDrawTexture, FileInfo file)
+    //{
+    //    imageLoader.OnLoad(imageDrawTexture, file);
+    //}
 
     public bool IsItArtwork(FileInfo file)
     {

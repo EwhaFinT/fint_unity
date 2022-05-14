@@ -47,18 +47,25 @@ public class PlayerController : MonoBehaviour
         //GameObject.FindGameObjectWithTag("")(true);
         //Turn();
         //LookUp();
-        bool notActiving = true;
-
-        for(int i=3; i< popupCanvas.Length; i++)
-        {
-            if (popupCanvas[i].activeSelf == true)
-                notActiving = false;
-        }
-        if (notActiving)
+       
+        if (!checkUI())
         {
             Turn();
             LookUp();
+            Move();
         }
+    }
+
+    private bool checkUI()
+    {
+
+        for (int i = 3; i < popupCanvas.Length; i++)
+        {
+            if (popupCanvas[i].activeSelf == true)
+                return true;
+        }
+
+        return false;
     }
 
     private void Turn()
@@ -82,8 +89,7 @@ public class PlayerController : MonoBehaviour
         mainCamera.transform.localEulerAngles = currentAngles; 
     }
 
-    // 상하좌우 이동 및 점프
-    private void Update()
+    private void Move()
     {
         // x, z 방향 이동
         float x = Input.GetAxisRaw("Horizontal");   // 방향키 좌/우 움직임
@@ -97,6 +103,8 @@ public class PlayerController : MonoBehaviour
             movement3D.JumpTo();
         }
     }
+
+    // 상하좌우 이동 및 점프
 
     public void SetMove(Vector3 pos)
     {
