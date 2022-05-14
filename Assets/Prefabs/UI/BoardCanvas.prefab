@@ -2547,8 +2547,8 @@ MonoBehaviour:
   ArticleTitle: {fileID: 7537407160068651483}
   ArticleTimestamp: {fileID: 7189823092975494588}
   ArticleContent: {fileID: 8589484969736964251}
-  articleprev: {fileID: 8454756723804345490, guid: 868604d8602244086b70a265f373e52f, type: 3}
-  content: {fileID: 9042386750668248717}
+  articleprev: {fileID: 6374612820748134141, guid: 5d549465973f146e3a0340091fa945c4, type: 3}
+  content: {fileID: 7243460881101728298}
   ReplyID: {fileID: 9145624357103517749}
   ReplyTimestamp: {fileID: 7211874807883125288}
   ReplyContent: {fileID: 525745402212733341}
@@ -3344,7 +3344,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1181754958953132245, guid: 5d549465973f146e3a0340091fa945c4, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1181754958953132245, guid: 5d549465973f146e3a0340091fa945c4, type: 3}
       propertyPath: m_AnchorMin.x
@@ -3352,7 +3352,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1181754958953132245, guid: 5d549465973f146e3a0340091fa945c4, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1181754958953132245, guid: 5d549465973f146e3a0340091fa945c4, type: 3}
       propertyPath: m_SizeDelta.x
@@ -3392,11 +3392,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1181754958953132245, guid: 5d549465973f146e3a0340091fa945c4, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 192.4765
       objectReference: {fileID: 0}
     - target: {fileID: 1181754958953132245, guid: 5d549465973f146e3a0340091fa945c4, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -56.4255
       objectReference: {fileID: 0}
     - target: {fileID: 1181754958953132245, guid: 5d549465973f146e3a0340091fa945c4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3422,15 +3422,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: ArticlePrevButton
       objectReference: {fileID: 0}
+    - target: {fileID: 6374612820748134141, guid: 5d549465973f146e3a0340091fa945c4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d549465973f146e3a0340091fa945c4, type: 3}
 --- !u!224 &3849523932413903013 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1181754958953132245, guid: 5d549465973f146e3a0340091fa945c4, type: 3}
-  m_PrefabInstance: {fileID: 2668996587120783472}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &9042386750668248717 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6374612820748134141, guid: 5d549465973f146e3a0340091fa945c4, type: 3}
   m_PrefabInstance: {fileID: 2668996587120783472}
   m_PrefabAsset: {fileID: 0}
