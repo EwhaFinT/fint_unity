@@ -18,11 +18,13 @@ public class VoteScript : MonoBehaviour
     public TextMeshProUGUI content;
 
     [Header("Vote")]
+    public TextMeshProUGUI StakePersonal;
     public TextMeshProUGUI YesPercent;
     public TextMeshProUGUI NoPercent;
     public Button YesBtn;
     public Button NoBtn;
     public bool temp;
+    public double klay;
 
     void Start()
     {
@@ -63,9 +65,9 @@ public class VoteScript : MonoBehaviour
     {
         ObjectId voteid = new ObjectId("6231edd26f3140647415ebcf");
         //ObjectId CommunityId = new ObjectId("6231d5883dfcf54107e14310");
-        ObjectId CommunityId = new ObjectId("6231f585aeee2e2cc44bfa90");
+        ObjectId UserId = new ObjectId("62689f6564ebad668621db42");
 
-        string url = "https://fintribe.herokuapp.com/v1/check?communityId=" + CommunityId + "&voteId=" + voteid;
+        string url = "https://fintribe.herokuapp.com/v1/check?voteId=" + voteid + "&userId=" + UserId;
 
         Debug.Log(url);
 
@@ -75,12 +77,15 @@ public class VoteScript : MonoBehaviour
         string jsonString = www.downloadHandler.text;
         var response = JsonUtility.FromJson<VoteCheckResponse>(jsonString);
 
+        Debug.Log("vote check responese: " + jsonString);
         proposer.text = "제안자: "+ response.identity.ToString();
         price.text = "제안가격: " + response.resalePrice.ToString();
         content.text = response.title.ToString();
 
         YesPercent.text = "YES\n" + response.agreement.ToString() + " %";
         NoPercent.text = "NO\n" + response.disagreement.ToString() + " %";
+
+        StakePersonal.text = response.ratio.ToString() + " %";
 
     }
     IEnumerator VotePost()
@@ -96,8 +101,8 @@ public class VoteScript : MonoBehaviour
             userId = UserId,
             communityId = CommunityId,
             voteId = VoteId,
-            choice = temp
-
+            choice = temp,
+            ratio = klay
         };
         string jsonBody = JsonUtility.ToJson(voteRequest);
 
@@ -140,7 +145,26 @@ class VoteCheckResponse
     public bool isDeleted;
     public double agreement;
     public double disagreement;
+    public double ratio;
+    public VoteCheckResponse(String msg)
+    {
+        voteId = msg;
+    }
 }
+//class VoteCheckResponse
+//{
+//    public string voteId;
+//    public string userId;
+//    public string identity;
+//    public string title;
+//    public double resalePrice;
+//    public string startTime;
+//    public string endTime;
+//    public bool isDeleted;
+//    public double agreement;
+//    public double disagreement;
+//    public double ratio;
+//}
 
 [Serializable]
 class VoteRequest
@@ -149,6 +173,7 @@ class VoteRequest
     public string communityId;
     public string voteId;
     public bool choice;
+    public double ratio;
 }
 
 [Serializable]

@@ -19,6 +19,7 @@ public class BoardScript : MonoBehaviour
     public TextMeshProUGUI ArticleTitle;
     public TextMeshProUGUI ArticleTimestamp;
     public TextMeshProUGUI ArticleContent;
+    public GameObject articleprev, content;
 
     [Header("Comment")]
     public TextMeshProUGUI ReplyID;
@@ -51,7 +52,45 @@ public class BoardScript : MonoBehaviour
     public void show()
     {
         board.SetActive(true);
+        StartCoroutine(LoadArticleList());
+    }
 
+    IEnumerator LoadArticleList()
+    {
+        ObjectId id = new ObjectId("6231f585aeee2e2cc44bfa90");
+
+        string url = "https://fintribe.herokuapp.com/v1/articles?communityId=" + id;
+
+        Debug.Log(url);
+
+        UnityWebRequest www = UnityWebRequest.Get(url);
+        yield return www.SendWebRequest();
+
+        string jsonString = www.downloadHandler.text;
+        var response = JsonUtility.FromJson<ArticlesResponse>(jsonString);
+        Debug.Log("board response: " + jsonString);
+        Debug.Log("response test: " + response.articles);
+        articleInit(response);
+    }
+
+    void articleInit(ArticlesResponse response)
+    {
+        if (content.transform.childCount > 1)
+        {
+            for (int i = 1; i < content.transform.childCount; i++)
+            {
+                Destroy(content.transform.GetChild(i).gameObject);
+            }
+            Debug.Log("Destory clone all");
+        }
+        for (int i = 0; i < response.articles.Count; i++)
+        {
+            GameObject prev = Instantiate(articleprev);
+            prev.transform.SetParent(content.transform, false);
+
+            var articleBtn = prev.GetComponent<articlepr>();
+            articleBtn.GetArticleInfo(response.articles[i].title, response.articles[i].createdAt, response.articles[i].articleId);
+        }
     }
 
     void onClicked_vote()
@@ -219,4 +258,18 @@ class CommentRequest
 class CommentResponse
 {
     public string commentSuccess;
+}
+
+[Serializable]
+class ArticlesResponse
+{ 
+    public List<ArticlesResTmp> articles;
+}
+
+[Serializable]
+public class ArticlesResTmp
+{
+    public string articleId;
+    public string title;
+    public string createdAt;
 }
