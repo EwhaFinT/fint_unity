@@ -66,7 +66,7 @@ public class AuctionPanel : MonoBehaviour
 
         for (int i=0; i<response.pricelist.Count; i++)
         {
-            if (response.pricelist[i].auctionPrice == response.price && response.pricelist[i].remainderRatio == 1)      //if response is successful bid, do not instantiate suggest 
+            if (response.pricelist[i].auctionPrice == response.price && response.pricelist[i].remainderRatio == 0)      //if response is successful bid, do not instantiate suggest 
                 continue;
             else
             {

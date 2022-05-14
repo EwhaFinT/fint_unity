@@ -1033,23 +1033,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &3326632481412646650
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3205364919641731430}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 530b80432107af04eaea35f9f43bac4b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  btn_close: {fileID: 0}
-  btn_OK: {fileID: 0}
-  year: {fileID: 0}
-  month: {fileID: 0}
-  day: {fileID: 0}
 --- !u!1 &3220648838679009454
 GameObject:
   m_ObjectHideFlags: 0
@@ -2188,7 +2171,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 1126074810103616476}
-  - {fileID: 1105540546629315494}
+  - {fileID: 8717536586654442153}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2277,7 +2260,7 @@ MonoBehaviour:
   auctionDate: {fileID: 2093882409827558637}
   description: {fileID: 1183030456177984363}
   warningWindow: {fileID: 4628479498889139638}
-  calendar: {fileID: 3205364919641731430}
+  calendar: {fileID: 6617754307143776361}
   btn_close: {fileID: 2123243866231201481}
   btn_FindFile: {fileID: 6315497826283678709}
   btn_upload: {fileID: 7564224690415970515}
@@ -3883,7 +3866,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!1001 &181311259563327976
+--- !u!1001 &8442392994017888487
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -3980,13 +3963,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 817f5b2ac9ad9714281cdeaf455b5cf0, type: 3}
---- !u!1 &3205364919641731430 stripped
+--- !u!1 &6617754307143776361 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3386596728750960782, guid: 817f5b2ac9ad9714281cdeaf455b5cf0, type: 3}
-  m_PrefabInstance: {fileID: 181311259563327976}
+  m_PrefabInstance: {fileID: 8442392994017888487}
   m_PrefabAsset: {fileID: 0}
---- !u!224 &1105540546629315494 stripped
+--- !u!224 &8717536586654442153 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 996297053735529038, guid: 817f5b2ac9ad9714281cdeaf455b5cf0, type: 3}
-  m_PrefabInstance: {fileID: 181311259563327976}
+  m_PrefabInstance: {fileID: 8442392994017888487}
   m_PrefabAsset: {fileID: 0}

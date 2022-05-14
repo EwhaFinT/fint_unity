@@ -168,7 +168,7 @@ public class RegisterFormController : MonoBehaviour
             price = price,
             //paint = artUrl,
             paint = "",
-            auctionDate = "2022-05-11T15:00:00.000+00:00"
+            auctionDate = "2022-05-10"
         };
 
         string jsonBody = JsonUtility.ToJson(uploadRequest);
@@ -202,6 +202,12 @@ public class RegisterFormController : MonoBehaviour
         {
             filePath.text = path;
         }
+    }
+
+    public void GetDate(string date)
+    {
+        string tmp_date = date;
+        Debug.Log(date);
     }
 
     void InitializeForm()   // 작품 등록 폼 초기화

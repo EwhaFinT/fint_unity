@@ -9,17 +9,14 @@ public class AuctionDate : MonoBehaviour
 {
     public Button btn_close, btn_OK;
     public TMP_InputField year, month, day;
-    public string yy, mm, dd, finalDate;
+    string yy, mm, dd, finalDate;
 
-    public GameObject warningWindow;    // 경고창
 
     // Start is called before the first frame update
     void Start()
     {
         btn_close.onClick.AddListener(Onclicked_close);
         btn_OK.onClick.AddListener(Onclicked_OK);
-        warningWindow = GameObject.Find("WarningWindow");
-        warningWindow.SetActive(false);
     }
 
     public void Onclicked_close()
@@ -29,6 +26,7 @@ public class AuctionDate : MonoBehaviour
     public void Onclicked_OK()
     {
         //값 패널로 보내기
+        GetDate();
     }
 
     void GetDate()
@@ -39,16 +37,17 @@ public class AuctionDate : MonoBehaviour
         mm = month.text;
         dd = day.text;
 
-        finalDate = "{yy}-{mm}-{dd}";
+        finalDate = $"{yy}-{mm}-{dd}";
         if (CheckValidation(finalDate, today))
             SendDate(finalDate);
-
+//        SendDate(finalDate);
     }
 
-    public string SendDate(string date)
+    public void SendDate(string date)
     {
 
-        return date;
+        var auctionPanel = UIManager.Instance.popupRegister.GetComponent<RegisterFormController>();
+        auctionPanel.GetDate(date);
     }
 
     bool CheckValidation(string date, string today)
