@@ -42,6 +42,7 @@ public class BoardImgScript : MonoBehaviour
                 {
                     boardPanel.show();
                     string articleId = "6231f66a15ffd20d91c1b10e";
+                    Debug.Log("------------board image article id-----------");
                     boardPanel.changeArticleId(articleId);
                 }
             }
