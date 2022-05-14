@@ -12,13 +12,14 @@ public class WebSocketManager : MonoBehaviour
     public GameObject player;
     public List<GameObject> playerPrefab;
     private Dictionary<string, GameObject> remoteplayer = new Dictionary<string, GameObject>();
-    private string playerId = "test";
+    private string playerId;
     private int playerCharacter = 1;
-    private string playerCommunity = "communityId"; // TODO: communityId, userId 받아오는 함수 호출 필요 (start 함수 내)
+    private string playerCommunity; // TODO: communityId, userId 받아오는 함수 호출 필요 (start 함수 내)
     private PositionData playerData;
 
     public void Start()
     {
+        playerId = Manager.Instance.ID;
         webSocket = new WebSocket("wss://fintribesocket.herokuapp.com");
         webSocket.SslConfiguration.EnabledSslProtocols = System.Security.Authentication.SslProtocols.Tls12;
         webSocket.Connect();
@@ -72,6 +73,11 @@ public class WebSocketManager : MonoBehaviour
             position = player.transform.position;
             playerData.position = position;
             playerData.command = PositionData.Command.Update;
+            if(Manager.Instance.ID != null)
+            {
+                playerData.userId = Manager.Instance.ID;
+            }
+            playerData.communityId = "tmp";
 
             string positionTmp = JsonUtility.ToJson(playerData);
             webSocket.Send(positionTmp);
