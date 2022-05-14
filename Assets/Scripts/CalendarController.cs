@@ -110,11 +110,10 @@ public class CalendarController : MonoBehaviour
         CreateCalendar();
     }
 
-    public void ShowCalendar(Button target)
+    public void ShowCalendar(Text target)
     {
         _calendarPanel.SetActive(true);
-        //_target = target.text;
-        Debug.Log("calendar show function: " + _calendarPanel);
+        _target = target;
     }
 
     Text _target;
@@ -123,7 +122,6 @@ public class CalendarController : MonoBehaviour
     public void OnDateItemClick(string day)
     {
         _target.text = _yearNumText.text + "-" + _monthNumText.text + "-" + int.Parse(day).ToString("D2");
-        ProposalScript.instance.calender_date = _yearNumText.text + "-" + _monthNumText.text + "-" + int.Parse(day).ToString("D2");
         _calendarPanel.SetActive(false);
     }
 }

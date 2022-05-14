@@ -33,8 +33,8 @@ public class RegisterFormController : MonoBehaviour
         btn_FindFile.onClick.AddListener(OpenExplorerButtonClick);
         btn_upload.onClick.AddListener(RegisterButtonClick);
         btn_pickDate.onClick.AddListener(ShowCalendar);
-        warningWindow = GameObject.Find("WarningWindow");
-        warningWindow.SetActive(false);
+        //warningWindow = GameObject.Find("WarningWindow");
+        //warningWindow.SetActive(false);
     }
     public void Onclicked_close()
     {
@@ -98,8 +98,9 @@ public class RegisterFormController : MonoBehaviour
             SendNewFileInfo();
 
             // ==== 서버와 통신하는 부분====
-            StartCoroutine(ImageUpload(path));
-            
+//            StartCoroutine(ImageUpload(path));
+            StartCoroutine(SendReguisterInfo());
+
             // ==== NFT API 사용해서 NFT 주소도 만들어야 함 ====
 
             // 작품 성공적으로 등록시 작품 등록 폼 닫음
@@ -140,7 +141,7 @@ public class RegisterFormController : MonoBehaviour
 
         string jsonString = www.downloadHandler.text;
         var data = JObject.Parse(jsonString);
-        
+
         artUrl = data["data"]["url"].ToString();         //get art url part from jsonString
 
         Debug.Log("complete upload img");
@@ -165,8 +166,9 @@ public class RegisterFormController : MonoBehaviour
             artName = title.text,
             detail = description.text,
             price = price,
-            paint = artUrl,
-            auctionDate = "2022-05-12"
+            //paint = artUrl,
+            paint = "",
+            auctionDate = "2022-05-11T15:00:00.000+00:00"
         };
 
         string jsonBody = JsonUtility.ToJson(uploadRequest);
