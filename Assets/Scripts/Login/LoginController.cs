@@ -93,6 +93,7 @@ public class LoginController : MonoBehaviour
             // TODO : userId 저장 후 메인 페이지로 랜더링
             Manager.Instance.ID = response.userId;
             Debug.Log(Manager.Instance.ID);
+            GameObject.Find("WebSocketManager").SetActive(true);
         }
     }
 }
