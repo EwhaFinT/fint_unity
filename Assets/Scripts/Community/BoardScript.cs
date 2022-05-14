@@ -28,6 +28,8 @@ public class BoardScript : MonoBehaviour
     public TMP_InputField CommentInput;
     public Button CommentRegister;
 
+    public string articleId;
+
 
     // Start is called before the first frame update
     void Start()
@@ -40,13 +42,13 @@ public class BoardScript : MonoBehaviour
         StartCoroutine(LoadArticle());
 
         CommentRegister.onClick.AddListener(onClicked_comment);
-
+        //articleId = "6231f66a15ffd20d91c1b10e";
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        //StartCoroutine(LoadArticle());
     }
 
     public void show()
@@ -55,21 +57,27 @@ public class BoardScript : MonoBehaviour
         StartCoroutine(LoadArticleList());
     }
 
+    public void LoadArticleUpdate()
+    {
+        StartCoroutine(LoadArticle());
+        Debug.Log("load article updated");
+    }
+
     IEnumerator LoadArticleList()
     {
         ObjectId id = new ObjectId("6231f585aeee2e2cc44bfa90");
 
         string url = "https://fintribe.herokuapp.com/v1/articles?communityId=" + id;
 
-        Debug.Log(url);
+        Debug.Log("LoadArticleList: " + url);
 
         UnityWebRequest www = UnityWebRequest.Get(url);
         yield return www.SendWebRequest();
 
         string jsonString = www.downloadHandler.text;
         var response = JsonUtility.FromJson<ArticlesResponse>(jsonString);
-        Debug.Log("board response: " + jsonString);
-        Debug.Log("response test: " + response.articles);
+        //Debug.Log("board response: " + jsonString);
+        //Debug.Log("response test: " + response.articles);
         articleInit(response);
     }
 
@@ -93,6 +101,11 @@ public class BoardScript : MonoBehaviour
         }
     }
 
+    public void changeArticleId(string id)
+    {
+        articleId = id;
+        Debug.Log("article changed: " + articleId);
+    }
     void onClicked_vote()
     {
         board.SetActive(false);
@@ -131,11 +144,13 @@ public class BoardScript : MonoBehaviour
     IEnumerator LoadArticle()
     {
         //ArticleTitle = GetComponent<TextMeshPro>();
-        ObjectId id = new ObjectId("6231f66a15ffd20d91c1b10e");
+        //ObjectId id = new ObjectId("6231f66a15ffd20d91c1b10e");
+        //ObjectId id = new ObjectId(articleId);
+        //articleId = "6231f66a15ffd20d91c1b10e";
 
-        string url = "https://fintribe.herokuapp.com/v1/article?articleId=" + id;
+        string url = "https://fintribe.herokuapp.com/v1/article?articleId=" + articleId;
 
-        Debug.Log(url);
+        Debug.Log("url: "+url);
 
         UnityWebRequest www = UnityWebRequest.Get(url);
         yield return www.SendWebRequest();
@@ -149,7 +164,7 @@ public class BoardScript : MonoBehaviour
         //DateTime timeFromJson = JsonUtility.FromJson<JsonDateTime>(response.article.createdAt);
 
         ArticleTitle.text = response.article.title.ToString();
-        ArticleTimestamp.text = "????| " + response.article.createdAt;
+        ArticleTimestamp.text = "작성시간| " + response.article.createdAt;
         //ArticleTimestamp.text = "????| " + response.article.createdAt.ToString("yyyy/MM/dd HH:mm") + "\n" + "???| " + response.article.identity.ToString();
         ArticleContent.text = response.article.content.ToString();
 
