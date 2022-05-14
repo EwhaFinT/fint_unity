@@ -14,7 +14,7 @@ public class articlepr : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        article.onClick.AddListener(Onclicked_Article);
     }
     public void GetArticleInfo(string title, string createdAt, string articleId)
     {
@@ -24,7 +24,12 @@ public class articlepr : MonoBehaviour
     }
     public void Onclicked_Article()
     {
-        Debug.Log("article info: " + title.text + timestamp.text + articleId);
+        Debug.Log("article clicked");
+        Debug.Log("article info: " + title.text + timestamp.text + "articleId: " + articleId);
+
+        var boardPanel = UIManager.Instance.popupBoard.GetComponent<BoardScript>();
+        boardPanel.changeArticleId(articleId);
+        boardPanel.LoadArticleUpdate();
     }
     // Update is called once per frame
     void Update()
