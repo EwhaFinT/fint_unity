@@ -175,7 +175,7 @@ public class SignupController : MonoBehaviour
 
     IEnumerator IdCheck() // 아이디 중복 검사 요청
     {
-        string url = "http://localhost:8080/v1/check-id?identity=" + identity.text;
+        string url = "https://fintribe.herokuapp.com/v1/check-id?identity=" + identity.text;
 
         UnityWebRequest www = UnityWebRequest.Get(url);
         yield return www.SendWebRequest();

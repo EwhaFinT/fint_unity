@@ -59,7 +59,8 @@ public class AuctionPanel : MonoBehaviour
         {
             for (int i = 1; i < content.transform.childCount; i++)
             {
-                Destroy(content.transform.GetChild(i).gameObject);
+                var a = content.transform.GetChild(i).gameObject;
+                Destroy(a);
             }
             Debug.Log("Destory clone all");
         }
@@ -106,7 +107,6 @@ public class AuctionPanel : MonoBehaviour
         var newAuctionPanel = UIManager.Instance.auctionNew.GetComponent<NewAuction>();
         newAuctionPanel.panelStart(artId);
         canvasJoin.SetActive(false);
-
     }
 
 }

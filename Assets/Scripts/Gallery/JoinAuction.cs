@@ -42,9 +42,7 @@ public class JoinAuction : MonoBehaviour
     void Onclick_JoinAuction()
     {
         StartCoroutine(SendJoinInfo());
-        //auction panel refresh
-        var auctionPanel = UIManager.Instance.popupAuction.GetComponent<AuctionPanel>();
-        auctionPanel.panelStart(artId);
+
     }
 
     IEnumerator SendJoinInfo()
@@ -80,6 +78,9 @@ public class JoinAuction : MonoBehaviour
         }
 
         // api 통신 부분 끝
+        //auction panel refresh
+        var auctionPanel = UIManager.Instance.popupAuction.GetComponent<AuctionPanel>();
+        auctionPanel.panelStart(artId);
     }
 
 

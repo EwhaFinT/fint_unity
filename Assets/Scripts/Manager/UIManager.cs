@@ -83,7 +83,7 @@ public class UIManager : MonoBehaviour
 
     public void OnLogin()
     {
-        popupLogin.SetActive(!popupLogin.activeSelf);
+        popupLogin.SetActive(true);
     }
 
     void OnVote()

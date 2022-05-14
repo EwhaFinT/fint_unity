@@ -37,7 +37,7 @@ public class LoginController : MonoBehaviour
     void SignupBtnClick()
     {
         OffWarn();
-        OffLogin();
+//        OffLogin();
         var signup = UIManager.Instance.popupSignup.GetComponent<SignupController>();
         signup.show();
     }
@@ -45,7 +45,7 @@ public class LoginController : MonoBehaviour
     void FindIdBtnClick()
     {
         OffWarn();
-        OffLogin();
+//        OffLogin();
         var findid = UIManager.Instance.popupFindId.GetComponent<FindIdController>();
         findid.show();
     }
@@ -53,7 +53,7 @@ public class LoginController : MonoBehaviour
     void FindPwBtnClick()
     {
         OffWarn();
-        OffLogin();
+ //       OffLogin();
         var findPw = UIManager.Instance.popupFindPw.GetComponent<FindPwController>();
         findPw.show();
     }
@@ -91,6 +91,8 @@ public class LoginController : MonoBehaviour
             popupWarn.OffWarn();
             OffLogin();
             // TODO : userId 저장 후 메인 페이지로 랜더링
+            Manager.Instance.ID = response.userId;
+            Debug.Log(Manager.Instance.ID);
         }
     }
 }

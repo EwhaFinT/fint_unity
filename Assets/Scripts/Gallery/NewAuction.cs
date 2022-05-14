@@ -29,9 +29,7 @@ public class NewAuction : MonoBehaviour
     void Onclick_NewAuction()
     {
         StartCoroutine(SendNewInfo());
-        //auction panel refresh
-        var auctionPanel = UIManager.Instance.popupAuction.GetComponent<AuctionPanel>();
-        auctionPanel.panelStart(_artId);
+
     }
 
 
@@ -68,7 +66,9 @@ public class NewAuction : MonoBehaviour
         }
 
         // api 통신 부분 끝
-
+        //auction panel refresh
+        var auctionPanel = UIManager.Instance.popupAuction.GetComponent<AuctionPanel>();
+        auctionPanel.panelStart(_artId);
     }
 
     private void InputPrice_Text(string _data)
