@@ -1324,8 +1324,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1341682325}
   playerPrefab:
-  - {fileID: 6261470874564650363, guid: c832eb2e81f9f1d4695bc2a885fc40e0, type: 3}
-  - {fileID: 6261470874564650363, guid: c832eb2e81f9f1d4695bc2a885fc40e0, type: 3}
+  - {fileID: 9168745481175242534, guid: 395685b118ca1554895fec76ed620a7b, type: 3}
+  - {fileID: 9168745481175242534, guid: 395685b118ca1554895fec76ed620a7b, type: 3}
 --- !u!114 &832825053 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 233525633726811125, guid: 8f7f12150940d91419515356ad1fd85c, type: 3}
@@ -4831,7 +4831,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 806566123421726891, guid: a68ae2487d47ffe48baca31efe0793e9, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 806566123421726892, guid: a68ae2487d47ffe48baca31efe0793e9, type: 3}
       propertyPath: m_Camera
