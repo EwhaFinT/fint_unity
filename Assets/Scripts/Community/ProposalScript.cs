@@ -51,7 +51,7 @@ public class ProposalScript : MonoBehaviour
         Debug.Log("calendar button clicked");
         var calenderPanel = UIManager.Instance.popupCalender.GetComponent<CalendarController>();
         Debug.Log("calendar panel: " + calenderPanel);
-        calenderPanel.ShowCalendar(date);
+       //calenderPanel.ShowCalendar(date);
     }
 
     IEnumerator PostVote()

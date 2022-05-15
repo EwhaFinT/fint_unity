@@ -98,8 +98,7 @@ public class RegisterFormController : MonoBehaviour
             SendNewFileInfo();
 
             // ==== 서버와 통신하는 부분====
-//            StartCoroutine(ImageUpload(path));
-            StartCoroutine(SendReguisterInfo());
+            StartCoroutine(ImageUpload(path));
 
             // ==== NFT API 사용해서 NFT 주소도 만들어야 함 ====
 
@@ -166,8 +165,8 @@ public class RegisterFormController : MonoBehaviour
             artName = title.text,
             detail = description.text,
             price = price,
-            //paint = artUrl,
-            paint = "",
+            paint = artUrl,
+//            paint = "",       //for test (not upload)
             auctionDate = "2022-05-10"
         };
 
@@ -190,7 +189,7 @@ public class RegisterFormController : MonoBehaviour
         }
         else
         {
-            response.artId = artId;
+            artId = response.artId;
             success = true;
         }
             

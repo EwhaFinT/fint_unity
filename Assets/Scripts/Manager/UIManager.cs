@@ -38,6 +38,7 @@ public class UIManager : MonoBehaviour
     public GameObject popupFindId;
     public GameObject popupFindPw;
     public GameObject popupTeleport;
+    public GameObject popupTeleportCommunity;
 
     [Header("Popups - MyRoom")]
     public GameObject myroomPanel;

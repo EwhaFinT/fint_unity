@@ -35,8 +35,8 @@ public class TeleportPanel : MonoBehaviour
         {
             player.SetMove(targetPos_mainHall);
             teleportPanel.SetActive(false);
-            var myroomPanel = UIManager.Instance.myroomPanel;
-            myroomPanel.SetActive(false);
+            var myroomPanel = UIManager.Instance.myroomPanel;       
+            myroomPanel.SetActive(false);       //hide inventory and upload button
         }
     }
 
@@ -49,7 +49,7 @@ public class TeleportPanel : MonoBehaviour
             player.SetMove(targetPos_myRoom);
             teleportPanel.SetActive(false);
             var myroomPanel = UIManager.Instance.myroomPanel;
-            myroomPanel.SetActive(true);
+            myroomPanel.SetActive(true);           //show inventory and upload button
         }
     }
 
@@ -59,10 +59,21 @@ public class TeleportPanel : MonoBehaviour
 
         if (player != null)
         {
+            var communityListPanel = UIManager.Instance.popupTeleportCommunity.GetComponent<CommunityList>();
+            communityListPanel.panelStart();
+        }
+    }
+
+    public void MoveCommunity()
+    {
+        var player = GameObject.Find("Player").GetComponent<PlayerController>();
+
+        if (player != null)
+        {
             player.SetMove(targetPos_community);
             teleportPanel.SetActive(false);
             var myroomPanel = UIManager.Instance.myroomPanel;
-            myroomPanel.SetActive(false);
+            myroomPanel.SetActive(false);       //hide inventory and upload button
         }
     }
     public void Onclicked_close()
