@@ -177,9 +177,9 @@ public class BoardScript : MonoBehaviour
 
     void commentInit(LoadBoardResponse response)
     {
-        if (commentcontent.transform.childCount > 1)
+        if (commentcontent.transform.childCount > 2)
         {
-            for (int i = 1; i < content.transform.childCount; i++)
+            for (int i = 2; i < content.transform.childCount; i++)
             {
                 Destroy(commentcontent.transform.GetChild(i).gameObject);
             }
