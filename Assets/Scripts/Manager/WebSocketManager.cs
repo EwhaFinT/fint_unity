@@ -14,7 +14,7 @@ public class WebSocketManager : MonoBehaviour
     private Dictionary<string, GameObject> remoteplayer = new Dictionary<string, GameObject>();
     private string playerId;
     private int playerCharacter = 1;
-    private string playerCommunity; // TODO: communityId, userId 받아오는 함수 호출 필요 (start 함수 내)
+    private string playerCommunity = "tmp";
     private PositionData playerData;
 
     public void Start()
@@ -77,6 +77,12 @@ public class WebSocketManager : MonoBehaviour
             {
                 playerData.userId = Manager.Instance.ID;
             }
+
+            if(CommunityManager.Instance.CommunityID != null)
+            {
+                playerData.communityId = CommunityManager.Instance.CommunityID;
+            }
+
             playerData.communityId = "tmp";
 
             string positionTmp = JsonUtility.ToJson(playerData);
