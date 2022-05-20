@@ -56,7 +56,7 @@ public class CommunityList : MonoBehaviour
     {
 
         // api 烹脚 何盒 矫累
-
+        Debug.Log(Manager.Instance.ID);
         string url = Manager.Instance.url + "v1/communities?userId="+ Manager.Instance.ID;
         UnityWebRequest www = UnityWebRequest.Get(url);
         yield return www.SendWebRequest();
