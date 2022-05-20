@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -55,16 +55,16 @@ public class CommunityList : MonoBehaviour
     IEnumerator LoadCommunityList()
     {
 
-        // api Åë½Å ºÎºÐ ½ÃÀÛ
+        // api çƒ¹è„š ä½•ç›’ çŸ«ç´¯
 
-        string url = "https://fintribe.herokuapp.com/v1/communities?userId="+ Manager.Instance.ID;
+        string url = Manager.Instance.url + "v1/communities?userId="+ Manager.Instance.ID;
         UnityWebRequest www = UnityWebRequest.Get(url);
         yield return www.SendWebRequest();
 
         string jsonString = www.downloadHandler.text;
         //        var response = JsonUtility.FromJson<CommnunityResponse>(jsonString);
         var response = JsonUtility.FromJson<CommnunityResponse>("{\"communityList\":" + jsonString + "}");
-        // api Åë½Å ºÎºÐ ³¡
+        // api çƒ¹è„š ä½•ç›’ åœº
         ListInit(response);
     }
 }

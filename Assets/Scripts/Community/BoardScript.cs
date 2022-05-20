@@ -68,7 +68,7 @@ public class BoardScript : MonoBehaviour
     {
         ObjectId id = new ObjectId("6231f585aeee2e2cc44bfa90");
 
-        string url = "https://fintribe.herokuapp.com/v1/articles?communityId=" + id;
+        string url = Manager.Instance.url + "v1/articles?communityId=" + id;
 
         Debug.Log("LoadArticleList: " + url);
 
@@ -151,7 +151,7 @@ public class BoardScript : MonoBehaviour
         //ObjectId id = new ObjectId(articleId);
         //articleId = "6231f66a15ffd20d91c1b10e";
 
-        string url = "https://fintribe.herokuapp.com/v1/article?articleId=" + articleId;
+        string url = Manager.Instance.url + "v1/article?articleId=" + articleId;
 
         Debug.Log("url: "+url);
 
@@ -206,7 +206,7 @@ public class BoardScript : MonoBehaviour
         string UserId = "6250073f634945502a92cbbe";
         //string ArticleId = "6231d5883dfcf54107e14364";
 
-        string url = "https://fintribe.herokuapp.com/v1/comment";
+        string url = Manager.Instance.url + "v1/comment";
 
         CommentRequest commentRequest = new CommentRequest
         {

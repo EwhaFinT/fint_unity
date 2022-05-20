@@ -64,7 +64,7 @@ public class ProposalScript : MonoBehaviour
         Debug.Log("price: " + Price.text);
         Debug.Log("content:" + Content.text);
 
-        string url = "https://fintribe.herokuapp.com/v1/vote-proposal";
+        string url = Manager.Instance.url + "v1/vote-proposal";
 
         ProposeRequest proposeRequest = new ProposeRequest
         {

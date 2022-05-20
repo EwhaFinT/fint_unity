@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -53,7 +53,7 @@ public class PostScript : MonoBehaviour
         Debug.Log("title: " + Title.text);
         Debug.Log("content:" + Content.text);
 
-        string url = "https://fintribe.herokuapp.com/v1/article";
+        string url = Manager.Instance.url + "v1/article";
 
         PostRequest postRequest = new PostRequest
         {

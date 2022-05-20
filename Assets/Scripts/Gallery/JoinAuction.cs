@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -54,7 +54,7 @@ public class JoinAuction : MonoBehaviour
             ratio = _ratio/100
         };
         Debug.Log("userid : "+ participateAuctionRequest.userId);
-        string url = "https://fintribe.herokuapp.com/v1/participate";
+        string url = Manager.Instance.url + "v1/participate";
         string jsonBody = JsonUtility.ToJson(participateAuctionRequest);
 
         UnityWebRequest www = UnityWebRequest.Post(url, jsonBody);

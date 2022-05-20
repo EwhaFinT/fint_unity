@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -54,7 +54,7 @@ public class FindPwController : MonoBehaviour
 
     IEnumerator FindPw()
     {
-        string url = "https://fintribe.herokuapp.com/v1/find-pw?identity=" + identity.text + "&email=" + email.text;
+        string url = Manager.Instance.url + "v1/find-pw?identity=" + identity.text + "&email=" + email.text;
 
         UnityWebRequest www = UnityWebRequest.Get(url);
         yield return www.SendWebRequest();
@@ -63,15 +63,15 @@ public class FindPwController : MonoBehaviour
         string jsonString = www.downloadHandler.text;
         var response = JsonUtility.FromJson<FindPwResponse>(jsonString);
 
-        if (!response.emailSuccess)    // ºñ¹Ğ¹øÈ£ Ã£±â ½ÇÆĞ
+        if (!response.emailSuccess)    // åšå‰é”…é¾‹ èŒ«æ‰ è§’è©
         {
             var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
-            popupWarn.MakePopupWarn("ÇØ´ç Á¤º¸¿Í ÀÏÄ¡ÇÏ´Â\n»ç¿ëÀÚ°¡ ¾ø½À´Ï´Ù.");
+            popupWarn.MakePopupWarn("ç§¦å¯¸ æ²¥ç„Šå®¢ è€æ‘¹çªç»°\nè¤ä¾©ç£Šå•Š ç»åš¼èªä¿ƒ.");
         }
         else
         {
             var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
-            popupWarn.MakePopupWarn("ÇØ´ç ÀÌ¸ŞÀÏ ÁÖ¼Ò·Î\nÀÓ½Ã ºñ¹Ğ¹øÈ£¸¦ Àü¼ÛÇß½À´Ï´Ù.");
+            popupWarn.MakePopupWarn("ç§¦å¯¸ æçš‹è€ æ—å®¶è‚º\nçƒ™çŸ« åšå‰é”…é¾‹ç”« å‚ˆä»·æ²åš¼èªä¿ƒ.");
         }
     }
 }

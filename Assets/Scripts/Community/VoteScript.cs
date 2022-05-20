@@ -67,7 +67,7 @@ public class VoteScript : MonoBehaviour
         //ObjectId CommunityId = new ObjectId("6231d5883dfcf54107e14310");
         ObjectId UserId = new ObjectId("62689f6564ebad668621db42");
 
-        string url = "https://fintribe.herokuapp.com/v1/check?voteId=" + voteid + "&userId=" + UserId;
+        string url = Manager.Instance.url + "v1/check?voteId=" + voteid + "&userId=" + UserId;
 
         Debug.Log(url);
 
@@ -94,7 +94,7 @@ public class VoteScript : MonoBehaviour
         string CommunityId = "6231f585aeee2e2cc44bfa90";
         string VoteId = "6231edd26f3140647415ebcf";
 
-        string url = "https://fintribe.herokuapp.com/v1/vote";
+        string url = Manager.Instance.url + "v1/vote";
 
         VoteRequest voteRequest = new VoteRequest
         {
