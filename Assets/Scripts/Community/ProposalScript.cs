@@ -13,9 +13,8 @@ public class ProposalScript : MonoBehaviour
 
     public TMP_InputField Price;
     public TMP_InputField Content;
-    public Button date;
+    public TMP_InputField Date;
     public Button submit;
-    public string calender_date;
     public static ProposalScript instance;
 
     // Start is called before the first frame update
@@ -23,7 +22,7 @@ public class ProposalScript : MonoBehaviour
     {
         exit.onClick.AddListener(onClicked_exit);
         submit.onClick.AddListener(onClicked_sumbit);
-        date.onClick.AddListener(onClicked_date);
+        //date.onClick.AddListener(onClicked_date);
     }
 
     // Update is called once per frame
@@ -46,18 +45,21 @@ public class ProposalScript : MonoBehaviour
     {
         StartCoroutine(PostVote());
     }
-    void onClicked_date()
-    {
-        Debug.Log("calendar button clicked");
-        var calenderPanel = UIManager.Instance.popupCalender.GetComponent<CalendarController>();
-        Debug.Log("calendar panel: " + calenderPanel);
-       //calenderPanel.ShowCalendar(date);
-    }
+    //void onClicked_date()
+    //{
+    //    Debug.Log("calendar button clicked");
+    //    var calenderPanel = UIManager.Instance.popupCalender.GetComponent<CalendarController>();
+    //    Debug.Log("calendar panel: " + calenderPanel);
+    //   //calenderPanel.ShowCalendar(date);
+    //}
 
     IEnumerator PostVote()
     {
-        string UserId = "6250073f634945502a92cbbe";
-        string CommunityId = "6231d5883dfcf54107e14310";
+        //string UserId = "62689f6564ebad668621db42";
+        string UserId = Manager.Instance.ID;
+        string CommunityId = "627f5ca702867d106384ef8f";
+        //string CommunityId = CommunityManager.Instance.CommunityID;
+
         var time = DateTime.Now;
         Debug.Log("datetime now: "+time);
 
@@ -72,7 +74,7 @@ public class ProposalScript : MonoBehaviour
             userId = UserId,
             title = Content.text,
             resalePrice = double.Parse(Price.text),
-            endTime = "2022-06-01T12:00:00"
+            endTime = Date.text
         };
         string jsonBody = JsonUtility.ToJson(proposeRequest);
         Debug.Log(proposeRequest);
