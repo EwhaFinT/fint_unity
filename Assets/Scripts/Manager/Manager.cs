@@ -36,7 +36,7 @@ public class Manager : Singleton<Manager>
 
     public void GetNetwork()
     {
-        ID = "627f912f04cd2370d57be29e"; //tmp ID
+        ID = "62689f6564ebad668621db42"; //tmp ID
         url = "https://fintribeserver.herokuapp.com/";
     }
 
