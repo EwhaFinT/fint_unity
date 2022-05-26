@@ -40,9 +40,11 @@ public class PostPopupScript : MonoBehaviour
     {
         var postPanel = UIManager.Instance.popupPost.GetComponent<PostScript>();
         var proposalPanel = UIManager.Instance.popUpProposal.GetComponent<ProposalScript>();
+        var votePanel = UIManager.Instance.popupVote.GetComponent<VoteScript>();
 
         PostPopUp.SetActive(false);
         postPanel.onClicked_exit();
         proposalPanel.onClicked_exit();
+        votePanel.onClicked_exit();
     }
 }

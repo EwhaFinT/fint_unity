@@ -23,8 +23,9 @@ public class VoteScript : MonoBehaviour
     public TextMeshProUGUI NoPercent;
     public Button YesBtn;
     public Button NoBtn;
-    public bool temp;
+    //public bool temp;
     public double klay;
+    public string vtId;
 
     void Start()
     {
@@ -44,7 +45,7 @@ public class VoteScript : MonoBehaviour
     {
         vote.SetActive(true);
     }
-    void onClicked_exit()
+    public void onClicked_exit()
     {
         var boardPanel = UIManager.Instance.popupBoard.GetComponent<BoardScript>();
 
@@ -53,21 +54,21 @@ public class VoteScript : MonoBehaviour
     }
     void onClicked_Yes()
     {
-        temp = true;
-        StartCoroutine(VotePost());
+        //temp = true;
+        StartCoroutine(VotePost(true));
     }
     void onClicked_No()
     {
-        temp = false;
-        StartCoroutine(VotePost());
+        //temp = false;
+        StartCoroutine(VotePost(false));
     }
     IEnumerator LoadVote()
     {
-        ObjectId voteid = new ObjectId("6231edd26f3140647415ebcf");
-        //ObjectId CommunityId = new ObjectId("6231d5883dfcf54107e14310");
+        //ObjectId voteid = new ObjectId("6231edd26f3140647415ebcf");
+        ObjectId CommunityId = new ObjectId("627f5ca702867d106384ef8f");
         ObjectId UserId = new ObjectId("62689f6564ebad668621db42");
 
-        string url = Manager.Instance.url + "v1/check?voteId=" + voteid + "&userId=" + UserId;
+        string url = Manager.Instance.url + "v1/check?communityId=" + CommunityId + "&userId=" + UserId;
 
         Debug.Log(url);
 
@@ -78,6 +79,8 @@ public class VoteScript : MonoBehaviour
         var response = JsonUtility.FromJson<VoteCheckResponse>(jsonString);
 
         Debug.Log("vote check responese: " + jsonString);
+        vtId = response.voteId.ToString();
+
         proposer.text = "제안자: "+ response.identity.ToString();
         price.text = "제안가격: " + response.resalePrice.ToString();
         content.text = response.title.ToString();
@@ -85,14 +88,16 @@ public class VoteScript : MonoBehaviour
         YesPercent.text = "YES\n" + response.agreement.ToString() + " %";
         NoPercent.text = "NO\n" + response.disagreement.ToString() + " %";
 
-        StakePersonal.text = response.ratio.ToString() + " %";
+        StakePersonal.text = (response.ratio * 100).ToString() + " %";
 
     }
-    IEnumerator VotePost()
+    IEnumerator VotePost(bool tf)
     {
-        string UserId = "62689f6564ebad668621db42";
-        string CommunityId = "6231f585aeee2e2cc44bfa90";
-        string VoteId = "6231edd26f3140647415ebcf";
+        //string UserId = "62689f6564ebad668621db42";
+        string UserId = Manager.Instance.ID;
+        string CommunityId = "627f5ca702867d106384ef8f";
+        //string CommunityId = CommunityManager.Instance.CommunityID;
+        //string VoteId = "6231edd26f3140647415ebcf";
 
         string url = Manager.Instance.url + "v1/vote";
 
@@ -100,8 +105,8 @@ public class VoteScript : MonoBehaviour
         {
             userId = UserId,
             communityId = CommunityId,
-            voteId = VoteId,
-            choice = temp,
+            voteId = vtId,
+            choice = tf,
             ratio = klay
         };
         string jsonBody = JsonUtility.ToJson(voteRequest);
@@ -117,8 +122,6 @@ public class VoteScript : MonoBehaviour
         yield return www.SendWebRequest();
 
         long status = www.responseCode;
-        Debug.Log("status: " + status);
-
 
         // string -> json
         string jsonString = www.downloadHandler.text;
@@ -126,6 +129,9 @@ public class VoteScript : MonoBehaviour
         //var PostPopup = UIManager.Instance.popUpPostAnnouncement.GetComponent<PostPopupScript>();
         //PostPopup.MakePopupWarn(status);
         Debug.Log("vote post status: " + status);
+
+        var PostPopup = UIManager.Instance.popUpPostAnnouncement.GetComponent<PostPopupScript>();
+        PostPopup.MakePopupWarn(status);
 
         www.disposeUploadHandlerOnDispose = true;
         www.disposeDownloadHandlerOnDispose = true;
