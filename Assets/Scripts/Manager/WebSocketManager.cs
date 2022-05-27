@@ -20,7 +20,7 @@ public class WebSocketManager : MonoBehaviour
     public void Start()
     {
         playerId = Manager.Instance.ID;
-        webSocket = new WebSocket("wss://fintribesocket.herokuapp.com");
+        webSocket = new WebSocket("wss://fintribenode.herokuapp.com");
         webSocket.SslConfiguration.EnabledSslProtocols = System.Security.Authentication.SslProtocols.Tls12;
         webSocket.Connect();
         playerData = new PositionData(player.transform.position, playerCharacter, playerId, playerCommunity, PositionData.Command.Create);
@@ -82,8 +82,6 @@ public class WebSocketManager : MonoBehaviour
             {
                 playerData.communityId = CommunityManager.Instance.CommunityID;
             }
-
-            playerData.communityId = "tmp";
 
             string positionTmp = JsonUtility.ToJson(playerData);
             webSocket.Send(positionTmp);
