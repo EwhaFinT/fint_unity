@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -35,7 +35,7 @@ public class NewAuction : MonoBehaviour
 
     IEnumerator SendNewInfo()
     {
-        string url = "https://fintribe.herokuapp.com/v1/price";
+        string url = Manager.Instance.url + "v1/price";
         NewPriceRequest newPriceRequest = new NewPriceRequest
         {
             userId = Manager.Instance.ID,
@@ -58,14 +58,14 @@ public class NewAuction : MonoBehaviour
 
         if (response.priceId == "0")
         {
-            // °æ¸Å Âü¿© ½ÇÆĞ : ÇöÀç »óÇÑ°¡º¸´Ù ÀûÀº ±İ¾× ÀÔ·ÂÇÑ °æ¿ì
+            // ç‰ˆæ¦‚ æ›¼å’¯ è§’è© : æ³…çŠ æƒ‘èŒ„å•Šç„Šä¿ƒ åˆ©ç¯® é™›å’€ æ¶ä»¿èŒ„ ç‰ˆå¿«
         }
         else
         {
-            // °æ¸Å Âü¿© ¼º°ø
+            // ç‰ˆæ¦‚ æ›¼å’¯ å·±å‚
         }
 
-        // api Åë½Å ºÎºĞ ³¡
+        // api çƒ¹è„š ä½•ç›’ åœº
         //auction panel refresh
         var auctionPanel = UIManager.Instance.popupAuction.GetComponent<AuctionPanel>();
         auctionPanel.panelStart(_artId);
@@ -82,7 +82,7 @@ public class NewAuction : MonoBehaviour
         double.TryParse(_data, out double shareprice);
         _ratio = shareprice;
         double tmp = sumprice * shareprice * 0.01;
-        pricetopay.text = "¿¹»ó ÁöºÒ ±İ¾× : " + tmp + " KLAY";
+        pricetopay.text = "æŠ—æƒ‘ ç˜¤é˜‚ é™›å’€ : " + tmp + " KLAY";
     }
 
 }

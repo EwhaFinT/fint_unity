@@ -13,6 +13,7 @@ public class Manager : Singleton<Manager>
     public GameObject UI;
     private PlayerController player;
     public string ID;
+    public string url;
     //    public GameObject TeleportPanel, Canvas_Art, Canvas_Auction;
     // Start is called before the first frame update
 
@@ -28,14 +29,15 @@ public class Manager : Singleton<Manager>
         var myroom = Instantiate(myroomPrefab);
         community.transform.position = new Vector3(0, 10, 0);
         myroom.transform.position = new Vector3(0, 25, 0);
-        GetUserID();
+        GetNetwork();
     }
 
     // Update is called once per frame
 
-    public void GetUserID()
+    public void GetNetwork()
     {
-        ID = "627f912f04cd2370d57be29e"; //tmp ID
+        ID = "62689f6564ebad668621db42"; //tmp ID
+        url = "https://fintribeserver.herokuapp.com/";
     }
 
     void Update()

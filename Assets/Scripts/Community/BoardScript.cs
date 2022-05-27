@@ -27,6 +27,7 @@ public class BoardScript : MonoBehaviour
     public TextMeshProUGUI ReplyContent;
     public TMP_InputField CommentInput;
     public Button CommentRegister;
+    public GameObject commentprev, commentcontent, articlepf;
 
     public string articleId;
 
@@ -67,7 +68,7 @@ public class BoardScript : MonoBehaviour
     {
         ObjectId id = new ObjectId("6231f585aeee2e2cc44bfa90");
 
-        string url = "https://fintribe.herokuapp.com/v1/articles?communityId=" + id;
+        string url = Manager.Instance.url + "v1/articles?communityId=" + id;
 
         Debug.Log("LoadArticleList: " + url);
 
@@ -79,6 +80,9 @@ public class BoardScript : MonoBehaviour
         //Debug.Log("board response: " + jsonString);
         //Debug.Log("response test: " + response.articles);
         articleInit(response);
+        Debug.Log("------------load article list change id-----------");
+        changeArticleId(response.articles[0].articleId);
+        Debug.Log("first article id: " + response.articles[0].articleId);
     }
 
     void articleInit(ArticlesResponse response)
@@ -138,7 +142,6 @@ public class BoardScript : MonoBehaviour
     void onClicked_comment()
     {
         StartCoroutine(PostComment());
-        //CommentInput.text = "??? ?????.";
     }
 
     IEnumerator LoadArticle()
@@ -148,7 +151,7 @@ public class BoardScript : MonoBehaviour
         //ObjectId id = new ObjectId(articleId);
         //articleId = "6231f66a15ffd20d91c1b10e";
 
-        string url = "https://fintribe.herokuapp.com/v1/article?articleId=" + articleId;
+        string url = Manager.Instance.url + "v1/article?articleId=" + articleId;
 
         Debug.Log("url: "+url);
 
@@ -164,23 +167,51 @@ public class BoardScript : MonoBehaviour
         //DateTime timeFromJson = JsonUtility.FromJson<JsonDateTime>(response.article.createdAt);
 
         ArticleTitle.text = response.article.title.ToString();
-        ArticleTimestamp.text = "작성시간| " + response.article.createdAt;
+        ArticleTimestamp.text = "작성시간| " + response.article.createdAt + "\n작성자| " + response.article.identity;
         //ArticleTimestamp.text = "????| " + response.article.createdAt.ToString("yyyy/MM/dd HH:mm") + "\n" + "???| " + response.article.identity.ToString();
         ArticleContent.text = response.article.content.ToString();
 
         Debug.Log("comment response: " + response.comments);
+        commentInit(response);
     }
+
+    void commentInit(LoadBoardResponse response)
+    {
+        if (commentcontent.transform.childCount > 2)
+        {
+            for (int i = 2; i < content.transform.childCount; i++)
+            {
+                Destroy(commentcontent.transform.GetChild(i).gameObject);
+            }
+            Debug.Log("Destory clone all");
+        }
+
+        //GameObject artic = Instantiate(articlepf);
+        //artic.transform.SetParent(commentcontent.transform, false);
+        //var oneArticle = artic.GetComponent<articlepf>();
+        //oneArticle.GetArticleInfo(response.article.title, response.article.createdAt, response.article.identity, response.article.content);
+
+        for (int i = 0; i < response.comments.Count; i++)
+        {
+            GameObject prev = Instantiate(commentprev);
+            prev.transform.SetParent(commentcontent.transform, false);
+
+            var comment = prev.GetComponent<commentpr>();
+            comment.GetReplyInfo(response.comments[i].identity, response.comments[i].createdAt, response.comments[i].content);
+        }
+    }
+
     IEnumerator PostComment()
     {
         string UserId = "6250073f634945502a92cbbe";
-        string ArticleId = "6231d5883dfcf54107e14364";
+        //string ArticleId = "6231d5883dfcf54107e14364";
 
-        string url = "https://fintribe.herokuapp.com/v1/comment";
+        string url = Manager.Instance.url + "v1/comment";
 
         CommentRequest commentRequest = new CommentRequest
         {
             userId = UserId,
-            articleId = ArticleId,
+            articleId = articleId,
             tagUser = null,
             content = CommentInput.text,
             tagCommentId = -1

@@ -13,25 +13,49 @@ public class InventoryScript : MonoBehaviour
 
     public GameObject[] frame;
     public Texture art;
+    int artNum;     //count of my paint
 
     // Start is called before the first frame update
     void Start()
     {
-        int artNum = 1; //보유한 그림 개수 (나중에 서버에서 받아올 것)
         slots = slotHolder.GetComponentsInChildren<Slot>();
+        //Button inventoryButton = UIManager.Instance.inventoryButton;
+        //inventoryButton.onClick.AddListener(OnInventory);
         //slotCnt = imageFileInfo.Length;   // 슬롯 개수 초기화
         //inven.onSlotCountChange += SlotChange;
-        SlotChange(artNum);         //보유한 그림 개수만큼 제외하고 슬롯 비활성화
-        StartCoroutine(DownloadImage(slots[0], "https://i.ibb.co/hyX44r9/flower.jpg"));
+        //StartCoroutine(DownloadImage(slots[0], "https://i.ibb.co/hyX44r9/flower.jpg"));
         //for (int i = 0; i < artNum; i++)
-        //{
         //    StartCoroutine(DownloadImage(slots[0], "https://i.ibb.co/hyX44r9/flower.jpg"));
-        //}
-
-
+        
         btn_close.onClick.AddListener(Onclicked_close);
 
     }
+
+    IEnumerator GetPaint()
+    {
+        //start api
+        string url = Manager.Instance.url + "v1/mypage?userId=" + Manager.Instance.ID;
+        UnityWebRequest www = UnityWebRequest.Get(url);
+        yield return www.SendWebRequest();
+
+        string jsonString = www.downloadHandler.text;
+        var response = JsonUtility.FromJson<PaintResponse>(jsonString);
+        Debug.Log(response);
+        // api end
+        artNum = response.paint.Count;
+        SlotChange(artNum);         //slot disabled without artNum;
+
+        for (int i = 0; i < response.paint.Count; i++)
+            StartCoroutine(DownloadImage(slots[i], response.paint[i]));
+
+    }
+
+    public void OnInventory()
+    {
+        gameObject.SetActive(!gameObject.activeSelf);
+        StartCoroutine(GetPaint());
+    }
+
     IEnumerator DownloadImage(Slot slot, string MediaUrl)          //서버에서 그림 받아와서 art에 넣기
     {
         UnityWebRequest request = UnityWebRequestTexture.GetTexture(MediaUrl);
@@ -57,7 +81,6 @@ public class InventoryScript : MonoBehaviour
                 Color colorwhite = new Color(255, 255, 255, 255);
                 slots[i].transform.GetChild(0).GetComponent<RawImage>().color = colorwhite;
                 slots[i].GetComponent<Button>().interactable = true;
- //               slots[i].GetComponent<Button>().onClick.AddListener(OnClick_Slot);
             }
             else
             {
@@ -71,4 +94,15 @@ public class InventoryScript : MonoBehaviour
         inventoryCanvas.SetActive(false);
     }
 
+}
+
+[System.Serializable]
+
+class PaintListResponse
+{
+    public string paintUrl;
+}
+class PaintResponse
+{
+    public List<string> paint;
 }

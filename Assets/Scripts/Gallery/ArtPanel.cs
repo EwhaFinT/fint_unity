@@ -66,7 +66,7 @@ public class ArtPanel : MonoBehaviour
     IEnumerator LoadArtInfo()     // ???????? ???? ???? ????????
     {
         //string url = "http://localhost:8080/v1/art-info?artId=" + artId;
-        string url = "https://fintribe.herokuapp.com/v1/art-info?artId=" + artId;
+        string url = Manager.Instance.url + "v1/art-info?artId=" + artId;
 
         UnityWebRequest www = UnityWebRequest.Get(url);
         yield return www.SendWebRequest();

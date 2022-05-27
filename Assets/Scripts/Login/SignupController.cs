@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -67,13 +67,13 @@ public class SignupController : MonoBehaviour
         if (identity.text.Length < 1)
         {
             var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
-            popupWarn.MakePopupWarn("¾ÆÀÌµğ¸¦ ÀÔ·ÂÇÏ¼¼¿ä.");
+            popupWarn.MakePopupWarn("é…’æå¼ç”« æ¶ä»¿çªæŠ€å¤¸.");
             return false;
         }
         if(!dupCheck)
         {
             var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
-            popupWarn.MakePopupWarn("¾ÆÀÌµğ Áßº¹ È®ÀÎÀ»\nÁøÇàÇØÁÖ¼¼¿ä.");
+            popupWarn.MakePopupWarn("é…’æå¼ åæ±— çŠ¬ç‰¢é˜‘\næŸ³é’ç§¦æ—æŠ€å¤¸.");
             return false;
         }
         return true;
@@ -85,7 +85,7 @@ public class SignupController : MonoBehaviour
         if (val.Length < 1)
         {
             var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
-            popupWarn.MakePopupWarn("ºñ¹Ğ¹øÈ£¸¦ ÀÔ·ÂÇÏ¼¼¿ä.");
+            popupWarn.MakePopupWarn("åšå‰é”…é¾‹ç”« æ¶ä»¿çªæŠ€å¤¸.");
             return false;
         }
         Regex eng = new Regex(@"[a-zA-Z]");
@@ -93,7 +93,7 @@ public class SignupController : MonoBehaviour
         if (val.Length < 8 || !eng.IsMatch(val) || !num.IsMatch(val))
         {
             var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
-            popupWarn.MakePopupWarn("¿µ¹®, ¼ıÀÚ¸¦ ÇÏ³ª ÀÌ»ó Æ÷ÇÔÇÑ\n8ÀÚ¸® ºñ¹Ğ¹øÈ£¸¦ ÀÔ·ÂÇÏ¼¼¿ä.");
+            popupWarn.MakePopupWarn("åº·å·©, ç®­ç£Šç”« çªå”± ææƒ‘ å™¨çªƒèŒ„\n8ç£Šåºœ åšå‰é”…é¾‹ç”« æ¶ä»¿çªæŠ€å¤¸.");
             return false;
         }
         return true;
@@ -104,7 +104,7 @@ public class SignupController : MonoBehaviour
         if (password.text != passwordConfirm.text)
         {
             var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
-            popupWarn.MakePopupWarn("ºñ¹Ğ¹øÈ£°¡ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.");
+            popupWarn.MakePopupWarn("åšå‰é”…é¾‹å•Š è€æ‘¹çªç˜¤ è‡¼åš¼èªä¿ƒ.");
             return false;
         }
         return true;
@@ -116,14 +116,14 @@ public class SignupController : MonoBehaviour
         if (val.Length < 1)
         {
             var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
-            popupWarn.MakePopupWarn("ÀÌ¸§À» ÀÔ·ÂÇÏ¼¼¿ä.");
+            popupWarn.MakePopupWarn("ææŠšé˜‘ æ¶ä»¿çªæŠ€å¤¸.");
             return false;
         }
-        Regex kor = new Regex(@"^[°¡-ÆR]+$");
+        Regex kor = new Regex(@"^[å•Š-èŠŒ]+$");
         if (val.Length < 2 || val.Length > 5 || !kor.IsMatch(val))
         {
             var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
-            popupWarn.MakePopupWarn("2±ÛÀÚ ÀÌ»ó 5±ÛÀÚ ÀÌÇÏ\nÇÑ±Û¸¸ ÀÔ·Â °¡´ÉÇÕ´Ï´Ù.");
+            popupWarn.MakePopupWarn("2è‡‚ç£Š ææƒ‘ 5è‡‚ç£Š æçª\nèŒ„è‡‚çˆ¶ æ¶ä»¿ å•Šç“·é’¦èªä¿ƒ.");
             return false;
         }
         return true;
@@ -135,14 +135,14 @@ public class SignupController : MonoBehaviour
         if (val.Length < 1)
         {
             var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
-            popupWarn.MakePopupWarn("ÀüÈ­¹øÈ£¸¦ ÀÔ·ÂÇÏ¼¼¿ä.");
+            popupWarn.MakePopupWarn("å‚ˆæ‹³é”…é¾‹ç”« æ¶ä»¿çªæŠ€å¤¸.");
             return false;
         }
         Regex num = new Regex(@"^01[016789][^0][0-9]{2,3}[0-9]{3,4}$");
         if(!num.IsMatch(val))
         {
             var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
-            popupWarn.MakePopupWarn("¿Ã¹Ù¸£Áö ¾ÊÀº\nÀüÈ­¹øÈ£ ÀÔ´Ï´Ù.");
+            popupWarn.MakePopupWarn("æ£µå®˜ç¦ç˜¤ è‡¼ç¯®\nå‚ˆæ‹³é”…é¾‹ æ¶èªä¿ƒ.");
             return false;
         }
         return true;
@@ -153,14 +153,14 @@ public class SignupController : MonoBehaviour
         if (val.Length < 1)
         {
             var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
-            popupWarn.MakePopupWarn("ÀÌ¸ŞÀÏÀ» ÀÔ·ÂÇÏ¼¼¿ä.");
+            popupWarn.MakePopupWarn("æçš‹è€é˜‘ æ¶ä»¿çªæŠ€å¤¸.");
             return false;
         }
         Regex mail = new Regex(@"[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}");
         if(!mail.IsMatch(val))
         {
             var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
-            popupWarn.MakePopupWarn("¿Ã¹Ù¸£Áö ¾ÊÀº\nÀÌ¸ŞÀÏ ÁÖ¼Ò ÀÔ´Ï´Ù..");
+            popupWarn.MakePopupWarn("æ£µå®˜ç¦ç˜¤ è‡¼ç¯®\næçš‹è€ æ—å®¶ æ¶èªä¿ƒ..");
             return false;
         }
         return true;
@@ -173,9 +173,9 @@ public class SignupController : MonoBehaviour
         signup.SetActive(false);
     }
 
-    IEnumerator IdCheck() // ¾ÆÀÌµğ Áßº¹ °Ë»ç ¿äÃ»
+    IEnumerator IdCheck() // é…’æå¼ åæ±— å…«è¤ å¤¸æ²¡
     {
-        string url = "https://fintribe.herokuapp.com/v1/check-id?identity=" + identity.text;
+        string url = Manager.Instance.url + "v1/check-id?identity=" + identity.text;
 
         UnityWebRequest www = UnityWebRequest.Get(url);
         yield return www.SendWebRequest();
@@ -184,22 +184,22 @@ public class SignupController : MonoBehaviour
         string jsonString = www.downloadHandler.text;
         var response = JsonUtility.FromJson<IdCheckResponse>(jsonString);
 
-        if (response.idCheckSuccess == 0)    // ¾ÆÀÌµğ Áßº¹
+        if (response.idCheckSuccess == 0)    // é…’æå¼ åæ±—
         {
             var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
-            popupWarn.MakePopupWarn("Áßº¹µÈ ¾ÆÀÌµğ°¡ Á¸ÀçÇÕ´Ï´Ù.");
+            popupWarn.MakePopupWarn("åæ±—ç­‰ é…’æå¼å•Š ç²®çŠé’¦èªä¿ƒ.");
         }
-        else                                // »ç¿ëÇÒ ¼ö ÀÖ´Â ¾ÆÀÌµğ
+        else                                // è¤ä¾©ä¸” è ä¹ç»° é…’æå¼
         {
             var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
-            popupWarn.MakePopupWarn("»ç¿ë °¡´ÉÇÑ ¾ÆÀÌµğÀÔ´Ï´Ù.");
+            popupWarn.MakePopupWarn("è¤ä¾© å•Šç“·èŒ„ é…’æå¼æ¶èªä¿ƒ.");
             dupCheck = true;
         }
     }
 
-    IEnumerator Signup() // ¾ÆÀÌµğ Áßº¹ °Ë»ç ¿äÃ»
+    IEnumerator Signup() // é…’æå¼ åæ±— å…«è¤ å¤¸æ²¡
     {
-        string url = "https://fintribe.herokuapp.com/v1/signup";
+        string url = Manager.Instance.url + "v1/signup";
 
         SignupRequest signupRequest = new SignupRequest
         {
@@ -222,13 +222,13 @@ public class SignupController : MonoBehaviour
         string jsonString = www.downloadHandler.text;
         var response = JsonUtility.FromJson<SignupResponse>(jsonString);
 
-        if (response.signupSuccess == 0)    // È¸¿ø°¡ÀÔ ½ÇÆĞ
+        if (response.signupSuccess == 0)    // é›€ç›”å•Šæ¶ è§’è©
         {
             var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
-            popupWarn.MakePopupWarn("Áßº¹µÈ ¾ÆÀÌµğ°¡ Á¸ÀçÇÕ´Ï´Ù.");
+            popupWarn.MakePopupWarn("åæ±—ç­‰ é…’æå¼å•Š ç²®çŠé’¦èªä¿ƒ.");
             dupCheck = false;
         }
-        else                                // È¸¿ø°¡ÀÔ ¼º°ø
+        else                                // é›€ç›”å•Šæ¶ å·±å‚
         {
             OffSignup();
             UIManager.Instance.OnLogin();

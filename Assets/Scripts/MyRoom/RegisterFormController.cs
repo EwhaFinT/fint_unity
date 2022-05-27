@@ -151,7 +151,7 @@ public class RegisterFormController : MonoBehaviour
     IEnumerator SendReguisterInfo()
     {
         
-        string url = "https://fintribe.herokuapp.com/v1/upload";
+        string url = Manager.Instance.url + "v1/upload";
 
         
         //DateTime tmp = new DateTime(2022, 05, 23);

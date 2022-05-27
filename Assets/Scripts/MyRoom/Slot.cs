@@ -28,6 +28,7 @@ public class Slot : MonoBehaviour
         //}
         frame = GameObject.Find("MyRoom_Frame1");
         art = img.texture;
+        //art = gameObject.GetComponent<RawImage>().texture;
         
         Material[] mt = frame.GetComponent<Renderer>().materials;
         mt[1].SetTexture("_MainTex", art);

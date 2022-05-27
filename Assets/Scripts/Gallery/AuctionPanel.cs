@@ -31,9 +31,9 @@ public class AuctionPanel : MonoBehaviour
 
     IEnumerator LoadAuctionList()
     {
-        // api 통신 부분 시작
+        // api ???? ???? ????
 
-        string url = "https://fintribe.herokuapp.com/v1/pricelist?artId=" + artId;
+        string url = Manager.Instance.url + "v1/pricelist?artId=" + artId;
 
         UnityWebRequest www = UnityWebRequest.Get(url);
         yield return www.SendWebRequest();
@@ -41,7 +41,7 @@ public class AuctionPanel : MonoBehaviour
         string jsonString = www.downloadHandler.text;
         var response = JsonUtility.FromJson<PricelistResponse>(jsonString);
         Debug.Log("esponse.pricelist : " + response.pricelist);
-        // api 통신 부분 끝
+        // api ???? ???? ??
         ShowAuctionInfo(response);
         AuctionListInit(response);
     }
@@ -111,23 +111,23 @@ public class AuctionPanel : MonoBehaviour
 
 }
 
-// response class (외부 클래스)
+// response class (???? ??????)
 
 [System.Serializable]
 class PriceResponse
 {
     public string priceId;
     public string auctionId;
-    public double auctionPrice;     //제안 내 총 가격
-    public double remainderRatio;   //제안 내 남은 지분
+    public double auctionPrice;     //???? ?? ?? ????
+    public double remainderRatio;   //???? ?? ???? ????
 }
 
 class PricelistResponse
 {
-    public double price; // 현재 상한가
-    public List<PriceResponse> pricelist; // 기존 제안 리스트
+    public double price; // ???? ??????
+    public List<PriceResponse> pricelist; // ???? ???? ??????
 
 }
 
-// TO FRONT : 메인홀에서 전체 작품 조회할 때 저장하고 있던 artId 사용합니다
-// TO FRONT : auctionPrice * (1-remainderRatio)로 경매가 현황 계산해주세요! 그리고 priceId도 꼭 저장해놓기
+// TO FRONT : ?????????? ???? ???? ?????? ?? ???????? ???? artId ??????????
+// TO FRONT : auctionPrice * (1-remainderRatio)?? ?????? ???? ????????????! ?????? priceId?? ?? ??????????

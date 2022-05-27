@@ -75,7 +75,8 @@ public class UIManager : MonoBehaviour
 
     public void OnInventory()
     {
-        popupInventory.SetActive(!popupInventory.activeSelf);
+        popupInventory.GetComponent<InventoryScript>().OnInventory();
+        //popupInventory.SetActive(!popupInventory.activeSelf);
     }
     public void OnRegister()
     {

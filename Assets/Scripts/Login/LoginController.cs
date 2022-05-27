@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -71,9 +71,9 @@ public class LoginController : MonoBehaviour
         popupWarn.OffWarn();
     }
 
-    IEnumerator Login() // ·Î±×ÀÎ ¿äÃ»
+    IEnumerator Login() // è‚ºå¼Šç‰¢ å¤¸æ²¡
     {
-        string url = "https://fintribe.herokuapp.com/v1/login?identity=" + identity.text + "&password=" + password.text;
+        string url = Manager.Instance.url + "v1/login?identity=" + identity.text + "&password=" + password.text;
 
         UnityWebRequest www = UnityWebRequest.Get(url);
         yield return www.SendWebRequest();
@@ -82,7 +82,7 @@ public class LoginController : MonoBehaviour
         string jsonString = www.downloadHandler.text;
         var response = JsonUtility.FromJson<LoginResponse>(jsonString);
         
-        if (response.userId == "")    // ·Î±×ÀÎ ½ÇÆĞ
+        if (response.userId == "")    // è‚ºå¼Šç‰¢ è§’è©
         {
             var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
             popupWarn.MakePopupWarn(response.message);
@@ -92,7 +92,7 @@ public class LoginController : MonoBehaviour
             var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
             popupWarn.OffWarn();
             OffLogin();
-            // TODO : userId ÀúÀå ÈÄ ¸ŞÀÎ ÆäÀÌÁö·Î ·£´õ¸µ
+            // TODO : userId å†å˜ é¥¶ çš‹ç‰¢ å…¶æç˜¤è‚º ç½šæ­¹å‚…
             Manager.Instance.ID = response.userId;
             Debug.Log(Manager.Instance.ID);
             websocket.SetActive(true);
