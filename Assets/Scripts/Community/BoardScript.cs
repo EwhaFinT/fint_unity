@@ -66,7 +66,8 @@ public class BoardScript : MonoBehaviour
 
     IEnumerator LoadArticleList()
     {
-        ObjectId id = new ObjectId("6231f585aeee2e2cc44bfa90");
+        ObjectId id = new ObjectId("627f5ca702867d106384ef8f");
+        //string CommunityId = CommunityManager.Instance.CommunityID;
 
         string url = Manager.Instance.url + "v1/articles?communityId=" + id;
 
@@ -142,6 +143,7 @@ public class BoardScript : MonoBehaviour
     void onClicked_comment()
     {
         StartCoroutine(PostComment());
+        StartCoroutine(LoadArticle());
     }
 
     IEnumerator LoadArticle()
@@ -166,10 +168,10 @@ public class BoardScript : MonoBehaviour
 
         //DateTime timeFromJson = JsonUtility.FromJson<JsonDateTime>(response.article.createdAt);
 
-        ArticleTitle.text = response.article.title.ToString();
-        ArticleTimestamp.text = "작성시간| " + response.article.createdAt + "\n작성자| " + response.article.identity;
-        //ArticleTimestamp.text = "????| " + response.article.createdAt.ToString("yyyy/MM/dd HH:mm") + "\n" + "???| " + response.article.identity.ToString();
-        ArticleContent.text = response.article.content.ToString();
+        //ArticleTitle.text = response.article.title.ToString();
+        //ArticleTimestamp.text = "작성시간| " + response.article.createdAt + "\n작성자| " + response.article.identity;
+        ////ArticleTimestamp.text = "????| " + response.article.createdAt.ToString("yyyy/MM/dd HH:mm") + "\n" + "???| " + response.article.identity.ToString();
+        //ArticleContent.text = response.article.content.ToString();
 
         Debug.Log("comment response: " + response.comments);
         commentInit(response);
@@ -177,6 +179,7 @@ public class BoardScript : MonoBehaviour
 
     void commentInit(LoadBoardResponse response)
     {
+        Debug.Log("childeCount: " + commentcontent.transform.childCount);
         if (commentcontent.transform.childCount > 2)
         {
             for (int i = 2; i < content.transform.childCount; i++)
@@ -186,16 +189,17 @@ public class BoardScript : MonoBehaviour
             Debug.Log("Destory clone all");
         }
 
-        //GameObject artic = Instantiate(articlepf);
-        //artic.transform.SetParent(commentcontent.transform, false);
-        //var oneArticle = artic.GetComponent<articlepf>();
-        //oneArticle.GetArticleInfo(response.article.title, response.article.createdAt, response.article.identity, response.article.content);
+        GameObject artic = Instantiate(articlepf, commentcontent.transform);
+        Debug.Log("help : article");
+
+        var oneArticle = artic.GetComponent<articlepf>();
+        oneArticle.GetArticleInfo(response.article.title, response.article.createdAt, response.article.identity, response.article.content);
 
         for (int i = 0; i < response.comments.Count; i++)
         {
             GameObject prev = Instantiate(commentprev);
             prev.transform.SetParent(commentcontent.transform, false);
-
+            Debug.Log("help : comment");
             var comment = prev.GetComponent<commentpr>();
             comment.GetReplyInfo(response.comments[i].identity, response.comments[i].createdAt, response.comments[i].content);
         }
@@ -203,7 +207,7 @@ public class BoardScript : MonoBehaviour
 
     IEnumerator PostComment()
     {
-        string UserId = "6250073f634945502a92cbbe";
+        string UserId = Manager.Instance.ID;
         //string ArticleId = "6231d5883dfcf54107e14364";
 
         string url = Manager.Instance.url + "v1/comment";

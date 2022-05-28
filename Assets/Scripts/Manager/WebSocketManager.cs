@@ -13,7 +13,6 @@ public class WebSocketManager : MonoBehaviour
     public List<GameObject> playerPrefab;
     private Dictionary<string, GameObject> remoteplayer = new Dictionary<string, GameObject>();
     private string playerId;
-    private int playerCharacter = 1;
     private string playerCommunity = "tmp";
     private PositionData playerData;
 
@@ -23,7 +22,7 @@ public class WebSocketManager : MonoBehaviour
         webSocket = new WebSocket("wss://fintribenode.herokuapp.com");
         webSocket.SslConfiguration.EnabledSslProtocols = System.Security.Authentication.SslProtocols.Tls12;
         webSocket.Connect();
-        playerData = new PositionData(player.transform.position, playerCharacter, playerId, playerCommunity, PositionData.Command.Create);
+        playerData = new PositionData(player.transform.position, playerId, playerCommunity, PositionData.Command.Create);
         webSocket.Send(JsonUtility.ToJson(playerData));
 
         webSocket.OnMessage += (sender, e) =>
@@ -32,10 +31,10 @@ public class WebSocketManager : MonoBehaviour
             switch (playerData.command)
             {
                 case PositionData.Command.Create:
-                    _actions.Enqueue(() => CreateRemotePlayer(playerData.userId, playerData.character, playerData.position, playerData.communityId));
+                    _actions.Enqueue(() => CreateRemotePlayer(playerData.userId, playerData.position, playerData.communityId));
                     break;
                 case PositionData.Command.Update:
-                    _actions.Enqueue(() => MoveRemotePlayer(playerData.userId, playerData.position, playerData.communityId, playerData.character));
+                    _actions.Enqueue(() => MoveRemotePlayer(playerData.userId, playerData.position, playerData.communityId));
                     break;
                 case PositionData.Command.Delete:
                     DeleteRemotePlayer(playerData.userId);
@@ -89,11 +88,12 @@ public class WebSocketManager : MonoBehaviour
         }
     }
 
-    private void CreateRemotePlayer(string userId, int character, Vector3 position, string communityId)
+    private void CreateRemotePlayer(string userId, Vector3 position, string communityId)
     {
+        int tmp = remoteplayer.Count;
         if (!userId.Equals(playerId) && !remoteplayer.ContainsKey(userId))
         {
-            remoteplayer.Add(userId, Instantiate(playerPrefab[character], position, Quaternion.identity));
+            remoteplayer.Add(userId, Instantiate(playerPrefab[tmp % 5], position, Quaternion.identity));
             if ((position.y >= 13 && !playerCommunity.Equals(communityId)) || (position.y >= 26))
             {
                 Debug.Log("false activate");
@@ -107,17 +107,18 @@ public class WebSocketManager : MonoBehaviour
         }
         else if (remoteplayer.ContainsKey(userId))
         {
-            MoveRemotePlayer(userId, position, communityId, character);
+            MoveRemotePlayer(userId, position, communityId);
         }
     }
 
-    private void MoveRemotePlayer(string userId, Vector3 position, string communityId, int character)
+    private void MoveRemotePlayer(string userId, Vector3 position, string communityId)
     {
+        int tmp = remoteplayer.Count;
         if (!userId.Equals(playerId))
         {
             if (!remoteplayer.ContainsKey(userId))
             {
-                GameObject remotePlayer = Instantiate(playerPrefab[character], position, Quaternion.identity);
+                GameObject remotePlayer = Instantiate(playerPrefab[tmp%5], position, Quaternion.identity);
                 Debug.Log(remotePlayer);
                 remoteplayer.Add(userId, remotePlayer);
             }
@@ -144,10 +145,9 @@ public class WebSocketManager : MonoBehaviour
 [Serializable]
 public class PositionData
 {
-    public PositionData(Vector3 position, int character, string userId, string communityId, Command command)
+    public PositionData(Vector3 position, string userId, string communityId, Command command)
     {
         this.position = position;
-        this.character = character;
         this.userId = userId;
         this.communityId = communityId;
         this.command = command;
@@ -160,7 +160,6 @@ public class PositionData
         Delete,
     }
     public Vector3 position;
-    public int character;
     public string userId;
     public string communityId;
     public Command command;
