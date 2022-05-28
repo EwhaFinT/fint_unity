@@ -26,6 +26,7 @@ public class VoteScript : MonoBehaviour
     //public bool temp;
     public double klay;
     public string vtId;
+    public RawImage NFT;
 
     void Start()
     {
@@ -65,8 +66,10 @@ public class VoteScript : MonoBehaviour
     IEnumerator LoadVote()
     {
         //ObjectId voteid = new ObjectId("6231edd26f3140647415ebcf");
-        ObjectId CommunityId = new ObjectId("627f5ca702867d106384ef8f");
-        ObjectId UserId = new ObjectId("62689f6564ebad668621db42");
+        //ObjectId CommunityId = new ObjectId("627f5ca702867d106384ef8f");
+        //ObjectId UserId = new ObjectId("62689f6564ebad668621db42");
+        string CommunityId = CommunityManager.Instance.CommunityID;
+        string UserId = Manager.Instance.ID;
 
         string url = Manager.Instance.url + "v1/check?communityId=" + CommunityId + "&userId=" + UserId;
 

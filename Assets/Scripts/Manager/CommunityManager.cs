@@ -5,6 +5,7 @@ using UnityEngine;
 public class CommunityManager : MonoBehaviour
 {
     public string CommunityID;
+    public Dictionary<string, string> nftaddress = new Dictionary<string, string>();
     // Start is called before the first frame update
 
     #region Singleton
