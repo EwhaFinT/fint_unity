@@ -837,6 +837,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b948f1c0fb7dbf249aa02eec19c70378, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CommunityID: 
+  frame: {fileID: 447687611146589737}
+  paint_url: 
+  art: {fileID: 0}
 --- !u!1 &6709773672751901709
 GameObject:
   m_ObjectHideFlags: 0

@@ -25,7 +25,7 @@ public class VoteScript : MonoBehaviour
     public Button NoBtn;
     //public bool temp;
     public double klay;
-    public string vtId;
+    public string vtId, paint_url;
     public RawImage NFT;
 
     void Start()
@@ -45,6 +45,9 @@ public class VoteScript : MonoBehaviour
     public void show()
     {
         vote.SetActive(true);
+        //get paint
+        GetPaint();
+        //StartCoroutine(DownloadImage(paint_url));
     }
     public void onClicked_exit()
     {
@@ -63,6 +66,27 @@ public class VoteScript : MonoBehaviour
         //temp = false;
         StartCoroutine(VotePost(false));
     }
+
+    public void GetPaint()
+    {
+        NFT.texture = CommunityManager.Instance.PostPaint();
+        Debug.Log("change vote paint");
+    }
+
+    //IEnumerator DownloadImage(string paint_url)          //서버에서 그림 받아와서 art에 넣기
+    //{
+    //    UnityWebRequest request = UnityWebRequestTexture.GetTexture(paint_url);
+    //    yield return request.SendWebRequest();
+    //    if (request.isNetworkError || request.isHttpError)
+    //        Debug.Log(request.error);
+    //    else
+    //    {
+    //        //인벤토리 슬롯을 해당 이미지로 변경
+    //        NFT.texture = ((DownloadHandlerTexture)request.downloadHandler).texture;
+    //        Debug.Log("change vote paint");
+    //    }
+    //}
+
     IEnumerator LoadVote()
     {
         //ObjectId voteid = new ObjectId("6231edd26f3140647415ebcf");

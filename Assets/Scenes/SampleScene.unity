@@ -1016,24 +1016,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3669003277607736294, guid: fa1234f5b7abd44f9bc13ec89628f591, type: 3}
   m_PrefabInstance: {fileID: 524980166}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &524980170
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 524980169}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ee54c0abc3994b5eb0999b650d60099, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  proposal: {fileID: 524980169}
-  exit: {fileID: 524980168}
-  Price: {fileID: 0}
-  Content: {fileID: 0}
-  Date: {fileID: 0}
-  submit: {fileID: 0}
 --- !u!114 &528265968 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5138663518689945963, guid: 9ad20a88539079d40832b86ab4a9e2e9, type: 3}
