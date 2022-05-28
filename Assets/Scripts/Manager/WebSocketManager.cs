@@ -10,6 +10,7 @@ public class WebSocketManager : MonoBehaviour
     private WebSocket webSocket = null;
     private Vector3 position;
     public GameObject player;
+    public GameObject mainCamera;
     public List<GameObject> playerPrefab;
     private Dictionary<string, GameObject> remoteplayer = new Dictionary<string, GameObject>();
     private string playerId;
@@ -19,10 +20,11 @@ public class WebSocketManager : MonoBehaviour
     public void Start()
     {
         playerId = Manager.Instance.ID;
+        Quaternion rot = Camera.main.transform.rotation;
         webSocket = new WebSocket("wss://fintribenode.herokuapp.com");
         webSocket.SslConfiguration.EnabledSslProtocols = System.Security.Authentication.SslProtocols.Tls12;
         webSocket.Connect();
-        playerData = new PositionData(player.transform.position, playerId, playerCommunity, PositionData.Command.Create);
+        playerData = new PositionData(player.transform.position, playerId, playerCommunity, PositionData.Command.Create, rot);
         webSocket.Send(JsonUtility.ToJson(playerData));
 
         webSocket.OnMessage += (sender, e) =>
@@ -31,10 +33,10 @@ public class WebSocketManager : MonoBehaviour
             switch (playerData.command)
             {
                 case PositionData.Command.Create:
-                    _actions.Enqueue(() => CreateRemotePlayer(playerData.userId, playerData.position, playerData.communityId));
+                    _actions.Enqueue(() => CreateRemotePlayer(playerData.userId, playerData.position, playerData.communityId, playerData.rotation));
                     break;
                 case PositionData.Command.Update:
-                    _actions.Enqueue(() => MoveRemotePlayer(playerData.userId, playerData.position, playerData.communityId));
+                    _actions.Enqueue(() => MoveRemotePlayer(playerData.userId, playerData.position, playerData.communityId, playerData.rotation));
                     break;
                 case PositionData.Command.Delete:
                     DeleteRemotePlayer(playerData.userId);
@@ -72,6 +74,7 @@ public class WebSocketManager : MonoBehaviour
             position = player.transform.position;
             playerData.position = position;
             playerData.command = PositionData.Command.Update;
+            playerData.rotation = Camera.main.transform.rotation;
             if(Manager.Instance.ID != null)
             {
                 playerData.userId = Manager.Instance.ID;
@@ -88,12 +91,12 @@ public class WebSocketManager : MonoBehaviour
         }
     }
 
-    private void CreateRemotePlayer(string userId, Vector3 position, string communityId)
+    private void CreateRemotePlayer(string userId, Vector3 position, string communityId, Quaternion rotation)
     {
         int tmp = remoteplayer.Count;
         if (!userId.Equals(playerId) && !remoteplayer.ContainsKey(userId))
         {
-            remoteplayer.Add(userId, Instantiate(playerPrefab[tmp % 5], position, Quaternion.identity));
+            remoteplayer.Add(userId, Instantiate(playerPrefab[tmp % 5], position, rotation));
             if ((position.y >= 13 && !playerCommunity.Equals(communityId)) || (position.y >= 26))
             {
                 Debug.Log("false activate");
@@ -107,22 +110,23 @@ public class WebSocketManager : MonoBehaviour
         }
         else if (remoteplayer.ContainsKey(userId))
         {
-            MoveRemotePlayer(userId, position, communityId);
+            MoveRemotePlayer(userId, position, communityId, rotation);
         }
     }
 
-    private void MoveRemotePlayer(string userId, Vector3 position, string communityId)
+    private void MoveRemotePlayer(string userId, Vector3 position, string communityId, Quaternion rotation)
     {
         int tmp = remoteplayer.Count;
         if (!userId.Equals(playerId))
         {
             if (!remoteplayer.ContainsKey(userId))
             {
-                GameObject remotePlayer = Instantiate(playerPrefab[tmp%5], position, Quaternion.identity);
+                GameObject remotePlayer = Instantiate(playerPrefab[tmp%5], position, rotation);
                 Debug.Log(remotePlayer);
                 remoteplayer.Add(userId, remotePlayer);
             }
             remoteplayer[userId].transform.position = position;
+            remoteplayer[userId].transform.rotation = rotation;
             Debug.Log("position updated");
             if ((position.y >= 13 && !playerCommunity.Equals(communityId)) || (position.y >= 26))
             {
@@ -145,12 +149,13 @@ public class WebSocketManager : MonoBehaviour
 [Serializable]
 public class PositionData
 {
-    public PositionData(Vector3 position, string userId, string communityId, Command command)
+    public PositionData(Vector3 position, string userId, string communityId, Command command, Quaternion rotation)
     {
         this.position = position;
         this.userId = userId;
         this.communityId = communityId;
         this.command = command;
+        this.rotation = rotation;
     }
 
     public enum Command
@@ -163,4 +168,5 @@ public class PositionData
     public string userId;
     public string communityId;
     public Command command;
+    public Quaternion rotation;
 }
