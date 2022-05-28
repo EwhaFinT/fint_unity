@@ -20,7 +20,7 @@ public class WebSocketManager : MonoBehaviour
     public void Start()
     {
         playerId = Manager.Instance.ID;
-        Quaternion rot = Camera.main.transform.rotation;
+        Quaternion rot = player.transform.rotation;
         webSocket = new WebSocket("wss://fintribenode.herokuapp.com");
         webSocket.SslConfiguration.EnabledSslProtocols = System.Security.Authentication.SslProtocols.Tls12;
         webSocket.Connect();
@@ -74,7 +74,7 @@ public class WebSocketManager : MonoBehaviour
             position = player.transform.position;
             playerData.position = position;
             playerData.command = PositionData.Command.Update;
-            playerData.rotation = Camera.main.transform.rotation;
+            playerData.rotation = player.transform.rotation;
             if(Manager.Instance.ID != null)
             {
                 playerData.userId = Manager.Instance.ID;
