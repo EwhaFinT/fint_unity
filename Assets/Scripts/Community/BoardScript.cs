@@ -19,7 +19,7 @@ public class BoardScript : MonoBehaviour
     public TextMeshProUGUI ArticleTitle;
     public TextMeshProUGUI ArticleTimestamp;
     public TextMeshProUGUI ArticleContent;
-    public GameObject articleprev, content;
+    public GameObject articleprev, listcontent;
 
     [Header("Comment")]
     public TextMeshProUGUI ReplyID;
@@ -66,13 +66,12 @@ public class BoardScript : MonoBehaviour
 
     IEnumerator LoadArticleList()
     {
-        ObjectId id = new ObjectId("627f5ca702867d106384ef8f");
-        //string CommunityId = CommunityManager.Instance.CommunityID;
+        //ObjectId id = new ObjectId("627f5ca702867d106384ef8f");
+        string CommunityId = CommunityManager.Instance.CommunityID;
 
-        string url = Manager.Instance.url + "v1/articles?communityId=" + id;
+        string url = Manager.Instance.url + "v1/articles?communityId=" + CommunityId;
 
         Debug.Log("LoadArticleList: " + url);
-
         UnityWebRequest www = UnityWebRequest.Get(url);
         yield return www.SendWebRequest();
 
@@ -81,25 +80,27 @@ public class BoardScript : MonoBehaviour
         //Debug.Log("board response: " + jsonString);
         //Debug.Log("response test: " + response.articles);
         articleInit(response);
-        Debug.Log("------------load article list change id-----------");
+        Debug.Log("------------load article list change id-----------" + response.articles);
         changeArticleId(response.articles[0].articleId);
         Debug.Log("first article id: " + response.articles[0].articleId);
     }
 
     void articleInit(ArticlesResponse response)
     {
-        if (content.transform.childCount > 1)
+        if (listcontent.transform.childCount > 1)
         {
-            for (int i = 1; i < content.transform.childCount; i++)
+            for (int i = 1; i < listcontent.transform.childCount; i++)
             {
-                Destroy(content.transform.GetChild(i).gameObject);
+                Destroy(listcontent.transform.GetChild(i).gameObject);
             }
             Debug.Log("Destory clone all");
         }
         for (int i = 0; i < response.articles.Count; i++)
         {
-            GameObject prev = Instantiate(articleprev);
-            prev.transform.SetParent(content.transform, false);
+            //GameObject prev = Instantiate(articleprev);
+            //prev.transform.SetParent(content.transform, false);
+
+            GameObject prev = Instantiate(articleprev, listcontent.transform);
 
             var articleBtn = prev.GetComponent<articlepr>();
             articleBtn.GetArticleInfo(response.articles[i].title, response.articles[i].createdAt, response.articles[i].articleId);
@@ -182,7 +183,7 @@ public class BoardScript : MonoBehaviour
         Debug.Log("childeCount: " + commentcontent.transform.childCount);
         if (commentcontent.transform.childCount > 2)
         {
-            for (int i = 2; i < content.transform.childCount; i++)
+            for (int i = 2; i < commentcontent.transform.childCount; i++)
             {
                 Destroy(commentcontent.transform.GetChild(i).gameObject);
             }
@@ -194,14 +195,16 @@ public class BoardScript : MonoBehaviour
 
         var oneArticle = artic.GetComponent<articlepf>();
         oneArticle.GetArticleInfo(response.article.title, response.article.createdAt, response.article.identity, response.article.content);
-
+        
         for (int i = 0; i < response.comments.Count; i++)
         {
-            GameObject prev = Instantiate(commentprev);
-            prev.transform.SetParent(commentcontent.transform, false);
+            //GameObject prev = Instantiate(commentprev);
+            //prev.transform.SetParent(commentcontent.transform, false);
+            GameObject prev = Instantiate(commentprev, commentcontent.transform);
             Debug.Log("help : comment");
             var comment = prev.GetComponent<commentpr>();
             comment.GetReplyInfo(response.comments[i].identity, response.comments[i].createdAt, response.comments[i].content);
+            prev.SetActive(true);
         }
     }
 

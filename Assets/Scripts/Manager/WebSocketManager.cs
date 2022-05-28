@@ -50,7 +50,6 @@ public class WebSocketManager : MonoBehaviour
 
     private double timeDelta = 0;
 
-
     public void Update()
     {
         // Work the dispatched actions on the Unity main thread
@@ -73,6 +72,7 @@ public class WebSocketManager : MonoBehaviour
             }
             position = player.transform.position;
             playerData.position = position;
+            playerData.position.y -= 1;
             playerData.command = PositionData.Command.Update;
             playerData.rotation = player.transform.rotation;
             if(Manager.Instance.ID != null)
@@ -97,7 +97,7 @@ public class WebSocketManager : MonoBehaviour
         if (!userId.Equals(playerId) && !remoteplayer.ContainsKey(userId))
         {
             remoteplayer.Add(userId, Instantiate(playerPrefab[tmp % 5], position, Quaternion.identity));
-            if ((position.y >= 13 && !playerCommunity.Equals(communityId)) || (position.y >= 26))
+            if ((position.y >= 12 && !playerCommunity.Equals(communityId)) || (position.y >= 25))
             {
                 Debug.Log("false activate");
                 remoteplayer[userId].SetActive(false);
@@ -128,7 +128,7 @@ public class WebSocketManager : MonoBehaviour
             remoteplayer[userId].transform.position = position;
             remoteplayer[userId].transform.rotation = rotation;
             Debug.Log("position updated");
-            if ((position.y >= 13 && !playerCommunity.Equals(communityId)) || (position.y >= 26))
+            if ((position.y >= 12 && !playerCommunity.Equals(communityId)) || (position.y >= 25))
             {
                 remoteplayer[userId].SetActive(false);
             }

@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -11,19 +11,19 @@ using Newtonsoft.Json.Linq;
 
 public class RegisterFormController : MonoBehaviour
 {
-    string path, artUrl, artId;
+    string path, artUrl, artId, auction_date;
     public Text filePath;
     bool success = false;
 
-    // »ç¿ëÀÚ ÀÔ·Â°ª
-    public TMP_InputField title;           // ÀÛÇ°¸í
-    public TMP_InputField author;          // ÀÛ°¡
-    public TMP_InputField reservedPrice;   // °æ¸Å ½ÃÀÛ°¡
-    public Text auctionDate;               // °æ¸Å ÀÏÀÚ
-    public TMP_InputField description;     // ÀÛÇ° ¼³¸í
+    // ì‚¬ìš©ì ì…ë ¥ê°’
+    public TMP_InputField title;           // ì‘í’ˆëª…
+    public TMP_InputField author;          // ì‘ê°€
+    public TMP_InputField reservedPrice;   // ê²½ë§¤ ì‹œì‘ê°€
+    public Text auctionDate;               // ê²½ë§¤ ì¼ì
+    public TMP_InputField description;     // ì‘í’ˆ ì„¤ëª…
     //public Button btn_right, btn_left;
     //public GameObject firstPanel, secondPanel;
-    public GameObject warningWindow;    // °æ°íÃ¢
+    public GameObject warningWindow;    // ê²½ê³ ì°½
     public GameObject calendar;
 
     public Button btn_close, btn_FindFile, btn_upload, btn_pickDate;
@@ -47,62 +47,67 @@ public class RegisterFormController : MonoBehaviour
         calendar.SetActive(true);
     }
 
-    bool CheckValidation()  // À¯È¿¼º °Ë»ç
+    bool CheckValidation()  // ìœ íš¨ì„± ê²€ì‚¬
     {
+        var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
         string today = DateTime.Now.ToString("yyyy-MM-dd");
 
         if (path == null || path.Length < 4)
         {
-            MakeWarningWindow("ÀÛÇ° ÆÄÀÏÀ» ¼±ÅÃÇÏ¼¼¿ä");
+            popupWarn.MakePopupWarn("ì‘í’ˆ íŒŒì¼ì„ ì„ íƒí•˜ì„¸ìš”");
             return false;
         }
         if (title.text.Length < 2)
         {
-            MakeWarningWindow("ÀÛÇ°¸íÀº\n2±ÛÀÚ ÀÌ»óÀÌ¾î¾ß ÇÕ´Ï´Ù.");
+            popupWarn.MakePopupWarn("ì‘í’ˆëª…ì€\n2ê¸€ì ì´ìƒì´ì–´ì•¼ í•©ë‹ˆë‹¤.");
             return false;
         }
         if (author.text.Length < 2)
         {
-            MakeWarningWindow("ÀÛ°¡ ÀÌ¸§Àº\n2±ÛÀÚ ÀÌ»óÀÌ¾î¾ß ÇÕ´Ï´Ù.");
+            popupWarn.MakePopupWarn("ì‘ê°€ ì´ë¦„ì€\n2ê¸€ì ì´ìƒì´ì–´ì•¼ í•©ë‹ˆë‹¤.");
             return false;
         }
         if (reservedPrice.text.Length < 1)
         {
-            MakeWarningWindow("°æ¸Å ½ÃÀÛ°¡¸¦ ÀÔ·ÂÇÏ¼¼¿ä.");
+            popupWarn.MakePopupWarn("ê²½ë§¤ ì‹œì‘ê°€ë¥¼ ì…ë ¥í•˜ì„¸ìš”.");
             return false;
         }
         //if (!Regex.IsMatch(auctionDate.text, @"^(20|21)\d{2}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[0-1])$"))
         //{
-        //    MakeWarningWindow("°æ¸Å ÀÏÀÚ¸¦ ¼±ÅÃÇÏ¼¼¿ä.");
+        //    MakeWarningWindow("ê²½ë§¤ ì¼ìë¥¼ ì„ íƒí•˜ì„¸ìš”.");
         //    return false;
         //}
         if (String.Compare(auctionDate.text, today) != 1)
         {
-            MakeWarningWindow("°æ¸Å ÀÏÀÚ´Â\nÀÍÀÏ ÀÌÈÄ¿©¾ß ÇÕ´Ï´Ù.");
+            popupWarn.MakePopupWarn("ê²½ë§¤ ì¼ìëŠ”\nìµì¼ ì´í›„ì—¬ì•¼ í•©ë‹ˆë‹¤.");
             return false;
         }
         if(description.text.Length < 3)
         {
-            MakeWarningWindow("ÀÛÇ° ¼³¸íÀº\n3±ÛÀÚ ÀÌ»óÀÌ¾î¾ß ÇÕ´Ï´Ù.");
+            popupWarn.MakePopupWarn("ì‘í’ˆ ì„¤ëª…ì€\n3ê¸€ì ì´ìƒì´ì–´ì•¼ í•©ë‹ˆë‹¤.");
             return false;
 
         }
-
+        //if(success == false)
+        //{
+        //    popupWarn.MakePopupWarn("ì‘í’ˆ ì—…ë¡œë“œ ì‹¤íŒ¨");
+        //    return false;
+        //}
         return true;
     }
 
-    void RegisterButtonClick()   // ÀÛÇ° µî·Ï ¹öÆ° Å¬¸¯½Ã
+    void RegisterButtonClick()   // ì‘í’ˆ ë“±ë¡ ë²„íŠ¼ í´ë¦­ì‹œ
     {
-        if (CheckValidation())   // À¯È¿¼º °Ë»ç Åë°ú
+        if (CheckValidation())   // ìœ íš¨ì„± ê²€ì‚¬ í†µê³¼
         {
             SendNewFileInfo();
 
-            // ==== ¼­¹ö¿Í Åë½ÅÇÏ´Â ºÎºĞ====
+            // ==== ì„œë²„ì™€ í†µì‹ í•˜ëŠ” ë¶€ë¶„====
             StartCoroutine(ImageUpload(path));
 
-            // ==== NFT API »ç¿ëÇØ¼­ NFT ÁÖ¼Òµµ ¸¸µé¾î¾ß ÇÔ ====
+            // ==== NFT API ì‚¬ìš©í•´ì„œ NFT ì£¼ì†Œë„ ë§Œë“¤ì–´ì•¼ í•¨ ====
 
-            // ÀÛÇ° ¼º°øÀûÀ¸·Î µî·Ï½Ã ÀÛÇ° µî·Ï Æû ´İÀ½
+            // ì‘í’ˆ ì„±ê³µì ìœ¼ë¡œ ë“±ë¡ì‹œ ì‘í’ˆ ë“±ë¡ í¼ ë‹«ìŒ
             if (success == true)
             {
                 InitializeForm();
@@ -113,10 +118,10 @@ public class RegisterFormController : MonoBehaviour
     }
 
 
-    public void OpenExplorerButtonClick()   // ÆÄÀÏ Å½»ö±â ¹öÆ° Å¬¸¯½Ã
+    public void OpenExplorerButtonClick()   // íŒŒì¼ íƒìƒ‰ê¸° ë²„íŠ¼ í´ë¦­ì‹œ
     {
-        // (pc ±âÁØÀ¸·Î ±¸ÇöÇÑ °Í, ¸ğ¹ÙÀÏ·Î ÇÒ °æ¿ì º¯°æÇØ¾ß ÇÒ µí)
-        path = EditorUtility.OpenFilePanel("³» ÀÛÇ° µî·ÏÇÏ±â", "", "jpg");
+        // (pc ê¸°ì¤€ìœ¼ë¡œ êµ¬í˜„í•œ ê²ƒ, ëª¨ë°”ì¼ë¡œ í•  ê²½ìš° ë³€ê²½í•´ì•¼ í•  ë“¯)
+        path = EditorUtility.OpenFilePanel("ë‚´ ì‘í’ˆ ë“±ë¡í•˜ê¸°", "", "jpg");
         GetImage();
         //StartCoroutine(ImageUpload(path));
     }
@@ -124,11 +129,11 @@ public class RegisterFormController : MonoBehaviour
     IEnumerator ImageUpload(string path)
     {
         Debug.Log("start upload img");
-        // ÀÌ¹ÌÁö base64stringÀ¸·Î º¯È¯
+        // ì´ë¯¸ì§€ base64stringìœ¼ë¡œ ë³€í™˜
         FileInfo file = new FileInfo(path);
         byte[] byteTexture = File.ReadAllBytes(file.FullName);
 
-        // ÀÌ¹ÌÁö ¼­¹ö post ¿äÃ»
+        // ì´ë¯¸ì§€ ì„œë²„ post ìš”ì²­
         string url = "https://api.imgbb.com/1/upload?key=8bb1d0057129896bc0546e05caf616b4";
         WWWForm form = new WWWForm();
         string base64string = Convert.ToBase64String(byteTexture);
@@ -167,7 +172,7 @@ public class RegisterFormController : MonoBehaviour
             price = price,
             paint = artUrl,
 //            paint = "",       //for test (not upload)
-            auctionDate = "2022-05-10"
+            auctionDate = auction_date
         };
 
         string jsonBody = JsonUtility.ToJson(uploadRequest);
@@ -184,18 +189,21 @@ public class RegisterFormController : MonoBehaviour
 
         if (response.artId == null)
         {
-            MakeWarningWindow("ÀÛÇ° ¾÷·Îµå ½ÇÆĞ");
+            var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
             success = false;
+            popupWarn.MakePopupWarn("ì‘í’ˆ ì—…ë¡œë“œ ì‹¤íŒ¨");
         }
         else
         {
             artId = response.artId;
             success = true;
+            Debug.Log("complete register");
+            Onclicked_close();
         }
             
     }
 
-    void GetImage()     // ÀÛÇ° ¼±ÅÃ½Ã ¹öÆ° text º¯°æÇÏ±â
+    void GetImage()     // ì‘í’ˆ ì„ íƒì‹œ ë²„íŠ¼ text ë³€ê²½í•˜ê¸°
     {
         if(path != null)
         {
@@ -205,19 +213,19 @@ public class RegisterFormController : MonoBehaviour
 
     public void GetDate(string date)
     {
-        string tmp_date = date;
-        Debug.Log(date);
+        auction_date = date+ "T00:00:00";
+        Debug.Log(auction_date);
     }
 
-    void InitializeForm()   // ÀÛÇ° µî·Ï Æû ÃÊ±âÈ­
+    void InitializeForm()   // ì‘í’ˆ ë“±ë¡ í¼ ì´ˆê¸°í™”
     {
         path = null;
-        filePath.text = "ÆÄÀÏ Å½»ö";
+        filePath.text = "íŒŒì¼ íƒìƒ‰";
         ClearInputField(title);
         ClearInputField(author);
         ClearInputField(description);
         ClearInputField(reservedPrice);
-        auctionDate.text = "°æ¸Å ÀÏÀÚ ¼±ÅÃ";
+        auctionDate.text = "ê²½ë§¤ ì¼ì ì„ íƒ";
     }
 
     void ClearInputField(TMP_InputField inputField)
@@ -225,14 +233,14 @@ public class RegisterFormController : MonoBehaviour
         inputField.text = "";
     }
 
-    void MakeWarningWindow(string msg)  // °æ°íÃ¢ ¸¸µé±â
+    void MakeWarningWindow(string msg)  // ê²½ê³ ì°½ ë§Œë“¤ê¸°
     {
         TMP_Text message = warningWindow.transform.GetChild(0).GetComponent<TMP_Text>();
         message.text = msg;
         warningWindow.SetActive(true);
     }
 
-    public void WarningWindowCloseButtonClick()     // °æ°íÃ¢ ´İ±â
+    public void WarningWindowCloseButtonClick()     // ê²½ê³ ì°½ ë‹«ê¸°
     {
         warningWindow.SetActive(false);
     }
@@ -250,11 +258,11 @@ public class RegisterFormController : MonoBehaviour
 class UploadRequest
 {
     public string userId;
-    public string painter; // ÀÛ°¡
-    public string artName; // ÀÛÇ°¸í
+    public string painter; // ì‘ê°€
+    public string artName; // ì‘í’ˆëª…
     public string detail;
-    public double price; // °æ¸Å°¡
-    public string paint; // ÀÌ¹ÌÁö url ÁÖ¼Ò
+    public double price; // ê²½ë§¤ê°€
+    public string paint; // ì´ë¯¸ì§€ url ì£¼ì†Œ
     public string auctionDate;
 }
 
