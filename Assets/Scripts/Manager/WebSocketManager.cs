@@ -50,7 +50,6 @@ public class WebSocketManager : MonoBehaviour
 
     private double timeDelta = 0;
 
-
     public void Update()
     {
         // Work the dispatched actions on the Unity main thread
