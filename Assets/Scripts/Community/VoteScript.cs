@@ -85,8 +85,8 @@ public class VoteScript : MonoBehaviour
         price.text = "제안가격: " + response.resalePrice.ToString();
         content.text = response.title.ToString();
 
-        YesPercent.text = "YES\n" + response.agreement.ToString() + " %";
-        NoPercent.text = "NO\n" + response.disagreement.ToString() + " %";
+        YesPercent.text = "YES\n" + (response.agreement * 100).ToString() + " %";
+        NoPercent.text = "NO\n" + (response.disagreement * 100).ToString() + " %";
 
         StakePersonal.text = (response.ratio * 100).ToString() + " %";
 
