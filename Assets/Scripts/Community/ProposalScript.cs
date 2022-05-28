@@ -57,8 +57,8 @@ public class ProposalScript : MonoBehaviour
     {
         //string UserId = "62689f6564ebad668621db42";
         string UserId = Manager.Instance.ID;
-        string CommunityId = "627f5ca702867d106384ef8f";
-        //string CommunityId = CommunityManager.Instance.CommunityID;
+        //string CommunityId = "627f5ca702867d106384ef8f";
+        string CommunityId = CommunityManager.Instance.CommunityID;
 
         var time = DateTime.Now;
         Debug.Log("datetime now: "+time);

@@ -49,6 +49,7 @@ public class CommunityList : MonoBehaviour
 
             var community_btn = community.GetComponent<CommunityButton>();
             community_btn.GetCommunityInfo(response.communityList[i].communityId, response.communityList[i].artName);
+            StartCoroutine(LoadArt(response.communityList[i].communityId));
         }
     }
 
@@ -67,6 +68,28 @@ public class CommunityList : MonoBehaviour
         // api 烹脚 何盒 场
         ListInit(response);
     }
+
+    IEnumerator LoadArt(string CommunityId)
+    {
+        //ObjectId CommunityId = new ObjectId("627f5ca702867d106384ef8f");
+        //string CommunityId = CommunityManager.Instance.CommunityID;
+
+        string url = Manager.Instance.url + "v1/community?communityId=" + CommunityId;
+
+
+        Debug.Log(url);
+
+        UnityWebRequest www = UnityWebRequest.Get(url);
+        yield return www.SendWebRequest();
+        //yield return new WaitForSeconds(1);
+
+        string jsonString = www.downloadHandler.text;
+        Debug.Log("jsonString: " + jsonString);
+        var response = JsonUtility.FromJson<CommunityArtResponse>(jsonString);
+        Debug.Log("------nft address-----: " + response.paint);
+
+        CommunityManager.Instance.nftaddress.Add(CommunityId, response.paint);
+    }
 }
 
 [Serializable]
@@ -82,4 +105,13 @@ class CommnunityResponse
     public List<communityListResponse> communityList;
 }
 
-
+[Serializable]
+class CommunityArtResponse
+{
+    public string painter;
+    public string artName;
+    public string detail;
+    public double price;
+    public string nftAdd;
+    public string paint;
+}

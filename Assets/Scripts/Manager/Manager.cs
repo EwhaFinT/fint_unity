@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
+using MongoDB.Bson;
+using System;
 
 public class Manager : Singleton<Manager>
 {
@@ -14,6 +17,8 @@ public class Manager : Singleton<Manager>
     private PlayerController player;
     public string ID;
     public string url;
+
+    public bool complete = false;
     //    public GameObject TeleportPanel, Canvas_Art, Canvas_Auction;
     // Start is called before the first frame update
 
@@ -44,4 +49,5 @@ public class Manager : Singleton<Manager>
     {
         
     }
+
 }

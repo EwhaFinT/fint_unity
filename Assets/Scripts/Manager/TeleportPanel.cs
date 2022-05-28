@@ -71,6 +71,7 @@ public class TeleportPanel : MonoBehaviour
         if (player != null)
         {
             player.SetMove(targetPos_community);
+     
             teleportPanel.SetActive(false);
             var myroomPanel = UIManager.Instance.myroomPanel;
             myroomPanel.SetActive(false);       //hide inventory and upload button
