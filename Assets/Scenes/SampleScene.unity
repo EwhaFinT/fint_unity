@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.4465782, g: 0.49641252, b: 0.5748167, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1043,9 +1043,8 @@ MonoBehaviour:
   exit: {fileID: 524980168}
   Price: {fileID: 0}
   Content: {fileID: 0}
-  date: {fileID: 0}
+  Date: {fileID: 0}
   submit: {fileID: 0}
-  calender_date: 
 --- !u!114 &528265968 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5138663518689945963, guid: 9ad20a88539079d40832b86ab4a9e2e9, type: 3}
@@ -1430,8 +1429,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1341682325}
   playerPrefab:
-  - {fileID: 9168745481175242534, guid: 395685b118ca1554895fec76ed620a7b, type: 3}
-  - {fileID: 9168745481175242534, guid: 395685b118ca1554895fec76ed620a7b, type: 3}
+  - {fileID: 137848, guid: b274f055acd44484e979267107f9a3c4, type: 3}
+  - {fileID: 166016, guid: f657c58adb4c219419ae056411d88e27, type: 3}
+  - {fileID: 198342, guid: fe9bab289d42f0244859df1b1359454b, type: 3}
+  - {fileID: 175374, guid: 8280ad2f586477b47ac0d3d3e444e3aa, type: 3}
+  - {fileID: 106736, guid: 46398a79a336cba4c9c8998b2bff56c2, type: 3}
 --- !u!114 &832825053 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 233525633726811125, guid: 8f7f12150940d91419515356ad1fd85c, type: 3}
