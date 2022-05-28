@@ -43,12 +43,17 @@ public class PostScript : MonoBehaviour
     void onClicked_sumbit()
     {
         StartCoroutine(Post_Article());
+        var boardPanel = UIManager.Instance.popupBoard.GetComponent<BoardScript>();
+
     }
     IEnumerator Post_Article()
     {
-        string UserId = "6250073f634945502a92cbbe";
-        string CommunityId = "6231f585aeee2e2cc44bfa90";
-        string Identity = "userIdentity";
+        //string UserId = "6250073f634945502a92cbbe";
+        //string CommunityId = "6231f585aeee2e2cc44bfa90";
+        string UserId = Manager.Instance.ID;
+        string CommunityId = CommunityManager.Instance.CommunityID;
+
+        //string Identity = "userIdentity";
 
         Debug.Log("title: " + Title.text);
         Debug.Log("content:" + Content.text);
@@ -60,8 +65,8 @@ public class PostScript : MonoBehaviour
             userId = UserId,
             title = Title.text,
             content = Content.text,
-            communityId = CommunityId,
-            identity = Identity
+            communityId = CommunityId
+            //identity = Identity
         }; 
         string jsonBody = JsonUtility.ToJson(postRequest);
 
@@ -97,7 +102,6 @@ class PostRequest
     public string title;
     public string content;
     public string communityId;
-    public string identity;
 }
 
 [Serializable]

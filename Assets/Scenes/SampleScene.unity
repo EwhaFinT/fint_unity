@@ -1403,9 +1403,9 @@ MonoBehaviour:
   playerPrefab:
   - {fileID: 137848, guid: b274f055acd44484e979267107f9a3c4, type: 3}
   - {fileID: 166016, guid: f657c58adb4c219419ae056411d88e27, type: 3}
-  - {fileID: 198342, guid: fe9bab289d42f0244859df1b1359454b, type: 3}
-  - {fileID: 175374, guid: 8280ad2f586477b47ac0d3d3e444e3aa, type: 3}
   - {fileID: 106736, guid: 46398a79a336cba4c9c8998b2bff56c2, type: 3}
+  - {fileID: 175374, guid: 8280ad2f586477b47ac0d3d3e444e3aa, type: 3}
+  - {fileID: 198342, guid: fe9bab289d42f0244859df1b1359454b, type: 3}
 --- !u!114 &832825053 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 233525633726811125, guid: 8f7f12150940d91419515356ad1fd85c, type: 3}

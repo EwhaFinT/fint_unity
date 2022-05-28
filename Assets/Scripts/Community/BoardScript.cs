@@ -72,7 +72,6 @@ public class BoardScript : MonoBehaviour
         string url = Manager.Instance.url + "v1/articles?communityId=" + CommunityId;
 
         Debug.Log("LoadArticleList: " + url);
-
         UnityWebRequest www = UnityWebRequest.Get(url);
         yield return www.SendWebRequest();
 
