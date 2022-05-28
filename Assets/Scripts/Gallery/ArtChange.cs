@@ -33,10 +33,7 @@ public class ArtChange : MonoBehaviour
     #endregion
 
     // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
     IEnumerator LoadImage()     // ???????????????????????? ???????? ?????????????? ????????????????
     {
         //string url = "http://localhost:8080/v1/artlist";
@@ -51,7 +48,9 @@ public class ArtChange : MonoBehaviour
         List<string> artId = response.artId;
         List<string> artUrl = response.paint;
 
-        for (int i = 0; i < 3; i++)
+        Debug.Log(artId.Count);
+
+        for (int i = 0; i < artId.Count; i++)
         {
             StartCoroutine(DownloadImage(frame[i], artUrl[i]));
             dic.Add(frame[i], artId[i]);
