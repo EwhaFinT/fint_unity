@@ -26,20 +26,25 @@ public class AuctionDate : MonoBehaviour
     public void Onclicked_OK()
     {
         //값 패널로 보내기
-        GetDate();
+        if (GetDate())
+            Onclicked_close();
     }
 
-    void GetDate()
+    bool GetDate()
     {
         string today = DateTime.Now.ToString("yyyy-MM-dd");
-
+        bool success = false;
         yy = year.text;
         mm = month.text;
         dd = day.text;
 
         finalDate = $"{yy}-{mm}-{dd}";
         if (CheckValidation(finalDate, today))
+        {
             SendDate(finalDate);
+            success = true;
+        }
+        return success;
 //        SendDate(finalDate);
     }
 

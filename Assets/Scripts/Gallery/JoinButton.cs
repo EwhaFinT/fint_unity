@@ -38,7 +38,7 @@ public class JoinButton : MonoBehaviour
 
     void ShowText()
     {
-        double remainPrice = auctionPrice * (1 - remainderRatio);
+        double remainPrice = auctionPrice * (1-remainderRatio);
         suggest.GetComponentInChildren<Text>().text = remainPrice.ToString("F0") + " KLAY / " + auctionPrice.ToString("F0") + " KLAY";
     }
 }

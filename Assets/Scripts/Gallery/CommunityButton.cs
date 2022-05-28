@@ -24,6 +24,8 @@ public class CommunityButton : MonoBehaviour
         Debug.Log("community prefab ID : "+CommunityManager.Instance.CommunityID);
         var teleport = UIManager.Instance.popupTeleport.GetComponent<TeleportPanel>();
         teleport.MoveCommunity();       //move to community
+
+
     }
 
     public void GetCommunityInfo(string communityId, string artName)
