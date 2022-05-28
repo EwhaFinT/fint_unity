@@ -96,7 +96,7 @@ public class WebSocketManager : MonoBehaviour
         int tmp = remoteplayer.Count;
         if (!userId.Equals(playerId) && !remoteplayer.ContainsKey(userId))
         {
-            remoteplayer.Add(userId, Instantiate(playerPrefab[tmp % 5], position, rotation));
+            remoteplayer.Add(userId, Instantiate(playerPrefab[tmp % 5], position, Quaternion.identity));
             if ((position.y >= 13 && !playerCommunity.Equals(communityId)) || (position.y >= 26))
             {
                 Debug.Log("false activate");
@@ -121,7 +121,7 @@ public class WebSocketManager : MonoBehaviour
         {
             if (!remoteplayer.ContainsKey(userId))
             {
-                GameObject remotePlayer = Instantiate(playerPrefab[tmp%5], position, rotation);
+                GameObject remotePlayer = Instantiate(playerPrefab[tmp%5], position, Quaternion.identity);
                 Debug.Log(remotePlayer);
                 remoteplayer.Add(userId, remotePlayer);
             }
