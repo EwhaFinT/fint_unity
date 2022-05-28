@@ -42,7 +42,6 @@ public class JoinAuction : MonoBehaviour
     void Onclick_JoinAuction()
     {
         StartCoroutine(SendJoinInfo());
-
     }
 
     IEnumerator SendJoinInfo()

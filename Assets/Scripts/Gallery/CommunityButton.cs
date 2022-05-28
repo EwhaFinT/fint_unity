@@ -2,11 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Networking;
+using MongoDB.Bson;
+using System;
 
 public class CommunityButton : MonoBehaviour
 {
     public Button community;
     string communityId, artName;
+    public bool complete = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,8 +27,11 @@ public class CommunityButton : MonoBehaviour
     {
         CommunityManager.Instance.CommunityID = communityId;    //assign community id to communityPrefab
         Debug.Log("community prefab ID : "+CommunityManager.Instance.CommunityID);
+        CommunityManager.Instance.SetFrameArt();
+        
         var teleport = UIManager.Instance.popupTeleport.GetComponent<TeleportPanel>();
         teleport.MoveCommunity();       //move to community
+
     }
 
     public void GetCommunityInfo(string communityId, string artName)
@@ -39,3 +47,4 @@ public class CommunityButton : MonoBehaviour
         community.GetComponentInChildren<Text>().text = artName;
     }
 }
+

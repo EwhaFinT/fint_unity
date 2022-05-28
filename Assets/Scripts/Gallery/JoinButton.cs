@@ -23,7 +23,9 @@ public class JoinButton : MonoBehaviour
     {
         UIManager.Instance.auctionJoin.SetActive(true);
         var joinPanel = UIManager.Instance.auctionJoin.GetComponent<JoinAuction>();
-        joinPanel.PanelStart(priceId, auctionPrice, remainderRatio, artId); 
+        joinPanel.PanelStart(priceId, auctionPrice, remainderRatio, artId);
+
+        UIManager.Instance.auctionNew.SetActive(false);
     }
 
     public void GetAuctionInfo(string priceId, double auctionPrice, double remainderRatio, string artId)
@@ -38,7 +40,7 @@ public class JoinButton : MonoBehaviour
 
     void ShowText()
     {
-        double remainPrice = auctionPrice * (1 - remainderRatio);
+        double remainPrice = auctionPrice * (1-remainderRatio);
         suggest.GetComponentInChildren<Text>().text = remainPrice.ToString("F0") + " KLAY / " + auctionPrice.ToString("F0") + " KLAY";
     }
 }
