@@ -39,7 +39,6 @@ public class LoginController : MonoBehaviour
     void SignupBtnClick()
     {
         OffWarn();
-//        OffLogin();
         var signup = UIManager.Instance.popupSignup.GetComponent<SignupController>();
         signup.show();
     }
@@ -47,7 +46,6 @@ public class LoginController : MonoBehaviour
     void FindIdBtnClick()
     {
         OffWarn();
-//        OffLogin();
         var findid = UIManager.Instance.popupFindId.GetComponent<FindIdController>();
         findid.show();
     }
@@ -55,7 +53,6 @@ public class LoginController : MonoBehaviour
     void FindPwBtnClick()
     {
         OffWarn();
- //       OffLogin();
         var findPw = UIManager.Instance.popupFindPw.GetComponent<FindPwController>();
         findPw.show();
     }
@@ -71,7 +68,7 @@ public class LoginController : MonoBehaviour
         popupWarn.OffWarn();
     }
 
-    IEnumerator Login() // 肺弊牢 夸没
+    IEnumerator Login() // login request
     {
         string url = Manager.Instance.url + "v1/login?identity=" + identity.text + "&password=" + password.text;
 
@@ -82,7 +79,7 @@ public class LoginController : MonoBehaviour
         string jsonString = www.downloadHandler.text;
         var response = JsonUtility.FromJson<LoginResponse>(jsonString);
         
-        if (response.userId == "")    // 肺弊牢 角菩
+        if (response.userId == "")    // login fail
         {
             var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
             popupWarn.MakePopupWarn(response.message);
@@ -92,7 +89,7 @@ public class LoginController : MonoBehaviour
             var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
             popupWarn.OffWarn();
             OffLogin();
-            // TODO : userId 历厘 饶 皋牢 其捞瘤肺 罚歹傅
+            
             Manager.Instance.ID = response.userId;
             Debug.Log(Manager.Instance.ID);
             websocket.SetActive(true);

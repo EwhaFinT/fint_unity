@@ -51,6 +51,8 @@ public class SignupController : MonoBehaviour
         }
     }
 
+    // valid check
+
     bool CheckValidation()
     {
         if (!CheckId()) return false;
@@ -67,13 +69,13 @@ public class SignupController : MonoBehaviour
         if (identity.text.Length < 1)
         {
             var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
-            popupWarn.MakePopupWarn("酒捞叼甫 涝仿窍技夸.");
+            popupWarn.MakePopupWarn("Please enter your ID.");
             return false;
         }
         if(!dupCheck)
         {
             var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
-            popupWarn.MakePopupWarn("酒捞叼 吝汗 犬牢阑\n柳青秦林技夸.");
+            popupWarn.MakePopupWarn("Duplicate ID.");
             return false;
         }
         return true;
@@ -85,7 +87,7 @@ public class SignupController : MonoBehaviour
         if (val.Length < 1)
         {
             var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
-            popupWarn.MakePopupWarn("厚剐锅龋甫 涝仿窍技夸.");
+            popupWarn.MakePopupWarn("Please enter your Password.");
             return false;
         }
         Regex eng = new Regex(@"[a-zA-Z]");
@@ -93,7 +95,7 @@ public class SignupController : MonoBehaviour
         if (val.Length < 8 || !eng.IsMatch(val) || !num.IsMatch(val))
         {
             var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
-            popupWarn.MakePopupWarn("康巩, 箭磊甫 窍唱 捞惑 器窃茄\n8磊府 厚剐锅龋甫 涝仿窍技夸.");
+            popupWarn.MakePopupWarn("Please enter at least 8 digits of\nEnglish and numeric combinations.");
             return false;
         }
         return true;
@@ -104,7 +106,7 @@ public class SignupController : MonoBehaviour
         if (password.text != passwordConfirm.text)
         {
             var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
-            popupWarn.MakePopupWarn("厚剐锅龋啊 老摹窍瘤 臼嚼聪促.");
+            popupWarn.MakePopupWarn("Password verification does not match.");
             return false;
         }
         return true;
@@ -116,14 +118,7 @@ public class SignupController : MonoBehaviour
         if (val.Length < 1)
         {
             var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
-            popupWarn.MakePopupWarn("捞抚阑 涝仿窍技夸.");
-            return false;
-        }
-        Regex kor = new Regex(@"^[啊-芌]+$");
-        if (val.Length < 2 || val.Length > 5 || !kor.IsMatch(val))
-        {
-            var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
-            popupWarn.MakePopupWarn("2臂磊 捞惑 5臂磊 捞窍\n茄臂父 涝仿 啊瓷钦聪促.");
+            popupWarn.MakePopupWarn("Please enter your Name.");
             return false;
         }
         return true;
@@ -135,14 +130,14 @@ public class SignupController : MonoBehaviour
         if (val.Length < 1)
         {
             var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
-            popupWarn.MakePopupWarn("傈拳锅龋甫 涝仿窍技夸.");
+            popupWarn.MakePopupWarn("Please enter your Phone.");
             return false;
         }
         Regex num = new Regex(@"^01[016789][^0][0-9]{2,3}[0-9]{3,4}$");
         if(!num.IsMatch(val))
         {
             var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
-            popupWarn.MakePopupWarn("棵官福瘤 臼篮\n傈拳锅龋 涝聪促.");
+            popupWarn.MakePopupWarn("Unvalid Phone number.");
             return false;
         }
         return true;
@@ -153,14 +148,14 @@ public class SignupController : MonoBehaviour
         if (val.Length < 1)
         {
             var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
-            popupWarn.MakePopupWarn("捞皋老阑 涝仿窍技夸.");
+            popupWarn.MakePopupWarn("Please enter your Email.");
             return false;
         }
         Regex mail = new Regex(@"[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}");
         if(!mail.IsMatch(val))
         {
             var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
-            popupWarn.MakePopupWarn("棵官福瘤 臼篮\n捞皋老 林家 涝聪促..");
+            popupWarn.MakePopupWarn("Unvalid Email.");
             return false;
         }
         return true;
@@ -173,7 +168,7 @@ public class SignupController : MonoBehaviour
         signup.SetActive(false);
     }
 
-    IEnumerator IdCheck() // 酒捞叼 吝汗 八荤 夸没
+    IEnumerator IdCheck() // dupIdCheck
     {
         string url = Manager.Instance.url + "v1/check-id?identity=" + identity.text;
 
@@ -184,20 +179,20 @@ public class SignupController : MonoBehaviour
         string jsonString = www.downloadHandler.text;
         var response = JsonUtility.FromJson<IdCheckResponse>(jsonString);
 
-        if (response.idCheckSuccess == 0)    // 酒捞叼 吝汗
+        if (response.idCheckSuccess == 0)
         {
             var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
-            popupWarn.MakePopupWarn("吝汗等 酒捞叼啊 粮犁钦聪促.");
+            popupWarn.MakePopupWarn("Duplicate ID.");
         }
-        else                                // 荤侩且 荐 乐绰 酒捞叼
+        else
         {
             var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
-            popupWarn.MakePopupWarn("荤侩 啊瓷茄 酒捞叼涝聪促.");
+            popupWarn.MakePopupWarn("Available ID.");
             dupCheck = true;
         }
     }
 
-    IEnumerator Signup() // 酒捞叼 吝汗 八荤 夸没
+    IEnumerator Signup() // signup request
     {
         string url = Manager.Instance.url + "v1/signup";
 
@@ -222,13 +217,13 @@ public class SignupController : MonoBehaviour
         string jsonString = www.downloadHandler.text;
         var response = JsonUtility.FromJson<SignupResponse>(jsonString);
 
-        if (response.signupSuccess == 0)    // 雀盔啊涝 角菩
+        if (response.signupSuccess == 0) // signup fail
         {
             var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
-            popupWarn.MakePopupWarn("吝汗等 酒捞叼啊 粮犁钦聪促.");
+            popupWarn.MakePopupWarn("Duplicate ID.");
             dupCheck = false;
         }
-        else                                // 雀盔啊涝 己傍
+        else // signup Success
         {
             OffSignup();
             UIManager.Instance.OnLogin();
