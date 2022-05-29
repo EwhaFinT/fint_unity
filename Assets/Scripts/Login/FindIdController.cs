@@ -62,15 +62,15 @@ public class FindIdController : MonoBehaviour
         string jsonString = www.downloadHandler.text;
         var response = JsonUtility.FromJson<FindIdResponse>(jsonString);
 
-        if (response.identity == null)    // 酒捞叼 茫扁 角菩
+        if (response.identity == null) // find id fail
         {
             var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
-            popupWarn.MakePopupWarn("秦寸 沥焊甫 啊柳\n荤侩磊啊 粮犁窍瘤 臼嚼聪促.");
+            popupWarn.MakePopupWarn("ID does not exist.");
         }
         else
         {
             var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
-            popupWarn.MakePopupWarn(userName.text + "丛狼 酒捞叼绰\n" + response.identity + " 涝聪促.");
+            popupWarn.MakePopupWarn(userName.text + "'s ID is <" + response.identity + ">.");
         }
     }
 }

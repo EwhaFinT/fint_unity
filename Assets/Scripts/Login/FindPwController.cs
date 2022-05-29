@@ -63,10 +63,10 @@ public class FindPwController : MonoBehaviour
         string jsonString = www.downloadHandler.text;
         var response = JsonUtility.FromJson<FindPwResponse>(jsonString);
 
-        if (!response.emailSuccess)    // 厚剐锅龋 茫扁 角菩
+        if (!response.emailSuccess) // find pw fail
         {
             var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
-            popupWarn.MakePopupWarn("秦寸 沥焊客 老摹窍绰\n荤侩磊啊 绝嚼聪促.");
+            popupWarn.MakePopupWarn("No user has that information.");
         }
         else
         {
