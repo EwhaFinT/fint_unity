@@ -50,7 +50,7 @@ public class RegisterFormController : MonoBehaviour
     bool CheckValidation()  // 유효성 검사
     {
         var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
-        string today = DateTime.Now.ToString("yyyy-MM-dd");
+        string today = DateTime.UtcNow.ToString("yyyy-MM-dd");
 
         if (path == null || path.Length < 4)
         {
