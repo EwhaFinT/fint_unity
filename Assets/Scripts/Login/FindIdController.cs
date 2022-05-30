@@ -69,8 +69,8 @@ public class FindIdController : MonoBehaviour
         }
         else
         {
-            var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
-            popupWarn.MakePopupWarn(userName.text + "'s ID is <" + response.identity + ">.");
+            var popupSuccess = UIManager.Instance.popupWarn.GetComponent<PopupSuccessController>();
+            popupSuccess.MakePopupMessage(userName.text + "'s ID is <" + response.identity + ">.");
         }
     }
 }

@@ -64,7 +64,11 @@ public class AuctionDate : MonoBehaviour
             return false;
         }
         else
+        {
+            UIManager.Instance.popupSuccess.GetComponent<PopupSuccessController>().MakeSuccessMessage();
             return true;
+        }
+            
     }
 
 

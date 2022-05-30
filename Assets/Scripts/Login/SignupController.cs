@@ -225,6 +225,7 @@ public class SignupController : MonoBehaviour
         }
         else // signup Success
         {
+            UIManager.Instance.popupSuccess.GetComponent<PopupSuccessController>().MakeSuccessMessage();
             OffSignup();
             UIManager.Instance.OnLogin();
         }

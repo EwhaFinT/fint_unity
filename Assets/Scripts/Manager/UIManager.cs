@@ -34,6 +34,7 @@ public class UIManager : MonoBehaviour
     public GameObject popupLogin;
     public GameObject popupSignup;
 
+    public GameObject popupSuccess;
     public GameObject popupWarn;
     public GameObject popupFindId;
     public GameObject popupFindPw;

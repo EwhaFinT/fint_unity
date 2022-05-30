@@ -31,12 +31,18 @@ public class JoinAuction : MonoBehaviour
 
     public void PanelStart(string priceId, double auctionPrice, double remainderRatio, string artId) 
     {
+        InitializeForm();
         _priceId = priceId;
         this.auctionPrice = auctionPrice;
         _remainderRatio = remainderRatio;
         this.artId = artId;
 
         ChangeContent();
+    }
+
+    void InitializeForm()   //Initialization
+    {
+        inputShare.text = "";
     }
 
     void Onclick_JoinAuction()
@@ -70,10 +76,14 @@ public class JoinAuction : MonoBehaviour
         if (response.priceId == "0")
         {
             // 경매 참여 실패 : 잔여 지분을 초과한 경우
+            var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
+            popupWarn.MakePopupWarn("Exceeding\n Possible Equity");
         }
         else
         {
             // 경매 참여 성공
+            var popup = UIManager.Instance.popupSuccess.GetComponent<PopupSuccessController>();
+            popup.MakePopupMessage("Success!\n E-mail will be sent at midnight\n if you win the auction.");
         }
 
         // api 통신 부분 끝

@@ -70,8 +70,8 @@ public class FindPwController : MonoBehaviour
         }
         else
         {
-            var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
-            popupWarn.MakePopupWarn("秦寸 捞皋老 林家肺\n烙矫 厚剐锅龋甫 傈价沁嚼聪促.");
+            var popupSccess = UIManager.Instance.popupSuccess.GetComponent<PopupSuccessController>();
+            popupSccess.MakePopupMessage("Sent a temporary password\n to your e-mail.");
         }
     }
 }

@@ -22,6 +22,7 @@ public class NewAuction : MonoBehaviour
 
     public void panelStart(string getArtId)
     {
+        InitializeForm();
         _artId = getArtId;
         gameObject.SetActive(true);
     }
@@ -29,7 +30,12 @@ public class NewAuction : MonoBehaviour
     void Onclick_NewAuction()
     {
         StartCoroutine(SendNewInfo());
+    }
 
+    void InitializeForm()   //Initialization
+    {
+        inputPrice.text = "";
+        inputShare.text = "";
     }
 
 
@@ -58,11 +64,13 @@ public class NewAuction : MonoBehaviour
 
         if (response.priceId == "0")
         {
-            // 版概 曼咯 角菩 : 泅犁 惑茄啊焊促 利篮 陛咀 涝仿茄 版快
+            var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
+            popupWarn.MakePopupWarn("Please check\n the input again.");
         }
         else
         {
-            // 版概 曼咯 己傍
+            var popup = UIManager.Instance.popupSuccess.GetComponent<PopupSuccessController>();
+            popup.MakePopupMessage("Success!\n E-mail will be sent at midnight\n if you win the auction.");
         }
 
         // api 烹脚 何盒 场
@@ -82,7 +90,7 @@ public class NewAuction : MonoBehaviour
         double.TryParse(_data, out double shareprice);
         _ratio = shareprice;
         double tmp = sumprice * shareprice * 0.01;
-        pricetopay.text = "抗惑 瘤阂 陛咀 : " + tmp + " KLAY";
+        pricetopay.text = "예상 지불 금액 : " + tmp.ToString("F2") + " KLAY";
     }
 
 }

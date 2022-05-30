@@ -11,7 +11,8 @@ using Newtonsoft.Json.Linq;
 
 public class RegisterFormController : MonoBehaviour
 {
-    string path, artUrl, artId, auction_date;
+    string path, artUrl, artId;
+    string auction_date = "";
     public Text filePath;
     bool success = false;
 
@@ -72,14 +73,9 @@ public class RegisterFormController : MonoBehaviour
             popupWarn.MakePopupWarn("경매 시작가를 입력하세요.");
             return false;
         }
-        //if (!Regex.IsMatch(auctionDate.text, @"^(20|21)\d{2}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[0-1])$"))
-        //{
-        //    MakeWarningWindow("경매 일자를 선택하세요.");
-        //    return false;
-        //}
-        if (String.Compare(auctionDate.text, today) != 1)
+        if (auction_date == "")
         {
-            popupWarn.MakePopupWarn("경매 일자는\n익일 이후여야 합니다.");
+            popupWarn.MakePopupWarn("경매 일자를 선택하세요.");
             return false;
         }
         if(description.text.Length < 3)
@@ -88,11 +84,6 @@ public class RegisterFormController : MonoBehaviour
             return false;
 
         }
-        //if(success == false)
-        //{
-        //    popupWarn.MakePopupWarn("작품 업로드 실패");
-        //    return false;
-        //}
         return true;
     }
 
@@ -104,16 +95,6 @@ public class RegisterFormController : MonoBehaviour
 
             // ==== 서버와 통신하는 부분====
             StartCoroutine(ImageUpload(path));
-
-            // ==== NFT API 사용해서 NFT 주소도 만들어야 함 ====
-
-            // 작품 성공적으로 등록시 작품 등록 폼 닫음
-            if (success == true)
-            {
-                InitializeForm();
-                gameObject.SetActive(false);
-            }
-
         }
     }
 
@@ -196,8 +177,9 @@ public class RegisterFormController : MonoBehaviour
         else
         {
             artId = response.artId;
-            success = true;
+            InitializeForm();           //작품 등록폼 초기화
             Debug.Log("complete register");
+            UIManager.Instance.popupSuccess.GetComponent<PopupSuccessController>().MakeSuccessMessage();
             Onclicked_close();
         }
             
@@ -231,18 +213,6 @@ public class RegisterFormController : MonoBehaviour
     void ClearInputField(TMP_InputField inputField)
     {
         inputField.text = "";
-    }
-
-    void MakeWarningWindow(string msg)  // 경고창 만들기
-    {
-        TMP_Text message = warningWindow.transform.GetChild(0).GetComponent<TMP_Text>();
-        message.text = msg;
-        warningWindow.SetActive(true);
-    }
-
-    public void WarningWindowCloseButtonClick()     // 경고창 닫기
-    {
-        warningWindow.SetActive(false);
     }
 
     void SendNewFileInfo()

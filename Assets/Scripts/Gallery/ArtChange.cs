@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -50,7 +50,7 @@ public class ArtChange : MonoBehaviour
 
         Debug.Log(artId.Count);
 
-        for (int i = 0; i < artId.Count; i++)
+        for (int i = 0; i < artId.Count; i++)       //0~2 본경매 3~5 재경매
         {
             StartCoroutine(DownloadImage(frame[i], artUrl[i]));
             dic.Add(frame[i], artId[i]);

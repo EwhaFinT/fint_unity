@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -19,14 +19,6 @@ public class InventoryScript : MonoBehaviour
     void Start()
     {
         slots = slotHolder.GetComponentsInChildren<Slot>();
-        //Button inventoryButton = UIManager.Instance.inventoryButton;
-        //inventoryButton.onClick.AddListener(OnInventory);
-        //slotCnt = imageFileInfo.Length;   // ½½·Ô °³¼ö ÃÊ±âÈ­
-        //inven.onSlotCountChange += SlotChange;
-        //StartCoroutine(DownloadImage(slots[0], "https://i.ibb.co/hyX44r9/flower.jpg"));
-        //for (int i = 0; i < artNum; i++)
-        //    StartCoroutine(DownloadImage(slots[0], "https://i.ibb.co/hyX44r9/flower.jpg"));
-        
         btn_close.onClick.AddListener(Onclicked_close);
 
     }
@@ -56,7 +48,7 @@ public class InventoryScript : MonoBehaviour
         StartCoroutine(GetPaint());
     }
 
-    IEnumerator DownloadImage(Slot slot, string MediaUrl)          //¼­¹ö¿¡¼­ ±×¸² ¹Ş¾Æ¿Í¼­ art¿¡ ³Ö±â
+    IEnumerator DownloadImage(Slot slot, string MediaUrl)          //ì„œë²„ì—ì„œ ê·¸ë¦¼ ë°›ì•„ì™€ì„œ artì— ë„£ê¸°
     {
         UnityWebRequest request = UnityWebRequestTexture.GetTexture(MediaUrl);
         yield return request.SendWebRequest();
@@ -64,16 +56,17 @@ public class InventoryScript : MonoBehaviour
             Debug.Log(request.error);
         else
         {
-            //ÀÎº¥Åä¸® ½½·ÔÀ» ÇØ´ç ÀÌ¹ÌÁö·Î º¯°æ
+            //ì¸ë²¤í† ë¦¬ ìŠ¬ë¡¯ì„ í•´ë‹¹ ì´ë¯¸ì§€ë¡œ ë³€ê²½
             slot.transform.GetChild(0).GetComponent<RawImage>().texture = ((DownloadHandlerTexture)request.downloadHandler).texture;
             Debug.Log("change inventory slot");
+            UIManager.Instance.popupSuccess.GetComponent<PopupSuccessController>().MakeSuccessMessage();
         }
     }
-    public int slotCnt;    // ½½·Ô °³¼ö (= ³» ÀÎº¥Åä¸® ¼Ó ÀÛÇ° °³¼ö)
+    public int slotCnt;    // ìŠ¬ë¡¯ ê°œìˆ˜ (= ë‚´ ì¸ë²¤í† ë¦¬ ì† ì‘í’ˆ ê°œìˆ˜)
 
-    private void SlotChange(int val)    // ½½·Ô È°¼ºÈ­ & ºñÈ°¼ºÈ­
+    private void SlotChange(int val)    // ìŠ¬ë¡¯ í™œì„±í™” & ë¹„í™œì„±í™”
     {
-        // (±âº» slot °³¼ö : 20°³)
+        // (ê¸°ë³¸ slot ê°œìˆ˜ : 20ê°œ)
         for (int i = 0; i < slots.Length; i++)
         {
             if (i < val)

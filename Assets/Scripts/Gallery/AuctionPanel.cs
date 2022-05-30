@@ -40,7 +40,7 @@ public class AuctionPanel : MonoBehaviour
 
         string jsonString = www.downloadHandler.text;
         var response = JsonUtility.FromJson<PricelistResponse>(jsonString);
-        Debug.Log("esponse.pricelist : " + response.pricelist);
+        Debug.Log("response.pricelist : " + response.pricelist);
         // api ???? ???? ??
         ShowAuctionInfo(response);
         AuctionListInit(response);
