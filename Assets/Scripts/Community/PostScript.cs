@@ -44,6 +44,8 @@ public class PostScript : MonoBehaviour
     {
         StartCoroutine(Post_Article());
         var boardPanel = UIManager.Instance.popupBoard.GetComponent<BoardScript>();
+        Title.text = string.Empty;
+        Content.text = string.Empty;
 
     }
     IEnumerator Post_Article()

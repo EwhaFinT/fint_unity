@@ -114,6 +114,7 @@ public class BoardScript : MonoBehaviour
     {
         articleId = id;
         Debug.Log("article changed: " + articleId);
+        StartCoroutine(LoadArticle());
     }
     void onClicked_vote()
     {
@@ -148,6 +149,7 @@ public class BoardScript : MonoBehaviour
     {
         StartCoroutine(PostComment());
         StartCoroutine(LoadArticle());
+        CommentInput.text = string.Empty;
     }
 
     IEnumerator LoadArticle()
@@ -194,7 +196,6 @@ public class BoardScript : MonoBehaviour
         }
 
         GameObject artic = Instantiate(articlepf, commentcontent.transform);
-        Debug.Log("help : article");
 
         var oneArticle = artic.GetComponent<articlepf>();
         bool tf = true;
