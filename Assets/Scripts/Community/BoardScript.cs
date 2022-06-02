@@ -40,10 +40,11 @@ public class BoardScript : MonoBehaviour
         BoardExitBtn.onClick.AddListener(onClicked_exit);
         WriteBtn.onClick.AddListener(onClicked_write);
         ProposalBtn.onClick.AddListener(onClicked_proposal);
-        StartCoroutine(LoadArticle());
+        
 
         CommentRegister.onClick.AddListener(onClicked_comment);
         //articleId = "6231f66a15ffd20d91c1b10e";
+        StartCoroutine(LoadArticleList());
     }
 
     // Update is called once per frame
@@ -55,6 +56,7 @@ public class BoardScript : MonoBehaviour
     public void show()
     {
         board.SetActive(true);
+        StartCoroutine(LoadArticle());
         StartCoroutine(LoadArticleList());
     }
 
@@ -79,13 +81,15 @@ public class BoardScript : MonoBehaviour
         var response = JsonUtility.FromJson<ArticlesResponse>(jsonString);
         //Debug.Log("board response: " + jsonString);
         //Debug.Log("response test: " + response.articles);
-        articleInit(response);
+        
         if (response.articles.Count != 0)
         {
             Debug.Log("------------load article list change id-----------" + response.articles);
             changeArticleId(response.articles[0].articleId);
             Debug.Log("first article id: " + response.articles[0].articleId);
         }
+        else { Debug.Log("aricle is empty"); }
+        articleInit(response);
     }
 
     void articleInit(ArticlesResponse response)
@@ -113,7 +117,7 @@ public class BoardScript : MonoBehaviour
     public void changeArticleId(string id)
     {
         articleId = id;
-        Debug.Log("article changed: " + articleId);
+        Debug.Log("****article changed: " + articleId);
         StartCoroutine(LoadArticle());
     }
     void onClicked_vote()
@@ -161,7 +165,7 @@ public class BoardScript : MonoBehaviour
 
         string url = Manager.Instance.url + "v1/article?articleId=" + articleId;
 
-        Debug.Log("url: "+url);
+        Debug.Log("***load article url: "+url);
 
         UnityWebRequest www = UnityWebRequest.Get(url);
         yield return www.SendWebRequest();
@@ -170,7 +174,7 @@ public class BoardScript : MonoBehaviour
         var response = JsonUtility.FromJson<LoadBoardResponse>(jsonString);
 
         Debug.Log("json : " + jsonString);
-        Debug.Log("time: " + response.article.createdAt.ToString());
+        //Debug.Log("time: " + response.article.createdAt.ToString()); // TODO
 
         //DateTime timeFromJson = JsonUtility.FromJson<JsonDateTime>(response.article.createdAt);
 
@@ -198,8 +202,9 @@ public class BoardScript : MonoBehaviour
         GameObject artic = Instantiate(articlepf, commentcontent.transform);
 
         var oneArticle = artic.GetComponent<articlepf>();
-        bool tf = true;
-        if(articleId == "62984aff7a30725036d64c4b") { tf = false; }
+        bool tf = false;
+        if(articleId != "62984aff7a30725036d64c4b") { tf = true; }
+        Debug.Log("****articleId: " + articleId + "*****tf: " + tf);
         oneArticle.GetArticleInfo(response.article.title, response.article.createdAt, response.article.identity, response.article.content, tf);
         
         for (int i = 0; i < response.comments.Count; i++)
