@@ -186,8 +186,8 @@ public class SignupController : MonoBehaviour
         }
         else
         {
-            var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
-            popupWarn.MakePopupWarn("Available ID.");
+            var popupWarn = UIManager.Instance.popupSuccess.GetComponent<PopupSuccessController>();
+            popupWarn.MakePopupMessage("Available ID.");
             dupCheck = true;
         }
     }

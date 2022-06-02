@@ -82,7 +82,9 @@ public class ArtPanel : MonoBehaviour
         artInfo.text =
             "작품 명 : " + response.artName + "\n" +
             "작가 : " + response.painter + "\n" +
-            "작품 소개 : " + response.detail + "\n";
+            "작품 소개 : " + response.detail + "\n" +
+            "가격 : " + response.price.ToString("F2")+"\n"+
+            "NFT : " + response.nftAdd;
     }
 }
 
