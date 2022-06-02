@@ -15,11 +15,19 @@ public class articlepf : MonoBehaviour
     {
 
     }
-    public void GetArticleInfo(string title, string timestamp, string identity, string content)
+    public void GetArticleInfo(string title, string timestamp, string identity, string content, bool tf)
     {
         this.title.text = title;
-        this.timestamp.text = "작성일자| " + timestamp + "\n작성자| " + identity;
-        this.content.text = content;
+        if (tf)
+        {
+            this.timestamp.text = "작성일자| " + timestamp + "\n작성자| " + identity;
+            this.content.text = content;
+        }
+        else
+        {
+            this.timestamp.text = "";
+            this.content.text = "";
+        }
 
         Debug.Log("article prefab: " + title + timestamp + identity + content);
     }

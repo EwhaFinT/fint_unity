@@ -44,6 +44,9 @@ public class ProposalScript : MonoBehaviour
     void onClicked_sumbit()
     {
         StartCoroutine(PostVote());
+        Price.text = string.Empty;
+        Date.text = string.Empty;
+        Content.text = string.Empty;
     }
     //void onClicked_date()
     //{
