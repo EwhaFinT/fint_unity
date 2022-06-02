@@ -41,7 +41,7 @@ public class BoardImgScript : MonoBehaviour
                 if (boardImg.Equals(target))
                 {
                     boardPanel.show();
-                    string articleId = "6270f58c342eda63a0c698f4";
+                    string articleId = "62984aff7a30725036d64c4b";
                     Debug.Log("------------board image article id-----------");
                     boardPanel.changeArticleId(articleId);
                 }

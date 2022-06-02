@@ -80,9 +80,12 @@ public class BoardScript : MonoBehaviour
         //Debug.Log("board response: " + jsonString);
         //Debug.Log("response test: " + response.articles);
         articleInit(response);
-        Debug.Log("------------load article list change id-----------" + response.articles);
-        changeArticleId(response.articles[0].articleId);
-        Debug.Log("first article id: " + response.articles[0].articleId);
+        if (response.articles.Count != 0)
+        {
+            Debug.Log("------------load article list change id-----------" + response.articles);
+            changeArticleId(response.articles[0].articleId);
+            Debug.Log("first article id: " + response.articles[0].articleId);
+        }
     }
 
     void articleInit(ArticlesResponse response)
@@ -194,7 +197,9 @@ public class BoardScript : MonoBehaviour
         Debug.Log("help : article");
 
         var oneArticle = artic.GetComponent<articlepf>();
-        oneArticle.GetArticleInfo(response.article.title, response.article.createdAt, response.article.identity, response.article.content);
+        bool tf = true;
+        if(articleId == "62984aff7a30725036d64c4b") { tf = false; }
+        oneArticle.GetArticleInfo(response.article.title, response.article.createdAt, response.article.identity, response.article.content, tf);
         
         for (int i = 0; i < response.comments.Count; i++)
         {
