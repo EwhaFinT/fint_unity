@@ -122,8 +122,8 @@ public class VoteScript : MonoBehaviour
     {
         //string UserId = "62689f6564ebad668621db42";
         string UserId = Manager.Instance.ID;
-        string CommunityId = "627f5ca702867d106384ef8f";
-        //string CommunityId = CommunityManager.Instance.CommunityID;
+        //string CommunityId = "627f5ca702867d106384ef8f";
+        string CommunityId = CommunityManager.Instance.CommunityID;
         //string VoteId = "6231edd26f3140647415ebcf";
 
         string url = Manager.Instance.url + "v1/vote";
