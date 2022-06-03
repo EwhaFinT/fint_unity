@@ -66,6 +66,8 @@ public class ProposalScript : MonoBehaviour
         var time = DateTime.Now;
         Debug.Log("datetime now: "+time);
 
+        string endT = Date.text + "T23:59:59 + 00:00";
+
         Debug.Log("price: " + Price.text);
         Debug.Log("content:" + Content.text);
 
@@ -77,7 +79,7 @@ public class ProposalScript : MonoBehaviour
             userId = UserId,
             title = Content.text,
             resalePrice = double.Parse(Price.text),
-            endTime = Date.text
+            endTime = endT
         };
         string jsonBody = JsonUtility.ToJson(proposeRequest);
         Debug.Log(proposeRequest);
