@@ -179,6 +179,7 @@ class VoteCheckResponse
     public double agreement;
     public double disagreement;
     public double ratio;
+    public List<string> voteParticipants;
     public VoteCheckResponse(String msg)
     {
         voteId = msg;
