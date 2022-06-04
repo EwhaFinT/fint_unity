@@ -44,7 +44,7 @@ public class BoardScript : MonoBehaviour
 
         CommentRegister.onClick.AddListener(onClicked_comment);
         //articleId = "6231f66a15ffd20d91c1b10e";
-        StartCoroutine(LoadArticleList());
+        //StartCoroutine(LoadArticleList());
     }
 
     // Update is called once per frame
@@ -57,7 +57,7 @@ public class BoardScript : MonoBehaviour
     {
         board.SetActive(true);
         //StartCoroutine(LoadArticle());
-        //StartCoroutine(LoadArticleList());
+        StartCoroutine(LoadArticleList());
     }
 
     public void LoadArticleUpdate()
