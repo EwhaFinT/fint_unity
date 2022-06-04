@@ -66,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: codus321
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4bea601c70031964e9903a115b1b4342, type: 2}
   m_sharedMaterial: {fileID: 4363104862951446302, guid: 4bea601c70031964e9903a115b1b4342, type: 2}
@@ -296,7 +296,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uC791\uC131\uC77C\uC790| 2022\uB144 4\uC6D4 4\uC77C \uC624\uD6C4 3:00"
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4bea601c70031964e9903a115b1b4342, type: 2}
   m_sharedMaterial: {fileID: 4363104862951446302, guid: 4bea601c70031964e9903a115b1b4342, type: 2}
@@ -431,8 +431,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uC88B\uC740 \uC18C\uC2DD\uC774\uB124\uC694. \uACF5\uC720 \uAC10\uC0AC\uD569\uB2C8\uB2E4
-    \u314E\u314E"
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4bea601c70031964e9903a115b1b4342, type: 2}
   m_sharedMaterial: {fileID: 4363104862951446302, guid: 4bea601c70031964e9903a115b1b4342, type: 2}

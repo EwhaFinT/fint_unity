@@ -60,11 +60,21 @@ public class VoteScript : MonoBehaviour
     {
         //temp = true;
         StartCoroutine(VotePost(true));
+        ReloadVote();
     }
     void onClicked_No()
     {
         //temp = false;
         StartCoroutine(VotePost(false));
+        ReloadVote();
+    }
+
+    public void ReloadVote()
+    {
+        var boardPanel = UIManager.Instance.popupBoard.GetComponent<BoardScript>();
+        boardPanel.onClicked_exit();
+
+        StartCoroutine(LoadVote());
     }
 
     public void GetPaint()
@@ -106,6 +116,7 @@ public class VoteScript : MonoBehaviour
         var response = JsonUtility.FromJson<VoteCheckResponse>(jsonString);
 
         Debug.Log("vote check responese: " + jsonString);
+        Debug.Log("----participants: " + response.voteParticipants.ToString());
         vtId = response.voteId.ToString();
 
         proposer.text = "제안자: "+ response.identity.ToString();
@@ -116,6 +127,15 @@ public class VoteScript : MonoBehaviour
         NoPercent.text = "NO\n" + (response.disagreement * 100).ToString() + " %";
 
         StakePersonal.text = (response.ratio * 100).ToString() + " %";
+
+        foreach( string idt in response.voteParticipants)
+        {
+            if(idt == response.identity)
+            {
+                YesBtn.interactable = false;
+                NoBtn.interactable = false;
+            }
+        }
 
     }
     IEnumerator VotePost(bool tf)

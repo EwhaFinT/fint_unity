@@ -56,7 +56,7 @@ public class BoardScript : MonoBehaviour
     public void show()
     {
         board.SetActive(true);
-        StartCoroutine(LoadArticle());
+        //StartCoroutine(LoadArticle());
         //StartCoroutine(LoadArticleList());
     }
 
@@ -128,7 +128,7 @@ public class BoardScript : MonoBehaviour
         votePanel.show();
     }
 
-    void onClicked_exit()
+    public void onClicked_exit()
     {
         board.SetActive(false);
     }
