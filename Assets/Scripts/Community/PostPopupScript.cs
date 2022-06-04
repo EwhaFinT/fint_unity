@@ -47,5 +47,9 @@ public class PostPopupScript : MonoBehaviour
         proposalPanel.onClicked_exit();
         //votePanel.onClicked_exit();
         //votePanel.ReloadVote();
+        if (votePanel.isActiveAndEnabled)
+        {
+            votePanel.ReloadVote();
+        }
     }
 }

@@ -130,7 +130,7 @@ public class VoteScript : MonoBehaviour
 
         foreach( string idt in response.voteParticipants)
         {
-            if(idt == response.identity)
+            if(idt == response.userId)
             {
                 YesBtn.interactable = false;
                 NoBtn.interactable = false;
