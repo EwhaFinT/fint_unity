@@ -323,7 +323,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 30 %
+  m_text: '   %'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4bea601c70031964e9903a115b1b4342, type: 2}
   m_sharedMaterial: {fileID: 4363104862951446302, guid: 4bea601c70031964e9903a115b1b4342, type: 2}
@@ -1167,6 +1167,7 @@ MonoBehaviour:
   NoBtn: {fileID: 3042078343922432853}
   klay: 0
   vtId: 
+  paint_url: 
   NFT: {fileID: 7938307543772979064}
 --- !u!1 &3042078343878800070
 GameObject:
@@ -1515,9 +1516,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'YES
-
-    60 %'
+  m_text: "YES\n  %"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1652,7 +1651,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uC81C\uC548\uC790: codus321"
+  m_text: "\uC81C\uC548\uC790: "
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4bea601c70031964e9903a115b1b4342, type: 2}
   m_sharedMaterial: {fileID: 4363104862951446302, guid: 4bea601c70031964e9903a115b1b4342, type: 2}
@@ -1949,9 +1948,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'NO
-
-    40 %'
+  m_text: "NO\n  %"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2086,7 +2083,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uC81C\uC548 \uAC00\uACA9: 200KLAY"
+  m_text: "\uC81C\uC548 \uAC00\uACA9: "
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4bea601c70031964e9903a115b1b4342, type: 2}
   m_sharedMaterial: {fileID: 4363104862951446302, guid: 4bea601c70031964e9903a115b1b4342, type: 2}
@@ -2221,9 +2218,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uC791\uAC00\uC758 \uC0C8\uB85C\uC6B4 \uC791\uD488 \uCD9C\uC2DC\uB85C
-    \uD654\uC81C\uAC00 \uB418\uB294 \uC9C0\uAE08 \uC7AC\uACBD\uB9E4\uB97C \uC9C4\uD589\uD558\uB294\uAC8C
-    \uC88B\uB2E4\uACE0 \uC0DD\uAC01\uD569\uB2C8\uB2E4."
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4bea601c70031964e9903a115b1b4342, type: 2}
   m_sharedMaterial: {fileID: 4363104862951446302, guid: 4bea601c70031964e9903a115b1b4342, type: 2}

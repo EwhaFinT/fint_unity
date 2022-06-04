@@ -57,7 +57,7 @@ public class BoardScript : MonoBehaviour
     {
         board.SetActive(true);
         StartCoroutine(LoadArticle());
-        StartCoroutine(LoadArticleList());
+        //StartCoroutine(LoadArticleList());
     }
 
     public void LoadArticleUpdate()
