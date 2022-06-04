@@ -66,7 +66,7 @@ public class ProposalScript : MonoBehaviour
         var time = DateTime.Now;
         Debug.Log("datetime now: "+time);
 
-        string endT = Date.text + "T23:59:59.000+00:00";
+        string endT = Date.text.ToString() + "T23:59:59";
 
         Debug.Log("price: " + Price.text);
         Debug.Log("content:" + Content.text);
