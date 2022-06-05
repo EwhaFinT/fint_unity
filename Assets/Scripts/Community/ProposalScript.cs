@@ -100,13 +100,13 @@ public class ProposalScript : MonoBehaviour
         // string -> json
         string jsonString = www.downloadHandler.text;
         var response = JsonUtility.FromJson<ProposeResponse>(jsonString);
-        Debug.Log("vote response: " + response);
+        Debug.Log("vote response: " + response.proposeSuccess);
 
         www.disposeUploadHandlerOnDispose = true;
         www.disposeDownloadHandlerOnDispose = true;
 
         var PostPopup = UIManager.Instance.popUpPostAnnouncement.GetComponent<PostPopupScript>();
-        PostPopup.MakePopupWarn(status);
+        PostPopup.MakePopupWarn(response.proposeSuccess);
 
     }
 }
@@ -124,5 +124,5 @@ class ProposeRequest
 [Serializable]
 class ProposeResponse
 {
-    public string proposeSuccess;
+    public int proposeSuccess;
 }

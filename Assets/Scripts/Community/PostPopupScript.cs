@@ -30,6 +30,18 @@ public class PostPopupScript : MonoBehaviour
         {
             message.text = "성공적으로 등록되었습니다.";
         }
+        else if(status == -1)
+        {
+            message.text = "더 이상 투표를 제안할 수 없습니다.";
+        }
+        else if(status == 0)
+        {
+            message.text = "투표가 등록되었습니다.";
+        }
+        else if(status == 1)
+        {
+            message.text = "경매 가능한 일자가 아닙니다.";
+        }
         else
         {
             message.text = "등록에 실패했습니다.";
@@ -44,6 +56,7 @@ public class PostPopupScript : MonoBehaviour
 
         if (votePanel.isActiveAndEnabled)
         {
+            PostPopUp.SetActive(false);
             votePanel.ReloadVote();
         }
         else
