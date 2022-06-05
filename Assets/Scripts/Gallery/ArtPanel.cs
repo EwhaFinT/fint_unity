@@ -80,10 +80,10 @@ public class ArtPanel : MonoBehaviour
     void changeArtInfo(ArtInfoResponse response)
     {
         artInfo.text =
-            "작품 명 : " + response.artName + "\n" +
+            "작품명 : " + response.artName + "\n" +
             "작가 : " + response.painter + "\n" +
             "작품 소개 : " + response.detail + "\n" +
-            "가격 : " + response.price.ToString("F2")+"\n"+
+            "가격 : " + response.price.ToString("F2")+" KLAY\n"+
             "NFT : " + response.nftAdd;
     }
 }

@@ -176,10 +176,14 @@ public class RegisterFormController : MonoBehaviour
         }
         else
         {
+
+            var panel = UIManager.Instance.popupSuccess.GetComponent<PopupSuccessController>();
+            panel.MakePopupMessage("작품 업로드에 성공하였습니다.");
             artId = response.artId;
             InitializeForm();           //작품 등록폼 초기화
             Debug.Log("complete register");
-            UIManager.Instance.popupSuccess.GetComponent<PopupSuccessController>().MakeSuccessMessage();
+
+
             Onclicked_close();
         }
             

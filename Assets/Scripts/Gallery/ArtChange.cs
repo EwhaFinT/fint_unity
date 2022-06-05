@@ -7,6 +7,7 @@ using UnityEngine.Networking;
 public class ArtChange : MonoBehaviour
 {
     public GameObject[] frame;
+    public GameObject[] ResaleFrame;
 
     public Dictionary<GameObject, string> dic;
 
@@ -14,6 +15,7 @@ public class ArtChange : MonoBehaviour
     void Start()
     { 
         frame = GameObject.FindGameObjectsWithTag("GalleryFrame");      //gallery?????? frame?????? ??????
+        ResaleFrame = GameObject.FindGameObjectsWithTag("ReauctionFrame");
         dic = new Dictionary<GameObject, string>();
         StartCoroutine(LoadImage());
     }
