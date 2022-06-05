@@ -47,6 +47,7 @@ public class VoteScript : MonoBehaviour
         vote.SetActive(true);
         //get paint
         GetPaint();
+        StartCoroutine(LoadVote());
         //StartCoroutine(DownloadImage(paint_url));
     }
     public void onClicked_exit()
@@ -233,5 +234,5 @@ class VoteRequest
 [Serializable]
 class VoteResponse
 {
-    public string voteSuccess;
+    public int voteSuccess;
 }
