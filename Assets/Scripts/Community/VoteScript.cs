@@ -129,15 +129,19 @@ public class VoteScript : MonoBehaviour
 
         StakePersonal.text = (response.ratio * 100).ToString() + " %";
 
+        //bool t_f = true;
+
         foreach( string idt in response.voteParticipants)
         {
-            if(idt == response.userId)
+            if(idt == UserId)
             {
                 YesBtn.interactable = false;
                 NoBtn.interactable = false;
+                //t_f = false;
             }
         }
-
+        //YesBtn.interactable = t_f;
+        //NoBtn.interactable = t_f;
     }
     IEnumerator VotePost(bool tf)
     {
