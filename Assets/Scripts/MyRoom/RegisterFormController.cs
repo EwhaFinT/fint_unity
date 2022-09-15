@@ -2,19 +2,23 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using UnityEditor;
+//using UnityEditor;
 using System;
 using System.Text.RegularExpressions;
 using UnityEngine.Networking;
 using System.IO;
 using Newtonsoft.Json.Linq;
+//using DI = System.Diagnostics;
+using FileWindow = System.Windows.Forms;
+//using Ookii.Dialogs;
+//using Microsoft.WindowsAPICodePack.Dialogs;
 
 public class RegisterFormController : MonoBehaviour
 {
     string path, artUrl, artId;
     string auction_date = "";
     public Text filePath;
-    bool success = false;
+    //bool success = false;
 
     // 사용자 입력값
     public TMP_InputField title;           // 작품명
@@ -26,6 +30,13 @@ public class RegisterFormController : MonoBehaviour
     //public GameObject firstPanel, secondPanel;
     public GameObject warningWindow;    // 경고창
     public GameObject calendar;
+
+    FileWindow.OpenFileDialog OpenDialog = new FileWindow.OpenFileDialog();
+    //private VistaOpenFileDialog OpenDialog
+    //    = new VistaOpenFileDialog();
+
+    [SerializeField]
+    private string[] m_FilePaths; // 파일 패스
 
     public Button btn_close, btn_FindFile, btn_upload, btn_pickDate;
     void Start()
@@ -102,14 +113,57 @@ public class RegisterFormController : MonoBehaviour
     public void OpenExplorerButtonClick()   // 파일 탐색기 버튼 클릭시
     {
         // (pc 기준으로 구현한 것, 모바일로 할 경우 변경해야 할 듯)
-        path = EditorUtility.OpenFilePanel("내 작품 등록하기", "", "jpg");
+        //path = EditorUtility.OpenFilePanel("내 작품 등록하기", "", "jpg");
+        //String filePath = "C:\\";
+        //Process.Start(filePath);
+        //OpenDialog = new VistaOpenFileDialog();
+        OpenDialog.Filter = "jpg files (*.jpg) |*.jpg|png files (*.png) |*.jpg|All files  (*.*)|*.*";
+        //OpenDialog.FilterIndex = 3;
+        OpenDialog.FileName = "";
+        OpenDialog.Title = "Image Dialog";
+
+        FileWindow.DialogResult dr = OpenDialog.ShowDialog();
+        if (dr == FileWindow.DialogResult.OK)
+        {
+            string fileName = OpenDialog.SafeFileName;
+            path = OpenDialog.FileName;
+            //path = fileFullName.Replace(fileName, "");
+            Debug.Log(path);
+        }
+
         GetImage();
-        //StartCoroutine(ImageUpload(path));
+
     }
+
+    //public void OpenExplorerButtonClick()   // 파일 탐색기 버튼 클릭시
+    //{
+    //    // CommonOpenFileDialog 클래스 생성
+    //    CommonOpenFileDialog dialog = new CommonOpenFileDialog();
+    //    // 처음 보여줄 폴더 설정(안해도 됨)
+    //    //dialog.InitialDirectory = "";
+    //    dialog.IsFolderPicker = true;
+    //    if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
+    //    {
+    //        path = dialog.FileName; // 테스트용, 폴더 선택이 완료되면 선택된 폴더를 label에 출력
+    //        Debug.Log(path);
+    //    }
+    //    GetImage();
+    //}
+
+    //string FileOpen(VistaOpenFileDialog openFileDialog)
+    //{
+    //    string result = openFileDialog.ShowDialog();
+    //    string filenames = result == FileWindow.DialogResult.OK ?
+    //        openFileDialog.FileNames :
+    //        new string[0];
+    //    openFileDialog.Dispose();
+    //    return filenames;
+    //}
+
 
     IEnumerator ImageUpload(string path)
     {
-        Debug.Log("start upload img");
+        //Debug.Log("start upload img");
         // 이미지 base64string으로 변환
         FileInfo file = new FileInfo(path);
         byte[] byteTexture = File.ReadAllBytes(file.FullName);
@@ -129,7 +183,7 @@ public class RegisterFormController : MonoBehaviour
 
         artUrl = data["data"]["url"].ToString();         //get art url part from jsonString
 
-        Debug.Log("complete upload img");
+        //Debug.Log("complete upload img");
 
         StartCoroutine(SendReguisterInfo());
     }
@@ -171,7 +225,7 @@ public class RegisterFormController : MonoBehaviour
         if (response.artId == null)
         {
             var popupWarn = UIManager.Instance.popupWarn.GetComponent<PopupWarnController>();
-            success = false;
+            //success = false;
             popupWarn.MakePopupWarn("작품 업로드 실패");
         }
         else
@@ -181,7 +235,7 @@ public class RegisterFormController : MonoBehaviour
             panel.MakePopupMessage("작품 업로드에 성공하였습니다.");
             artId = response.artId;
             InitializeForm();           //작품 등록폼 초기화
-            Debug.Log("complete register");
+            //Debug.Log("complete register");
 
 
             Onclicked_close();
@@ -200,7 +254,7 @@ public class RegisterFormController : MonoBehaviour
     public void GetDate(string date)
     {
         auction_date = date+ "T00:00:00";
-        Debug.Log(auction_date);
+        //Debug.Log(auction_date);
     }
 
     void InitializeForm()   // 작품 등록 폼 초기화

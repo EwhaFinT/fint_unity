@@ -75,6 +75,8 @@ public class TeleportPanel : MonoBehaviour
             teleportPanel.SetActive(false);
             var myroomPanel = UIManager.Instance.myroomPanel;
             myroomPanel.SetActive(false);       //hide inventory and upload button
+            var communityPanel = UIManager.Instance.popupTeleportCommunity;
+            communityPanel.SetActive(false);
         }
     }
     public void Onclicked_close()
