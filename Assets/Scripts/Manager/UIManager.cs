@@ -21,6 +21,11 @@ public class UIManager : MonoBehaviour
     public GameObject auctionJoin;
     public GameObject auctionNew;
     public GameObject popupArtInfo;
+    public GameObject popup3dArt;
+    public GameObject auctionPanel3d;
+    public GameObject auctionNew3d;
+    public GameObject popupArArt;
+    public GameObject auctionPanelAr;
 
     [Header("Popups - Community")]
     public GameObject popupBoard;

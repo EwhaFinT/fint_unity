@@ -8,6 +8,7 @@ public class ArtClick : MonoBehaviour
     GameObject[] popupCanvas;
     public GameObject ui;
     public GameObject art, target;
+    public GameObject art3d, artAr;
     void Start()
     {
         ui = GameObject.Find("UI");
@@ -33,33 +34,44 @@ public class ArtClick : MonoBehaviour
             {
                 target = GetClickedObject();
                 var artPanel = UIManager.Instance.popupArtInfo.GetComponent<ArtPanel>();
+                var artpanel3d = UIManager.Instance.popup3dArt.GetComponent<ArtPanel3d>();
+                var artpanelAr = UIManager.Instance.popupArArt.GetComponent<ArtPanelAr>();
                 if (art.Equals(target))
                 {
                     artPanel.panelStart();
                     artPanel.changeImg(gameObject);
                     artPanel.getFrame(gameObject);
-                    //artPanel.changeArtInfo();
+                }
+                if (art3d.Equals(target))
+                {
+                    artpanel3d.panelStart();
+                }
+                if (artAr.Equals(target))
+                {
+                    artpanelAr.panelStart();
                 }
             }
 
-        }
+            }
 
-    }
+        }
+    
 
     private GameObject GetClickedObject()
-    {
-        RaycastHit hit;
-        GameObject target = null;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); //마우스 포인트 근처 좌표를 만든다. 
-
-        if (true == (Physics.Raycast(ray.origin, ray.direction * 10, out hit)))   //마우스 근처에 오브젝트가 있는지 확인
         {
-            //있으면 오브젝트를 저장한다.
-            target = hit.collider.gameObject;
+            RaycastHit hit;
+            GameObject target = null;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); //마우스 포인트 근처 좌표를 만든다. 
 
+            if (true == (Physics.Raycast(ray.origin, ray.direction * 10, out hit)))   //마우스 근처에 오브젝트가 있는지 확인
+            {
+                //있으면 오브젝트를 저장한다.
+                target = hit.collider.gameObject;
+
+            }
+            return target;
         }
-        return target;
-    }
 
 
+    
 }

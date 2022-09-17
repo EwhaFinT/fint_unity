@@ -86,6 +86,7 @@ public class ArtPanel : MonoBehaviour
             "가격 : " + response.price.ToString("F2")+" KLAY\n"+
             "NFT : " + response.nftAdd;
     }
+
 }
 
 class ArtInfoResponse {
