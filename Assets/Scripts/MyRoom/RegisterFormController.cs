@@ -10,7 +10,7 @@ using System.IO;
 using Newtonsoft.Json.Linq;
 //using DI = System.Diagnostics;
 using FileWindow = System.Windows.Forms;
-//using Ookii.Dialogs;
+using Ookii.Dialogs;
 //using Microsoft.WindowsAPICodePack.Dialogs;
 
 public class RegisterFormController : MonoBehaviour
@@ -31,11 +31,13 @@ public class RegisterFormController : MonoBehaviour
     public GameObject warningWindow;    // 경고창
     public GameObject calendar;
 
-    FileWindow.OpenFileDialog OpenDialog = new FileWindow.OpenFileDialog();
-    //private VistaOpenFileDialog OpenDialog
-    //    = new VistaOpenFileDialog();
+    VistaOpenFileDialog OpenDialog = new VistaOpenFileDialog();
+    Stream openStream = null;
+        //FileWindow.OpenFileDialog OpenDialog = new FileWindow.OpenFileDialog();
+        //private VistaOpenFileDialog OpenDialog
+        //    = new VistaOpenFileDialog();
 
-    [SerializeField]
+        [SerializeField]
     private string[] m_FilePaths; // 파일 패스
 
     public Button btn_close, btn_FindFile, btn_upload, btn_pickDate;
@@ -118,18 +120,27 @@ public class RegisterFormController : MonoBehaviour
         //Process.Start(filePath);
         //OpenDialog = new VistaOpenFileDialog();
         OpenDialog.Filter = "jpg files (*.jpg) |*.jpg|png files (*.png) |*.jpg|All files  (*.*)|*.*";
-        //OpenDialog.FilterIndex = 3;
+        OpenDialog.FilterIndex = 3;
         OpenDialog.FileName = "";
         OpenDialog.Title = "Image Dialog";
 
-        FileWindow.DialogResult dr = OpenDialog.ShowDialog();
-        if (dr == FileWindow.DialogResult.OK)
+        //FileWindow.DialogResult dr = OpenDialog.ShowDialog();
+        if (OpenDialog.ShowDialog() == FileWindow.DialogResult.OK)
         {
-            string fileName = OpenDialog.SafeFileName;
-            path = OpenDialog.FileName;
-            //path = fileFullName.Replace(fileName, "");
-            Debug.Log(path);
+            if ((openStream = OpenDialog.OpenFile()) != null)
+            {
+                path = OpenDialog.FileName;
+                //return OpenDialog.FileName;
+            }
         }
+
+        //if (dr == FileWindow.DialogResult.OK)
+        //{
+        //    string fileName = OpenDialog.SafeFileName;
+        //    path = OpenDialog.FileName;
+        //    //path = fileFullName.Replace(fileName, "");
+        //    Debug.Log(path);
+        //}
 
         GetImage();
 

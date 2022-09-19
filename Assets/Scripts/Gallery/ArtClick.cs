@@ -6,17 +6,22 @@ using UnityEngine.UI;
 public class ArtClick : MonoBehaviour
 {
     GameObject[] popupCanvas;
+    GameObject[] frame;
     public GameObject ui;
-    public GameObject art, target;
-    public GameObject art3d, artAr;
+    public GameObject target;
+    GameObject art3d;
+    public GameObject artAr;
     void Start()
     {
+        frame = GameObject.FindGameObjectsWithTag("GalleryFrame");
         ui = GameObject.Find("UI");
         popupCanvas = new GameObject[ui.transform.childCount];
         for (int i = 3; i < popupCanvas.Length; i++)
         {
             popupCanvas[i] = ui.transform.GetChild(i).gameObject;
         }
+        art3d = GameObject.Find("FloralGoldJar");
+        artAr = GameObject.Find("earthSphere");
     }
 
     void Update()
@@ -36,11 +41,14 @@ public class ArtClick : MonoBehaviour
                 var artPanel = UIManager.Instance.popupArtInfo.GetComponent<ArtPanel>();
                 var artpanel3d = UIManager.Instance.popup3dArt.GetComponent<ArtPanel3d>();
                 var artpanelAr = UIManager.Instance.popupArArt.GetComponent<ArtPanelAr>();
-                if (art.Equals(target))
+                for(int i=0; i<frame.Length; i++)
                 {
-                    artPanel.panelStart();
-                    artPanel.changeImg(gameObject);
-                    artPanel.getFrame(gameObject);
+                    if (frame[i].Equals(target))
+                    {
+                        artPanel.panelStart();
+                        artPanel.changeImg(frame[i]);
+                        artPanel.getFrame(frame[i]);
+                    }
                 }
                 if (art3d.Equals(target))
                 {
